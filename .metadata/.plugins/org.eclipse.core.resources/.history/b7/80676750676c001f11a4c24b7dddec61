@@ -1,0 +1,13 @@
+package ttps.clasificados;
+
+import jakarta.servlet.ServletContextListener;
+
+public class Listener implements ServletContextListener {
+	
+	public void contextDestroyed(ServletContextEvent src) {
+	}	
+	public void contextInitialized(ServletContextEvent src) {
+		
+	}
+
+}

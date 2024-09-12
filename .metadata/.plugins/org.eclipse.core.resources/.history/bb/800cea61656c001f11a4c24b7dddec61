@@ -1,0 +1,70 @@
+package ttps.clasificados;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * Servlet implementation class Menu
+ */
+@WebServlet("/menu") // Make sure to add this annotation to map the servlet
+public class Menu extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    public Menu() {
+        super();
+    }
+
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Retrieve the user object from the request
+        Usuario user = (Usuario) request.getAttribute("user");
+
+        // Prepare the response
+        response.setContentType("text/plain"); // Set the response content type
+        if (user != null) {
+            // Assuming Usuario has getUsername() and getPassword() methods
+            String username = user.getUsuario();
+            String password = user.getPassword(); // Be cautious with exposing passwords
+
+            // Write the username and password to the response
+            response.getWriter().append("Username: ").append(username).append("\n");
+            response.getWriter().append("Password: ").append(password).append("\n");
+        } else {
+            response.getWriter().append("No user found.");
+        }
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Retrieve the user object from the request
+        Usuario user = (Usuario) request.getAttribute("user");
+
+        // Set the response content type to HTML
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8"); // Set character encoding if needed
+
+        // Prepare the HTML response
+        StringBuilder htmlResponse = new StringBuilder();
+
+        if (user != null) {
+            // Assuming Usuario has a getUsername() method
+            String username = user.getUsername();
+
+            // Build the HTML response with the username
+            htmlResponse.append("<p>Welcome, ").append(username).append("!</p>");
+        } else {
+            htmlResponse.append("<p>No user found.</p>");
+        }
+
+        // Write the HTML response to the output
+        response.getWriter().write(htmlResponse.toString());
+    }
+}

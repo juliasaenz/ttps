@@ -1,0 +1,5 @@
+package ttps.clasificados;
+
+public class Publicador extends Usuario {
+
+}

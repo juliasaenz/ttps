@@ -1,0 +1,32 @@
+package ttps.clasificados;
+
+import jakarta.servlet.ServletConnection;
+import jakarta.servlet.ServletContextListener;
+
+public class Listener implements ServletContextListener, ServletConnection {
+
+	@Override
+	public String getConnectionId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getProtocol() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getProtocolConnectionId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSecure() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

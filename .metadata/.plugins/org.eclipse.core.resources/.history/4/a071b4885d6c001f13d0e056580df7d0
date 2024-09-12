@@ -1,0 +1,12 @@
+package ttps.clasificados;
+
+public class Publicador extends Usuario {
+
+	@Override
+	public String redirect() {
+		// TODO Auto-generated method stub
+		return "./publicador.html";
+	}
+	
+
+}

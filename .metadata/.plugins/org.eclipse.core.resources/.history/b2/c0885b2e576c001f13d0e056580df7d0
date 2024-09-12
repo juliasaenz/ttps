@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> Soy el index! </title>
+</head>
+<body>
+	<a href="./login"> Llevame al login bro </a>
+</body>
+</html>

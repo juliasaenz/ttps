@@ -1,0 +1,5 @@
+package ttps.clasificados;
+
+public class Administrador extends Usuario {
+
+}

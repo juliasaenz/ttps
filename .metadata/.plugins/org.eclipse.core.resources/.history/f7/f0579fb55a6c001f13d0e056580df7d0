@@ -1,0 +1,6 @@
+package ttps.clasificados;
+
+public class Usuario {
+	private String usuario;
+	private String password; 
+}

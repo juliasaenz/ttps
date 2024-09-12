@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Page</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow: hidden;
+            background: linear-gradient(270deg, #880808, #EE4B2B);
+            background-size: 400% 400%;
+            animation: gradient 10s ease infinite;
+            position: relative;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 50% 50%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #cb4335 ;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #a93226 ;
+            transform: scale(1.05);
+        }
+
+        .cursor-effect {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: background 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sorry, something went wrong :(</h1>
+    <a href="./login.html" class="button">Take me to Login</a>
+    <div class="cursor-effect" id="cursorEffect"></div>
+
+    <script>
+        const cursorEffect = document.getElementById('cursorEffect');
+
+        document.addEventListener('mousemove', (e) => {
+            cursorEffect.style.left = `${e.pageX}px`;
+            cursorEffect.style.top = `${e.pageY}px`;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            const color1 = `rgba(106, 17, 203, ${1 - y})`;
+            const color2 = `rgba(37, 117, 252, ${1 - x})`;
+            document.body.style.background = `linear-gradient(270deg, ${color1}, ${color2})`;
+        });
+    </script>
+</body>
+</html>
