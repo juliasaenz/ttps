@@ -1,7 +1,0 @@
-package ttps.clasificados;
-
-import jakarta.servlet.ServletContextListener;
-
-public class Listener implements ServletContextListener {
-
-}

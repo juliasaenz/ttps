@@ -1,8 +1,0 @@
-package ttps.clasificados;
-
-public class SitioClasificado {
-	protected String nombre;
-	protected String email;
-	protected String telefono;
-
-}
