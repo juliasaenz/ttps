@@ -35,7 +35,6 @@ INDEX VERSION 1.134+/home/julia/Documents/Info/ttps/practicas/.metadata/.plugins
 594603961.index
 1373229257.index
 320252216.index
-1902986303.index
 3175525998.index
 1772916610.index
 2834301772.index
