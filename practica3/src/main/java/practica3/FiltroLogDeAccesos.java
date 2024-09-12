@@ -11,14 +11,12 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 
-@WebFilter(
-		urlPatterns = "/*"
-		)
+@WebFilter(urlPatterns = "/*")
 public class FiltroLogDeAccesos implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {	
+			throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		// TODO Auto-generated method stub
 		String metodo = httpRequest.getMethod();
@@ -29,7 +27,7 @@ public class FiltroLogDeAccesos implements Filter {
         String userAgent = httpRequest.getHeader("User-Agent");
 		String mensaje = request.getLocalAddr() + " " + requestLine + " " + fecha.toString() + " " + userAgent;
 		System.out.println(mensaje);
-		
+
 	}
 
 }
