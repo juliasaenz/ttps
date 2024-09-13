@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Quilmes Rock!</title>
+</head>
+
+<body class="flex">
+	<div class="flex">
+		<h2> Comprá entradas para Quilmes Rock </h2>
+		<form class="flex" action="ImprimeEntrada" method="post">
+			<input required name="nombre" type="text" placeholder="Ingrese su nombre"></input>
+			<input required name="apellido" type="text" placeholder="Ingrese su apellido"></input>
+			<input required name="mail" type="email" placeholder="Ingrese su mail"></input>
+			<input required name="dni" type="number" placeholder="Ingrese su DNI"></input>
+			<p> Sacar abono para: </p>
+			<select name="dias"> 
+				<option value="dos"> Dos días </option>
+				<option value="tres"> Tres días </option>
+			</select>
+			<button type="submit"> Comprar </button>
+		</form>
+	</div>
+
+
+</body>
+
+</html>
+
+<style>
+	body {
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+	}
+	.flex{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1em;
+	}
+	input, select{
+		width: 20rem;
+		height: 2rem;
+		border-radius: 6px;
+		padding: 0.25rem;
+	}
+	p{
+		font-size: 12px;
+	}
+	button {
+		background-color: lightblue;
+		width: 10em;
+		height: 2.5em;
+		padding: 0.25em;
+		border-radius: 6px;
+	}
+</style>
