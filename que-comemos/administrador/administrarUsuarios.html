@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrar Usuarios</title>
     <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
     <header>
         <div class="header-logo">
-            <h2> <a href="./index.html"> ¿Qué Comemos? </a></h2>
+            <h2><a href="./index.html"> ¿Qué Comemos? </a></h2>
         </div>
         <nav>
             <ul>
@@ -25,28 +26,139 @@
         </nav>
     </header>
 
-    <main>
+    <main style="display: flex; flex-direction: column; align-items: center; gap: 2rem;">
         <section class="content">
             <div class="text-section">
                 <h2>Administrar Usuarios Responsables</h2>
                 <p>
-                    Desde aquí puedes realizar <strong>altas, bajas y modificaciones</strong> de usuarios responsables.
+                    Desde aquí puedes realizar <strong>altas, bajas y modificaciones</strong> de
+                    usuarios responsables.
                 </p>
             </div>
 
-            <div class="card">
+            <div class="card light-bg">
                 <button class="btn" id="agregarUsuarioBtn">Agregar Usuario</button>
-                <ul id="listaUsuarios">
+                <ul id="listaUsuarios" class="fullwidth">
                     <!-- Aquí se agregarán los usuarios -->
                 </ul>
             </div>
         </section>
 
+        <section class="content">
+            <div class="card full-width light-bg">
+                <h3>Lista de Responsables</h3>
+                <div class="filter-sort-container">
+                    <label for="filterDNIResponsable">Filtrar por DNI:</label>
+                    <input type="text" id="filterDNIResponsable" placeholder="Buscar por DNI...">
+                </div>
+
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable('responsibleTable', 0)">Nombre</th>
+                            <th onclick="sortTable('responsibleTable', 1)">Apellido</th>
+                            <th onclick="sortTable('responsibleTable', 2)">DNI</th>
+                            <th onclick="sortTable('responsibleTable', 3)">Email</th>
+                            <th>Turno</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="responsibleTable">
+                        <tr>
+                            <td>Ana</td>
+                            <td>Martínez</td>
+                            <td>23456789</td>
+                            <td>ana@example.com</td>
+                            <td>
+                                <select>
+                                    <option value="Mañana">Mañana</option>
+                                    <option value="Tarde">Tarde</option>
+                                </select>
+                            </td>
+                            <td><button class="btn eliminar">Eliminar</button></td>
+                        </tr>
+                        <tr>
+                            <td>Pedro</td>
+                            <td>Sánchez</td>
+                            <td>98765432</td>
+                            <td>pedro@example.com</td>
+                            <td>
+                                <select>
+                                    <option value="Mañana">Mañana</option>
+                                    <option value="Tarde">Tarde</option>
+                                </select>
+                            </td>
+                            <td><button class="btn eliminar">Eliminar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="pagination">
+                    <button class="prev-page">&laquo; Anterior</button>
+                    <span class="page-info">1 de 1 páginas</span>
+                    <button class="next-page">Siguiente &raquo;</button>
+                </div>
+            </div>
+
+            <div class="card full-width light-bg">
+                <h3>Lista de Clientes</h3>
+                <div class="filter-sort-container">
+                    <label for="filterDNICustomer">Filtrar por DNI:</label>
+                    <input type="text" id="filterDNICustomer" placeholder="Buscar por DNI...">
+                </div>
+
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable('clientTable', 0)">Nombre</th>
+                            <th onclick="sortTable('clientTable', 1)">Apellido</th>
+                            <th onclick="sortTable('clientTable', 2)">DNI</th>
+                            <th onclick="sortTable('clientTable', 3)">Email</th>
+                            <th onclick="sortTable('clientTable', 4)">Total Pagos</th>
+                            <th onclick="sortTable('clientTable', 5)">Pagos Pendientes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientTable">
+                        <tr>
+                            <td>Juan</td>
+                            <td>Pérez</td>
+                            <td>12345678</td>
+                            <td>juan@example.com</td>
+                            <td>5</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>María</td>
+                            <td>Gómez</td>
+                            <td>87654321</td>
+                            <td>maria@example.com</td>
+                            <td>3</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Carlos</td>
+                            <td>Lopez</td>
+                            <td>11223344</td>
+                            <td>carlos@example.com</td>
+                            <td>4</td>
+                            <td>2</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="pagination">
+                    <button class="prev-page">&laquo; Anterior</button>
+                    <span class="page-info">1 de 1 páginas</span>
+                    <button class="next-page">Siguiente &raquo;</button>
+                </div>
+            </div>
+        </section>
+
         <!-- Modal para agregar usuario -->
         <div class="modal" id="modalAgregarUsuario">
-            <div class="modal-content">
+            <div class="modal-content light-bg">
                 <h2>Agregar Usuario Responsable</h2>
-                <form id="formAgregarUsuario">
+                <form id="formAgregarUsuario" class="fullwidth">
                     <div class="input-group">
                         <p>Introduce el <strong>nombre</strong> del usuario responsable:</p>
                         <label for="nombre">Nombre</label>
@@ -99,35 +211,68 @@
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
 
-        agregarUsuarioBtn.addEventListener('click', () => {
-            modalAgregarUsuario.style.display = 'flex';
-        });
+        agregarUsuarioBtn.onclick = () => {
+            modalAgregarUsuario.style.display = 'block';
+        };
 
-        cerrarModalBtn.addEventListener('click', () => {
+        cerrarModalBtn.onclick = () => {
             modalAgregarUsuario.style.display = 'none';
-        });
+        };
 
-        confirmarUsuarioBtn.addEventListener('click', () => {
-            const nombre = nombreInput.value.trim();
-            const apellido = apellidoInput.value.trim();
+        confirmarUsuarioBtn.onclick = () => {
+            const nombre = nombreInput.value;
+            const apellido = apellidoInput.value;
+            const email = emailInput.value;
+            const password = passwordInput.value;
             const turno = turnoInput.value;
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
 
-            if (nombre !== '' && apellido !== '' && turno !== '' && email !== '' && password !== '') {
-                const nuevoUsuario = document.createElement('li');
-                nuevoUsuario.innerHTML = `
-                    Nombre: ${nombre}, Apellido: ${apellido}, Turno: ${turno}, Email: ${email}
-                    <button class="btn-small eliminar">Eliminar</button>
-                    <button class="btn-small pausar">Pausar</button>
-                    <button class="btn-small modificar">Modificar</button>
-                `;
-                listaUsuarios.appendChild(nuevoUsuario);
-                modalAgregarUsuario.style.display = 'none';
-            }
+            const li = document.createElement('li');
+            li.textContent = `${nombre} ${apellido} - ${email} (${turno})`;
+            listaUsuarios.appendChild(li);
+
+            // Clear inputs and close modal
+            nombreInput.value = '';
+            apellidoInput.value = '';
+            emailInput.value = '';
+            passwordInput.value = '';
+            modalAgregarUsuario.style.display = 'none';
+        };
+
+        // Filtering functionality
+        document.getElementById("filterDNIResponsable").addEventListener("input", function () {
+            const filterValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll("#responsibleTable tr");
+            rows.forEach(row => {
+                const dniCell = row.cells[2].textContent.toLowerCase();
+                row.style.display = dniCell.includes(filterValue) ? "" : "none";
+            });
         });
-    </script>
 
+        document.getElementById("filterDNICustomer").addEventListener("input", function () {
+            const filterValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll("#clientTable tr");
+            rows.forEach(row => {
+                const dniCell = row.cells[2].textContent.toLowerCase();
+                row.style.display = dniCell.includes(filterValue) ? "" : "none";
+            });
+        });
+
+        function sortTable(tableId, columnIndex) {
+            const table = document.getElementById(tableId);
+            const rows = Array.from(table.rows);
+            const header = rows.shift(); // Keep header
+
+            const sortedRows = rows.sort((a, b) => {
+                const cellA = a.cells[columnIndex].textContent;
+                const cellB = b.cells[columnIndex].textContent;
+                return cellA.localeCompare(cellB);
+            });
+
+            table.innerHTML = "";
+            table.appendChild(header); // Append header back
+            sortedRows.forEach(row => table.appendChild(row));
+        }
+    </script>
 </body>
 
 </html>
