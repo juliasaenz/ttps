@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Comidas</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-logo">
+            <h2> <a href="./administrador.html"> ¿Qué Comemos? </a></h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a class="unselected" href="./administrarComidas.html">Administrar Comidas</a></li>
+                <li><a class="unselected" href="./administrarMenus.html">Administrar Menús</a></li>
+                <li><a class="unselected" href="./administrarBuzon.html">Administrar Buzón</a></li>
+                <li><a class="unselected" href="./estadisticas.html">Estadísticas</a></li>
+                <li><a class="unselected" href="./administrarUsuarios.html">Administrar Usuarios</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content">
+            <div class="text-section">
+                <h2>Administrar Comidas</h2>
+                <p>
+                    Desde aquí puedes realizar <strong>altas, bajas y modificaciones</strong> de comidas y menús.
+                </p>
+            </div>
+
+            <div class="card">
+                <button class="btn" id="agregarComidaBtn">Agregar Comida</button>
+                <ul id="listaComidas">
+
+                </ul>
+            </div>
+        </section>
+
+        <div class="modal" id="modalAgregarComida">
+            <div class="modal-content">
+                <h2>Agregar Comida</h2>
+                <form id="formAgregarComida">
+                    <div class="input-group">
+                        <label for="nombreComida">Nombre de la Comida</label>
+                        <input type="text" id="nombreComida" name="nombreComida" required>
+                    </div>
+                    <button type="button" class="btn" id="confirmarComidaBtn">Confirmar</button>
+                </form>
+                <button type="button" class="btn" id="cerrarModalBtn">Cerrar</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Taller de Tecnologías de Producción de Software</p>
+        <p>Grupo 1 - Saenz Julia & Rubiano Manuel</p>
+    </footer>
+
+    <script>
+        const agregarComidaBtn = document.getElementById('agregarComidaBtn');
+        const modalAgregarComida = document.getElementById('modalAgregarComida');
+        const cerrarModalBtn = document.getElementById('cerrarModalBtn');
+        const confirmarComidaBtn = document.getElementById('confirmarComidaBtn');
+        const listaComidas = document.getElementById('listaComidas');
+        const nombreComidaInput = document.getElementById('nombreComida');
+
+        agregarComidaBtn.addEventListener('click', () => {
+            modalAgregarComida.style.display = 'flex';
+        });
+
+        cerrarModalBtn.addEventListener('click', () => {
+            modalAgregarComida.style.display = 'none';
+        });
+
+        confirmarComidaBtn.addEventListener('click', () => {
+            const nombreComida = nombreComidaInput.value.trim();
+            if (nombreComida !== '') {
+                const nuevaComida = document.createElement('li');
+                nuevaComida.innerHTML = `
+                    ${nombreComida} 
+                    <button class="btn-small eliminar">Eliminar</button>
+                    <button class="btn-small pausar">Pausar</button>
+                    <button class="btn-small modificar">Modificar</button>
+                `;
+                listaComidas.appendChild(nuevaComida);
+                nombreComidaInput.value = '';
+                modalAgregarComida.style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+
+</html>
