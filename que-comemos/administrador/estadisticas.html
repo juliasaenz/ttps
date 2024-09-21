@@ -4,21 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Qué Comemos? - Administrador</title>
+    <title>¿Qué Comemos? - Estadísticas</title>
     <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .charts-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 2rem;
+        }
+
+        .chart-card {
+            align-items: center;
+            height: fit-content !important;
+        }
+        .chart-card canvas {
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        .text-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .chart-container {
+            width: 400px;
+            /* Set the width to a specific value */
+            margin: 20px auto;
+            /* Add some margin and center the chart */
+        }
+    </style>
 </head>
 
 <body>
     <header>
         <div class="header-logo">
-            <h2> <a href="./index.html"> ¿Qué Comemos? </a></h2>
+            <h2><a href="./index.html"> ¿Qué Comemos? </a></h2>
         </div>
         <nav>
             <ul>
-                <li><a class="unselected" href="./administrarComidas.html">Comidas</a></li>
+                <li><a href="./administrarComidas.html">Comidas</a></li>
                 <li><a class="unselected" href="./administrarMenus.html">Menús</a></li>
                 <li><a class="unselected" href="./administrarBuzon.html">Buzón</a></li>
-                <li><a href="./estadisticas.html">Estadísticas</a></li>
+                <li><a class="unselected" href="./estadisticas.html">Estadísticas</a></li>
                 <li><a class="unselected" href="./administrarUsuarios.html">Usuarios</a></li>
                 <li><a class="unselected" href="./editar.html">Perfil</a></li>
             </ul>
@@ -28,10 +58,30 @@
     <main>
         <section class="content">
             <div class="text-section">
-                <h2>Bienvenido Estadisticas del menu</h2>
+                <h2>Estadísticas de Menús Comprados</h2>
                 <p>
-                    Bienvenido al panel de estadisticas de <strong>¿Qué Comemos?</strong>. Desde aquí puedes ver las estadisticas de nuestros menus.
+                    A continuación, se muestran algunas estadísticas interesantes sobre los menús
+                    más comprados, las bebidas más populares, y la evolución de las compras a lo
+                    largo del tiempo.
                 </p>
+            </div>
+
+            <div class="charts-container">
+                <!-- First Chart: Pie Chart -->
+                <div class="card chart-card light-bg">
+                    <h3>Platos Principales más Comprados</h3>
+                    <div class="chart-container">
+                        <canvas id="menuTypePieChart"></canvas>
+                    </div>
+                </div> 
+
+                <!-- Third Chart: Line Chart -->
+                <div class="card chart-card light-bg">
+                    <h3>Compras de Menús por Mes</h3>
+                    <div class="chart-container">
+                        <canvas id="monthlySalesLineChart"></canvas>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -40,6 +90,61 @@
         <p>&copy; 2024 Taller de Tecnologías de Producción de Software</p>
         <p>Grupo 1 - Saenz Julia & Rubiano Manuel</p>
     </footer>
+
+    <script>
+        // Pie Chart - Menu Types
+        const menuTypePieChart = new Chart(document.getElementById('menuTypePieChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Pollo con papas', 'Pizza', 'Pastel de papa', 'Guiso de lentejas'],
+                datasets: [{
+                    data: [25, 50, 15, 10], // Dummy data
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+                    hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+                }]
+            },
+            options: {
+                responsive: false, // Set responsive to false
+                width: 400, // Set the width to a specific value
+                height: 300, // Set the height to a specific value
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Line Chart - Monthly Sales
+        const monthlySalesLineChart = new Chart(document.getElementById('monthlySalesLineChart'), {
+            type: 'line',
+            data: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto'],
+                datasets: [{
+                    label: 'Compras de Menús',
+                    data: [20, 35, 40, 60, 70, 55, 65, 75], // Dummy data
+                    fill: false,
+                    borderColor: '#36A2EB',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: false, // Set responsive to false
+                width: 400, // Set the width to a specific value
+                height: 300, // Set the height to a specific value
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

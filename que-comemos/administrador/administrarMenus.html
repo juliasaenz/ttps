@@ -11,7 +11,7 @@
 <body>
     <header>
         <div class="header-logo">
-            <h2> <a href="./index.html"> ¿Qué Comemos? </a></h2>
+            <h2><a href="./index.html"> ¿Qué Comemos? </a></h2>
         </div>
         <nav>
             <ul>
@@ -25,7 +25,7 @@
         </nav>
     </header>
 
-    <main>
+    <main style="display: flex; flex-direction: column; align-items: center; gap: 2rem;">
         <section class="content">
             <div class="text-section">
                 <h2>Administrar Menús</h2>
@@ -35,21 +35,109 @@
                 </p>
             </div>
 
-            <div class="card">
+            <div class="card light-bg">
                 <button class="btn" id="agregarMenuBtn">Agregar Menú</button>
-                <ul id="listaMenus">
-                    <!-- Aca se agregaran los menus -->
+                <ul id="listaMenus" class="fullwidth">
+                    <!-- Aquí se agregarán los menús -->
                 </ul>
             </div>
         </section>
 
-        <!-- Modal para agregar menus -->
+        <section class="content">
+            <div class="card full-width light-bg">
+                <h3>Lista de Menús</h3>
+                <div class="filter-sort-container">
+                    <label for="filterStatus">Filtrar por estado:</label>
+                    <select id="filterStatus">
+                        <option value="all">Todos</option>
+                        <option value="Activo">Activo</option>
+                        <option value="En pausa">En pausa</option>
+                    </select>
+                </div>
+
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable('menuTable', 0)">Entrada</th>
+                            <th onclick="sortTable('menuTable', 1)">1er Plato Principal</th>
+                            <th onclick="sortTable('menuTable', 2)">2do Plato Principal</th>
+                            <th onclick="sortTable('menuTable', 3)">Postre</th>
+                            <th onclick="sortTable('menuTable', 4)">Bebida</th>
+                            <th onclick="sortTable('menuTable', 5)">Estatus</th>
+                            <th onclick="sortTable('menuTable', 6)">Fecha Asignada</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="menuTable">
+                        <tr>
+                            <td>Ensalada César</td>
+                            <td>Pizza</td>
+                            <td>Calzone</td>
+                            <td> - </td>
+                            <td>Agua</td>
+                            <td>Lunes</td>
+                            <td>Activo</td>
+                            <td><button class="btn eliminar">Eliminar</button></td>
+                        </tr>
+                        <tr>
+                            <td>Sopa de Verduras</td>
+                            <td>Milanesa con Puré</td>
+                            <td>Wrap vegetariano</td>
+                            <td>Flan</td>
+                            <td>Refresco</td>
+                            <td>Martes</td>
+                            <td>En pausa</td>
+                            <td><button class="btn eliminar">Eliminar</button></td>
+                        </tr>
+                        <tr>
+                            <td> - </td>
+                            <td>Pasta Bolognese</td>
+                            <td> Pasta con fileto </td>
+                            <td> - </td>
+                            <td>Limonada</td>
+                            <td>Miércoles</td>
+                            <td>Activo</td>
+                            <td><button class="btn eliminar">Eliminar</button></td>
+                        </tr>
+                        <tr>
+                            <td> - </td>
+                            
+                            <td>Lasagna</td>
+                            <td>Ensalada Griega</td>
+                            <td> - </td>
+                            <td>Agua</td>
+                            <td>Jueves</td>
+                            <td>En pausa</td>
+                            <td><button class="btn eliminar">Eliminar</button></td>
+                        </tr>
+                        <tr>
+                            <td>Caprese</td>
+                            <td>Pastel de papa</td>
+                            <td> Ensalada con medallón de berenjena</td>
+                            <td> - </td>
+                            <td>Zumo de Naranja</td>
+                            <td>Viernes</td>
+                            <td>Activo</td>
+                            <td><button class="btn eliminar">Eliminar</button></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+                <div class="pagination">
+                    <button class="prev-page">&laquo; Anterior</button>
+                    <span class="page-info">1 de 1 páginas</span>
+                    <button class="next-page">Siguiente &raquo;</button>
+                </div>
+            </div>
+        </section>
+
         <div class="modal" id="modalAgregarMenu">
-            <div class="modal-content">
+            <div class="modal-content light-bg">
                 <h2>Agregar Menú</h2>
-                <form id="formAgregarMenu">
+                <form id="formAgregarMenu" class="fullwidth" onsubmit="return false;">
                     <div class="input-group">
-                        <label for="entrada">Entrada</label>
+                        <label for="entrada">Selecciona la <strong>entrada</strong>:</label>
                         <select id="entrada" name="entrada" required>
                             <option value="Ensalada">Ensalada</option>
                             <option value="Sopa">Sopa</option>
@@ -57,26 +145,65 @@
                         </select>
                     </div>
                     <div class="input-group">
-                        <label for="principal">Comida Principal</label>
-                        <select id="principal" name="principal" required>
+                        <label for="principal1">Selecciona el <strong>1er Plato
+                                Principal</strong>:</label>
+                        <select id="principal1" name="principal1" required>
                             <option value="Milanesa con puré">Milanesa con puré</option>
                             <option value="Pastas">Pastas</option>
                             <option value="Pizza">Pizza</option>
                         </select>
                     </div>
                     <div class="input-group">
-                        <label for="postre">Postre</label>
+                        <label for="principal2">Selecciona el <strong>2do Plato
+                                Principal</strong>:</label>
+                        <select id="principal2" name="principal2" required>
+                            <option value="Hamburguesa">Hamburguesa</option>
+                            <option value="Pollo asado">Pollo asado</option>
+                            <option value="Risotto">Risotto</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="postre">Selecciona el <strong>postre</strong>:</label>
                         <select id="postre" name="postre" required>
                             <option value="Helado">Helado</option>
                             <option value="Fruta">Fruta</option>
                             <option value="Tarta">Tarta</option>
                         </select>
                     </div>
-                    <button type="button" class="btn" id="confirmarMenuBtn">Confirmar</button>
+                    <div class="input-group">
+                        <label for="bebida">Selecciona la <strong>bebida</strong>:</label>
+                        <select id="bebida" name="bebida" required>
+                            <option value="Agua">Agua</option>
+                            <option value="Refresco">Refresco</option>
+                            <option value="Jugo">Jugo</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="estatus">Estatus:</label>
+                        <select id="estatus" name="estatus" required>
+                            <option value="Activo">Activo</option>
+                            <option value="En Pausa">En Pausa</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="fechaAsignada">Fecha Asignada:</label>
+                        <select id="fechaAsignada" name="fechaAsignada" required>
+                            <option value="Ninguna">Ninguna</option>
+                            <option value="Lunes">Lunes</option>
+                            <option value="Martes">Martes</option>
+                            <option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option>
+                            <option value="Viernes">Viernes</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <button type="button" class="btn" id="confirmarMenuBtn">Confirmar</button>
+                        <button type="button" class="btn" id="cerrarModalBtn">Cerrar</button>
+                    </div>
                 </form>
-                <button type="button" class="btn" id="cerrarModalBtn">Cerrar</button>
             </div>
         </div>
+
     </main>
 
     <footer>
@@ -96,37 +223,88 @@
         const modalAgregarMenu = document.getElementById('modalAgregarMenu');
         const cerrarModalBtn = document.getElementById('cerrarModalBtn');
         const confirmarMenuBtn = document.getElementById('confirmarMenuBtn');
-        const listaMenus = document.getElementById('listaMenus');
+        const menuTable = document.getElementById('menuTable');
         const entradaInput = document.getElementById('entrada');
-        const principalInput = document.getElementById('principal');
+        const principal1Input = document.getElementById('principal1');
+        const principal2Input = document.getElementById('principal2');
         const postreInput = document.getElementById('postre');
+        const bebidaInput = document.getElementById('bebida');
+        const estatusInput = document.getElementById('estatus');
+        const fechaAsignadaInput = document.getElementById('fechaAsignada');
 
-        agregarMenuBtn.addEventListener('click', () => {
+        agregarMenuBtn.onclick = () => {
             modalAgregarMenu.style.display = 'flex';
-        });
+        };
 
-        cerrarModalBtn.addEventListener('click', () => {
+        cerrarModalBtn.onclick = () => {
             modalAgregarMenu.style.display = 'none';
-        });
+        };
 
-        confirmarMenuBtn.addEventListener('click', () => {
+        confirmarMenuBtn.onclick = () => {
             const entrada = entradaInput.value;
-            const principal = principalInput.value;
+            const principal1 = principal1Input.value;
+            const principal2 = principal2Input.value;
             const postre = postreInput.value;
-            if (entrada !== '' && principal !== '' && postre !== '') {
-                const nuevoMenu = document.createElement('li');
-                nuevoMenu.innerHTML = `
-                    Entrada: ${entrada}, Principal: ${principal}, Postre: ${postre}
-                    <button class="btn-small eliminar">Eliminar</button>
-                    <button class="btn-small pausar">Pausar</button>
-                    <button class="btn-small modificar">Modificar</button>
+            const bebida = bebidaInput.value;
+            const estatus = estatusInput.value;
+            const fechaAsignada = fechaAsignadaInput.value;
+
+            if (entrada && principal1 && principal2 && postre && bebida && estatus && fechaAsignada) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${entrada}</td>
+                    <td>${principal1}</td>
+                    <td>${principal2}</td>
+                    <td>${postre}</td>
+                    <td>${bebida}</td>
+                    <td>${estatus}</td>
+                    <td>${fechaAsignada}</td>
+                    <td><button class="btn eliminar">Eliminar</button></td>
                 `;
-                listaMenus.appendChild(nuevoMenu);
+                menuTable.appendChild(tr);
+
+                // Clear inputs and close modal
+                entradaInput.selectedIndex = 0;
+                principal1Input.selectedIndex = 0;
+                principal2Input.selectedIndex = 0;
+                postreInput.selectedIndex = 0;
+                bebidaInput.selectedIndex = 0;
+                estatusInput.selectedIndex = 0;
+                fechaAsignadaInput.selectedIndex = 0;
                 modalAgregarMenu.style.display = 'none';
             }
-        });
-    </script>
+        };
 
+        // Filtering functionality by status
+        document.getElementById("filterStatus").addEventListener("change", function () {
+            const selectedStatus = this.value;
+            const rows = document.querySelectorAll("#menuTable tr");
+            rows.forEach(row => {
+                const statusCell = row.cells[4].textContent;
+                if (selectedStatus === "all" || statusCell === selectedStatus) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        });
+
+        function sortTable(tableId, columnIndex) {
+            const table = document.getElementById(tableId);
+            const rows = Array.from(table.rows);
+            const header = rows.shift(); // Keep header
+
+            const sortedRows = rows.sort((a, b) => {
+                const cellA = a.cells[columnIndex].textContent;
+                const cellB = b.cells[columnIndex].textContent;
+                return cellA.localeCompare(cellB);
+            });
+
+            table.innerHTML = "";
+            table.appendChild(header); // Append header back
+            sortedRows.forEach(row => table.appendChild(row));
+        }
+    </script>
 </body>
 
 </html>
