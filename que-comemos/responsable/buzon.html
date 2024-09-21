@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sugerencias - ¿Qué Comemos?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="header-logo">
+            <h2><a href="./usuario.html">¿Qué Comemos?</a></h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a class="unselected" href="./usuarios.html">Usuarios</a></li>
+                <li><a class="unselected" href="./menus.html">Menus</a></li>
+                <li><a class="unselected" href="./pagos.html">Pagos</a></li>
+                <li><a href="./buzon.html">Buzón</a></li>
+                <li><a class="unselected" href="./editar.html">Perfil</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="content">
+            <div class="card menu-card light-bg">
+                <h3>Sugerencias Enviadas</h3>
+
+                <div class="filter-sort-container">
+                    <label for="filterType">Filtrar por tipo:</label>
+                    <select style="width:fit-content" id="filterType">
+                        <option value="all">Todos</option>
+                        <option value="menu">Menú</option>
+                        <option value="servicio">Servicio</option>
+                    </select>
+
+                    <label for="sortDate">Ordenar por fecha:</label>
+                    <select style="width: fit-content" id="sortDate" onchange="sortTable(0)">
+                        <option value="asc">Más antiguo primero</option>
+                        <option value="desc">Más reciente primero</option>
+                    </select>
+                </div>
+
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">Fecha</th>
+                            <th onclick="sortTable(1)">Tipo</th>
+                            <th>Mensaje</th>
+                            <th>Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody id="suggestionsTable">
+                        <tr>
+                            <td>2024-09-18</td>
+                            <td>Menú</td>
+                            <td>Me gustaría que incluyan opciones vegetarianas en el menú.</td>
+                            <td><button class="btn"
+                                        onclick="openModal('2024-09-18', 'usuario@example.com', 'Menú', 'Me gustaría que incluyan opciones vegetarianas en el menú.');">Abrir</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2024-09-19</td>
+                            <td>Servicio</td>
+                            <td>El servicio fue excelente, pero podría mejorar en tiempos de espera.
+                            </td>
+                            <td><button class="btn"
+                                        onclick="openModal('2024-09-19', 'usuario@example.com', 'Servicio', 'El servicio fue excelente, pero podría mejorar en tiempos de espera.');">Abrir</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2024-09-20</td>
+                            <td>Menú</td>
+                            <td>Sería genial tener una opción sin gluten.</td>
+                            <td><button class="btn"
+                                        onclick="openModal('2024-09-20', 'usuario@example.com', 'Menú', 'Sería genial tener una opción sin gluten.');">Abrir</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="pagination">
+                    <button class="prev-page">&laquo; Anterior</button>
+                    <span class="page-info">1 de 3 páginas</span>
+                    <button class="next-page">Siguiente &raquo;</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <h3>Detalles de la Sugerencia</h3>
+                <p><strong>Fecha:</strong> <span id="modalDate"></span></p>
+                <p><strong>Tipo:</strong> <span id="modalType"></span></p>
+                <p><strong>Email:</strong> <span id="modalEmail"></span></p>
+                <p id="modalMessage"></p>
+                <button class="btn" id="closeModal">Cerrar</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Taller de Tecnologías de Producción de Software</p>
+        <p>Grupo 1 - Saenz Julia & Rubiano Manuel</p>
+    </footer>
+
+    <script>
+        function openModal(date, email, type, message) {
+            document.getElementById('modalDate').textContent = date;
+            document.getElementById('modalEmail').textContent = email;
+            document.getElementById('modalType').textContent = type;
+            document.getElementById('modalMessage').textContent = message;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        document.getElementById("closeModal").addEventListener("click", function () {
+            document.getElementById("modal").style.display = "none";
+        });
+
+        function sortTable(columnIndex) {
+            const table = document.getElementById("suggestionsTable");
+            const rows = Array.from(table.rows);
+            const sortOrder = document.getElementById("sortDate").value;
+
+            const sortedRows = rows.sort((a, b) => {
+                const cellA = columnIndex === 0 ? new Date(a.cells[columnIndex].textContent) : a.cells[columnIndex].textContent;
+                const cellB = columnIndex === 0 ? new Date(b.cells[columnIndex].textContent) : b.cells[columnIndex].textContent;
+                return sortOrder === "asc" ? cellA - cellB : cellB - cellA;
+            });
+
+            table.innerHTML = "";
+            sortedRows.forEach(row => table.appendChild(row));
+        }
+
+        document.getElementById("filterType").addEventListener("change", function () {
+            const filterValue = this.value;
+            const rows = document.querySelectorAll("#suggestionsTable tr");
+            rows.forEach(row => {
+                const typeCell = row.cells[1].textContent;
+                row.style.display = (filterValue === "all" || typeCell === filterValue) ? "" : "none";
+            });
+            sortTable(0); // Re-sort after filtering
+        });
+    </script>
+</body>
+
+</html>
