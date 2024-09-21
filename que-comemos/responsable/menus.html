@@ -19,7 +19,7 @@
                 <li><a class="unselected" href="./usuarios.html">Usuarios</a></li>
                 <li><a href="./menus.html">Menus</a></li>
                 <li><a class="unselected" href="./pagos.html">Pagos</a></li>
-                
+
                 <li><a class="unselected" href="./buzon.html">Buzón</a></li>
                 <li><a class="unselected" href="./editar.html">Perfil</a></li>
             </ul>
@@ -204,7 +204,8 @@
                             <td>8</td>
                             <td>9</td>
                             <td>17</td>
-                            <td><button class="btn" onclick="openModal('Menú 10')">Ver </button></td>
+                            <td><button class="btn" onclick="openModal('Menú 10')">Ver </button>
+                            </td>
                         </tr>
                         <tr>
                             <td>Jueves</td>
@@ -285,6 +286,13 @@
     </footer>
 
     <script>
+        window.onload = () => {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none'; // Hide each modal on page load
+            });
+        };
+
         function openModal(menuName) {
             document.getElementById('modalMenuName').textContent = menuName;
             document.getElementById('modal').style.display = 'flex';

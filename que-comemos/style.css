@@ -1,14 +1,14 @@
 :root {
-	--light: #fffbeb; 
-	--primary: #d17020; 
-	--secondary: #425d45; 
+	--light: #fffbeb;
+	--primary: #d17020;
+	--secondary: #425d45;
 	--shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-	--primary-text: #121f16; 
-	--secondary-text: #fffbeb; 
+	--primary-text: #121f16;
+	--secondary-text: #fffbeb;
 
-	--primary-bg: var(--light); 
-	--secondary-bg: var(--secondary); 
+	--primary-bg: var(--light);
+	--secondary-bg: var(--secondary);
 
 	--highlight: #d27d37;
 }
@@ -20,18 +20,18 @@
 }
 
 .fullwidth {
-    width: 100%;
-    padding: 0 1.5rem;
+	width: 100%;
+	padding: 0 1.5rem;
 }
 
 .light-bg {
-    background-color: var(--primary-bg) !important;
-    color: var(--primary-text) !important;
-    border: 1px solid var(--secondary-bg); 
+	background-color: var(--primary-bg) !important;
+	color: var(--primary-text) !important;
+	border: 1px solid var(--secondary-bg);
 }
 
 .light-bg label {
-    color: var(--primary-text);
+	color: var(--primary-text);
 }
 
 body {
@@ -82,12 +82,12 @@ main {
 	align-items: start;
 	padding: 2rem 3rem;
 	min-height: 80vh;
-    width: 100vw;
+	width: 100vw;
 }
 
 .content {
 	display: flex;
-    flex-direction: row;
+	flex-direction: row;
 	flex-wrap: wrap;
 	gap: 2rem;
 	width: 100%;
@@ -97,24 +97,22 @@ main {
 
 .text-section {
 	min-width: 300px;
-    max-width: 450px;
+	max-width: 450px;
 }
 
 .card {
-    min-width: 300px;
-    flex-grow: 1;
+	min-width: 300px;
+	flex-grow: 1;
 	background-color: var(--secondary-bg);
 	padding: 2rem;
 	border-radius: 10px;
 	box-shadow: var(--shadow);
 	transition: box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    gap: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	gap: 1rem;
 }
-
-
 
 h1 {
 	font-size: 2.5rem;
@@ -125,10 +123,10 @@ h2 {
 	color: var(--primary-text);
 	padding: 0.25rem;
 }
-h2 a{
-    text-decoration: none;
-    color: var(--primary-text);
-    cursor: pointer;
+h2 a {
+	text-decoration: none;
+	color: var(--primary-text);
+	cursor: pointer;
 }
 
 p {
@@ -146,9 +144,9 @@ label {
 }
 
 a {
-    text-decoration: none;
-    color: var(--secondary-text);
-    cursor: pointer;
+	text-decoration: none;
+	color: var(--secondary-text);
+	cursor: pointer;
 }
 
 input {
@@ -198,7 +196,7 @@ footer p {
 
 /* Modal styles */
 .modal {
-    display: none;
+    display: none; /* Ensure modal is hidden initially */
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -207,8 +205,9 @@ footer p {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
 }
 
 .modal-content {
@@ -221,229 +220,231 @@ footer p {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .modal .btn {
-    width: auto;
-    margin: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+	width: auto;
+	margin: 10px;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
 }
 
 .profile-card {
-    background-color: var(--primary-bg);
-    border: 1px solid var(--secondary-bg); 
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    transition: box-shadow 0.3s; 
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 1rem;
-    justify-content: start;
+	background-color: var(--primary-bg);
+	border: 1px solid var(--secondary-bg);
+	border-radius: 10px;
+	padding: 2rem;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: box-shadow 0.3s;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	gap: 1rem;
+	justify-content: start;
 }
-
-
 
 /* Style the section */
 .preferences {
-    padding: 20px;
-  }
-  
-  /* Hide the default checkbox */
-  input[type="checkbox"] {
-    display: none;
-  }
-  
-  /* Style the custom checkbox */
-  input[type="checkbox"] + label:before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 10px;
-    background-color: var(--primary-bg);
-    border: 1px solid var(--secondary);
-    border-radius: 30%;
-    cursor: pointer;
-  }
-  
-  /* Style the checked state */
-  input[type="checkbox"]:checked + label:before {
-    background-color: var(--highlight);
-    border-color: var(--highlight);
-  }
-  
-  /* Style the label */
-  .preferences label {
-    display: flex;
-    align-items: end;
-    cursor: pointer;
-    justify-content: start;
-  }
+	padding: 20px;
+}
 
-  .preferences-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    list-style: none;
-  }
+/* Hide the default checkbox */
+input[type="checkbox"] {
+	display: none;
+}
 
-  select { 
-    width: 70%;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    font-size: 1rem;
-    color: var(--primary-text);
-    background-color: #fffbeb;
-    border: 1px solid var(--secondary);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
+/* Style the custom checkbox */
+input[type="checkbox"] + label:before {
+	content: "";
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin-right: 10px;
+	background-color: var(--primary-bg);
+	border: 1px solid var(--secondary);
+	border-radius: 30%;
+	cursor: pointer;
+}
 
-  select option {
-    color: var(--primary-text);
-    background-color: var(--light);
-  }
+/* Style the checked state */
+input[type="checkbox"]:checked + label:before {
+	background-color: var(--highlight);
+	border-color: var(--highlight);
+}
 
-  textarea {
-    width: 70%;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    font-size: 1rem;
-    color: var(--primary-text);
-    background-color: #fffbeb;
-    border: 1px solid var(--secondary);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    resize: none;
-  }
+/* Style the label */
+.preferences label {
+	display: flex;
+	align-items: end;
+	cursor: pointer;
+	justify-content: start;
+}
 
-  .menu-card {
-    padding: 2rem;
-    background-color: var(--primary-bg);
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--secondary);
+.preferences-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	list-style: none;
+}
+
+select {
+	width: 70%;
+	padding: 0.75rem;
+	border: none;
+	border-radius: 5px;
+	outline: none;
+	font-size: 1rem;
+	color: var(--primary-text);
+	background-color: #fffbeb;
+	border: 1px solid var(--secondary);
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+select option {
+	color: var(--primary-text);
+	background-color: var(--light);
+}
+
+textarea {
+	width: 70%;
+	padding: 0.75rem;
+	border: none;
+	border-radius: 5px;
+	outline: none;
+	font-size: 1rem;
+	color: var(--primary-text);
+	background-color: #fffbeb;
+	border: 1px solid var(--secondary);
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	resize: none;
+}
+
+.menu-card {
+	padding: 2rem;
+	background-color: var(--primary-bg);
+	border-radius: 10px;
+	box-shadow: var(--shadow);
+	border: 1px solid var(--secondary);
 }
 
 .menu-card h3 {
-    color: var(--primary-text);
+	color: var(--primary-text);
 }
 
 .menu-table {
-    width: 100%;
-    border-collapse: collapse;
+	width: 100%;
+	border-collapse: collapse;
 }
 
-
-.menu-table th, .menu-table td {
-    padding: 0.75rem;
-    text-align: left;
-    border-bottom: 1px solid var(--primary-text);
+.menu-table th,
+.menu-table td {
+	padding: 0.75rem;
+	text-align: left;
+	border-bottom: 1px solid var(--primary-text);
 }
 
 .menu-table th {
-    background-color: var(--secondary);
-    color: var(--secondary-text);
+	background-color: var(--secondary);
+	color: var(--secondary-text);
 }
 
 .menu-table tr:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+	background-color: rgba(0, 0, 0, 0.2);
 }
-.card:hover, .profile-card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.card:hover,
+.profile-card:hover {
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .total-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 1.5rem;
 }
 .total-amount {
-    font-size: 1.25rem;
-    padding-right: 1.25rem;
+	font-size: 1.25rem;
+	padding-right: 1.25rem;
 }
 
 .select-btn {
-    width: 120px;
+	width: 120px;
 }
 #buyButton {
-    width: 100%;
-    max-width: 800px;
-
+	width: 100%;
+	max-width: 800px;
 }
 .qr-code {
-    width: 250px;
-    height: auto; /* Adjusts height to maintain aspect ratio */
+	width: 250px;
+	height: auto; /* Adjusts height to maintain aspect ratio */
 }
 .filter-sort-container {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 20px;
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 20px;
 }
 
 .pagination {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
 }
 
-.prev-page, .next-page {
-    background-color: var(--secondary);
-    color: var(--secondary-text);
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
+.prev-page,
+.next-page {
+	background-color: var(--secondary);
+	color: var(--secondary-text);
+	border: none;
+	padding: 10px 15px;
+	cursor: pointer;
 }
 
 .page-info {
-    font-size: 0.9rem;
+	font-size: 0.9rem;
 }
 .tab {
-    display: none; /* Hide by default */
-    padding: 20px;
-    border: 1px solid var(--secondary);
-    border-radius: 5px;
-    background-color: var(--primary-bg);
-    margin-top: -1px; /* To align with the tab button border */
+	display: none; /* Hide by default */
+	padding: 20px;
+	border: 1px solid var(--secondary);
+	border-radius: 5px;
+	background-color: var(--primary-bg);
+	margin-top: -1px; /* To align with the tab button border */
 }
 
 .tab.active {
-    display: block; /* Show active tab */
+	display: block; /* Show active tab */
 }
 
 .tabs {
-    display: flex;
-    margin-bottom: 10px; /* Space between tabs and table */
+	display: flex;
+	margin-bottom: 10px; /* Space between tabs and table */
 }
 
 .tab-button {
-    flex: 1;
-    padding: 10px;
-    text-align: center;
-    background: var(--primary-bg);
-    border-bottom: none; /* Remove bottom border for tabs */
-    cursor: pointer;
-    transition: background 0.3s;
+	flex: 1;
+	padding: 10px;
+	text-align: center;
+	background: var(--primary-bg);
+	border-bottom: none; /* Remove bottom border for tabs */
+	cursor: pointer;
+	transition: background 0.3s;
 }
 
 .tab-button:hover {
-    background: rgba(0, 0, 0, 0.2); /* Darker on hover */
+	background: rgba(0, 0, 0, 0.2); /* Darker on hover */
 }
 
 .tab-button.active {
-    background: var(--secondary); /* Active tab color */
-    color: var(--secondary-text);
-    border-bottom: 1px solid transparent; /* Maintain alignment */
+	background: var(--secondary); /* Active tab color */
+	color: var(--secondary-text);
+	border-bottom: 1px solid transparent; /* Maintain alignment */
 }

@@ -38,7 +38,8 @@
                     </div>
                     <div class="input-group">
                         <label for="message">Mensaje</label>
-                        <textarea id="message" name="message" rows="4" required placeholder="Escribe tu sugerencia aquí..."></textarea>
+                        <textarea id="message" name="message" rows="4" required
+                                  placeholder="Escribe tu sugerencia aquí..."></textarea>
                     </div>
                     <button type="submit" class="btn" style="width: 70%;">Enviar Sugerencia</button>
                 </form>
@@ -60,12 +61,19 @@
     </footer>
 
     <script>
-        document.getElementById('suggestion-form').addEventListener('submit', function(event) {
+        window.onload = () => {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none'; // Hide each modal on page load
+            });
+        };
+
+        document.getElementById('suggestion-form').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent the default form submission
             document.getElementById('modal').style.display = 'flex'; // Show the modal
         });
 
-        document.getElementById('close-modal').addEventListener('click', function() {
+        document.getElementById('close-modal').addEventListener('click', function () {
             document.getElementById('modal').style.display = 'none'; // Hide the modal
         });
     </script>

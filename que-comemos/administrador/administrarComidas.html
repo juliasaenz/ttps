@@ -30,7 +30,8 @@
             <div class="text-section">
                 <h2>Administrar Comidas</h2>
                 <p>
-                    Desde aquí puedes realizar <strong>altas, bajas y modificaciones</strong> de comidas y menús.
+                    Desde aquí puedes realizar <strong>altas, bajas y modificaciones</strong> de
+                    comidas y menús.
                 </p>
             </div>
 
@@ -63,6 +64,13 @@
     </footer>
 
     <script>
+        window.onload = () => {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none'; // Hide each modal on page load
+            });
+        };
+
         const agregarComidaBtn = document.getElementById('agregarComidaBtn');
         const modalAgregarComida = document.getElementById('modalAgregarComida');
         const cerrarModalBtn = document.getElementById('cerrarModalBtn');

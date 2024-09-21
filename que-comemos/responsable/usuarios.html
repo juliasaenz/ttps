@@ -89,6 +89,13 @@
     </footer>
 
     <script>
+        window.onload = () => {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none'; // Hide each modal on page load
+            });
+        };
+
         function sortTable(columnIndex) {
             const table = document.getElementById("clientTable");
             const rows = Array.from(table.rows);

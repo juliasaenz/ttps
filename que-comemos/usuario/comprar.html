@@ -168,35 +168,42 @@
     </footer>
 
     <script>
+        window.onload = () => {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none'; // Hide each modal on page load
+            });
+        };
+
         const totalAmount = document.getElementById('totalAmount');
         let currentTotal = 0;
-    
+
         document.querySelectorAll('.select-menu').forEach(select => {
             select.addEventListener('change', function () {
                 const selectedValue = this.value;
-    
+
                 // Check if an option is selected
                 if (selectedValue) {
                     currentTotal += 500; // Add 500 if an option is selected
                 } else {
                     currentTotal -= 500; // Subtract 500 if no option is selected
                 }
-    
+
                 // Ensure currentTotal doesn't go below zero
                 currentTotal = Math.max(currentTotal, 0);
                 totalAmount.textContent = `$${currentTotal}`;
             });
         });
-    
+
         document.getElementById("buyButton").addEventListener("click", function () {
             document.getElementById("modal").style.display = "flex";
         });
-    
+
         document.getElementById("closeModal").addEventListener("click", function () {
             document.getElementById("modal").style.display = "none";
         });
     </script>
-    
+
 </body>
 
 </html>

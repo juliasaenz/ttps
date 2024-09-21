@@ -109,6 +109,13 @@
     </footer>
 
     <script>
+        window.onload = () => {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none'; // Hide each modal on page load
+            });
+        };
+
         function openModal(date, email, type, message) {
             document.getElementById('modalDate').textContent = date;
             document.getElementById('modalEmail').textContent = email;

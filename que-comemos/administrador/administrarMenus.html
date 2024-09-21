@@ -30,7 +30,8 @@
             <div class="text-section">
                 <h2>Administrar Menús</h2>
                 <p>
-                    Desde aquí puedes realizar <strong>altas, bajas y modificaciones</strong> de menús.
+                    Desde aquí puedes realizar <strong>altas, bajas y modificaciones</strong> de
+                    menús.
                 </p>
             </div>
 
@@ -84,6 +85,13 @@
     </footer>
 
     <script>
+        window.onload = () => {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none'; // Hide each modal on page load
+            });
+        };
+
         const agregarMenuBtn = document.getElementById('agregarMenuBtn');
         const modalAgregarMenu = document.getElementById('modalAgregarMenu');
         const cerrarModalBtn = document.getElementById('cerrarModalBtn');
