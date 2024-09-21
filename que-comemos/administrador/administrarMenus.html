@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Menús</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-logo">
+            <h2> <a href="./administrador.html"> ¿Qué Comemos? </a></h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a class="unselected" href="./administrarComidas.html">Administrar Comidas</a></li>
+                <li><a class="unselected" href="./administrarMenus.html">Administrar Menús</a></li>
+                <li><a class="unselected" href="./administrarBuzon.html">Administrar Buzón</a></li>
+                <li><a class="unselected" href="./estadisticas.html">Estadísticas</a></li>
+                <li><a class="unselected" href="./administrarUsuarios.html">Administrar Usuarios</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content">
+            <div class="text-section">
+                <h2>Administrar Menús</h2>
+                <p>
+                    Desde aquí puedes realizar <strong>altas, bajas y modificaciones</strong> de menús.
+                </p>
+            </div>
+
+            <div class="card">
+                <button class="btn" id="agregarMenuBtn">Agregar Menú</button>
+                <ul id="listaMenus">
+                    <!-- Aca se agregaran los menus -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- Modal para agregar menus -->
+        <div class="modal" id="modalAgregarMenu">
+            <div class="modal-content">
+                <h2>Agregar Menú</h2>
+                <form id="formAgregarMenu">
+                    <div class="input-group">
+                        <label for="entrada">Entrada</label>
+                        <select id="entrada" name="entrada" required>
+                            <option value="Ensalada">Ensalada</option>
+                            <option value="Sopa">Sopa</option>
+                            <option value="Bruschetta">Bruschetta</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="principal">Comida Principal</label>
+                        <select id="principal" name="principal" required>
+                            <option value="Milanesa con puré">Milanesa con puré</option>
+                            <option value="Pastas">Pastas</option>
+                            <option value="Pizza">Pizza</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="postre">Postre</label>
+                        <select id="postre" name="postre" required>
+                            <option value="Helado">Helado</option>
+                            <option value="Fruta">Fruta</option>
+                            <option value="Tarta">Tarta</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn" id="confirmarMenuBtn">Confirmar</button>
+                </form>
+                <button type="button" class="btn" id="cerrarModalBtn">Cerrar</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Taller de Tecnologías de Producción de Software</p>
+        <p>Grupo 1 - Saenz Julia & Rubiano Manuel</p>
+    </footer>
+
+    <script>
+        const agregarMenuBtn = document.getElementById('agregarMenuBtn');
+        const modalAgregarMenu = document.getElementById('modalAgregarMenu');
+        const cerrarModalBtn = document.getElementById('cerrarModalBtn');
+        const confirmarMenuBtn = document.getElementById('confirmarMenuBtn');
+        const listaMenus = document.getElementById('listaMenus');
+        const entradaInput = document.getElementById('entrada');
+        const principalInput = document.getElementById('principal');
+        const postreInput = document.getElementById('postre');
+
+        agregarMenuBtn.addEventListener('click', () => {
+            modalAgregarMenu.style.display = 'flex';
+        });
+
+        cerrarModalBtn.addEventListener('click', () => {
+            modalAgregarMenu.style.display = 'none';
+        });
+
+        confirmarMenuBtn.addEventListener('click', () => {
+            const entrada = entradaInput.value;
+            const principal = principalInput.value;
+            const postre = postreInput.value;
+            if (entrada !== '' && principal !== '' && postre !== '') {
+                const nuevoMenu = document.createElement('li');
+                nuevoMenu.innerHTML = `
+                    Entrada: ${entrada}, Principal: ${principal}, Postre: ${postre}
+                    <button class="btn-small eliminar">Eliminar</button>
+                    <button class="btn-small pausar">Pausar</button>
+                    <button class="btn-small modificar">Modificar</button>
+                `;
+                listaMenus.appendChild(nuevoMenu);
+                modalAgregarMenu.style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+
+</html>
