@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menús de la Semana - ¿Qué Comemos?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="header-logo">
+            <h2><a href="./usuario.html">¿Qué Comemos?</a></h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a class="unselected" href="./comprar.html">Comprar</a></li>
+                <li><a class="unselected" href="./sugerencias.html">Sugerencias</a></li>
+                <li><a class="unselected" href="./editar.html">Perfil</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="card menu-card">
+            <h2>Menús de la Semana Actual y Próxima</h2>
+            <div class="tabs">
+                <div class="tab-button active" onclick="showTab('currentWeek')">Semana Actual</div>
+                <div class="tab-button" onclick="showTab('nextWeek')">Próxima Semana</div>
+            </div>
+
+            <div id="currentWeek" class="tab active">
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Día</th>
+                            <th>Fecha</th>
+                            <th>Plato 1</th>
+                            <th>Plato 2</th>
+                            <th>Detalles</th>
+                            <th>Total Plato 1</th>
+                            <th>Total Plato 2</th>
+                            <th>Total Comprado</th>
+                            <th>Compras</th>
+                        </tr>
+                    </thead>
+                    <tbody id="menuTable">
+                        <tr>
+                            <td>Lunes</td>
+                            <td>2024-09-18</td>
+                            <td>Pollo al horno</td>
+                            <td>Pure mixto</td>
+                            <td>
+                                <ul>
+                                    <li>Entrada: Ensalada César</li>
+                                    <li>Postre: Flan</li>
+                                    <li>Bebida: Gaseosa</li>
+                                </ul>
+                            </td>
+                            <td>10</td>
+                            <td>5</td>
+                            <td>15</td>
+                            <td><button class="btn" onclick="openModal('Menú 1')">Ver</button></td>
+                        </tr>
+                        <tr>
+                            <td>Martes</td>
+                            <td>2024-09-19</td>
+                            <td>Pasta con salsa</td>
+                            <td>Ensalada fresca</td>
+                            <td>
+                                <ul>
+                                    <li>Entrada: Sopa del día</li>
+                                    <li>Postre: Helado</li>
+                                    <li>Bebida: Jugo natural</li>
+                                </ul>
+                            </td>
+                            <td>8</td>
+                            <td>12</td>
+                            <td>20</td>
+                            <td><button class="btn" onclick="openModal('Menú 2')">Ver</button></td>
+                        </tr>
+                        <tr>
+                            <td>Miércoles</td>
+                            <td>2024-09-20</td>
+                            <td>Hamburguesa</td>
+                            <td>Wrap vegetariano</td>
+                            <td>
+                                <ul>
+                                    <li>Entrada: Papas fritas</li>
+                                    <li>Postre: Brownie</li>
+                                    <li>Bebida: Agua mineral</li>
+                                </ul>
+                            </td>
+                            <td>7</td>
+                            <td>9</td>
+                            <td>16</td>
+                            <td><button class="btn" onclick="openModal('Menú 3')">Ver </button></td>
+                        </tr>
+                        <tr>
+                            <td>Jueves</td>
+                            <td>2024-09-21</td>
+                            <td>Pizza margarita</td>
+                            <td>Calzone</td>
+                            <td>
+                                <ul>
+                                    <li>Entrada: Pan de ajo</li>
+                                    <li>Postre: Tarta de frutas</li>
+                                    <li>Bebida: Té helado</li>
+                                </ul>
+                            </td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>11</td>
+                            <td><button class="btn" onclick="openModal('Menú 4')">Ver </button></td>
+                        </tr>
+                        <tr>
+                            <td>Viernes</td>
+                            <td>2024-09-22</td>
+                            <td>Pescado al horno</td>
+                            <td>Ensalada de quinoa</td>
+                            <td>
+                                <ul>
+                                    <li>Entrada: Gazpacho</li>
+                                    <li>Postre: Flan de coco</li>
+                                    <li>Bebida: Agua con limón</li>
+                                </ul>
+                            </td>
+                            <td>12</td>
+                            <td>8</td>
+                            <td>20</td>
+                            <td><button class="btn" onclick="openModal('Menú 5')">Ver </button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="nextWeek" class="tab">
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Día</th>
+                            <th>Fecha</th>
+                            <th>Plato 1</th>
+                            <th>Plato 2</th>
+                            <th>Detalles</th>
+                            <th>Total Plato 1</th>
+                            <th>Total Plato 2</th>
+                            <th>Total Comprado</th>
+                            <th>Detalles de </th>
+                        </tr>
+                    </thead>
+                    <tbody id="menuTable">
+                        <tr>
+                            <td>Lunes</td>
+                            <td>2024-09-25</td>
+                            <td>Pollo al curry</td>
+                            <td>Vegetales salteados</td>
+                            <td>
+                                <ul>
+                                    <li>Entrada: Sopa de verduras</li>
+                                    <li>Postre: Flan de caramelo</li>
+                                    <li>Bebida: Té helado</li>
+                                </ul>
+                            </td>
+                            <td>9</td>
+                            <td>11</td>
+                            <td>20</td>
+                            <td><button class="btn" onclick="openModal('Menú 8')">Ver </button></td>
+                        </tr>
+                        <tr>
+                            <td>Martes</td>
+                            <td>2024-09-26</td>
+                            <td>Ternera a la parrilla</td>
+                            <td>Puré de papas</td>
+                            <td>
+                                <ul>
+                                    <li>Entrada: Ensalada mixta</li>
+                                    <li>Postre: Mousse de chocolate</li>
+                                    <li>Bebida: Agua mineral</li>
+                                </ul>
+                            </td>
+                            <td>10</td>
+                            <td>7</td>
+                            <td>17</td>
+                            <td><button class="btn" onclick="openModal('Menú 9')">Ver </button></td>
+                        </tr>
+                        <tr>
+                            <td>Miércoles</td>
+                            <td>2024-09-27</td>
+                            <td>Filete de cerdo</td>
+                            <td>Ensalada de frutas</td>
+                            <td>
+                                <ul>
+                                    <li>Entrada: Croquetas</li>
+                                    <li>Postre: Gelatina</li>
+                                    <li>Bebida: Gaseosa</li>
+                                </ul>
+                            </td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>17</td>
+                            <td><button class="btn" onclick="openModal('Menú 10')">Ver </button></td>
+                        </tr>
+                        <tr>
+                            <td>Jueves</td>
+                            <td>2024-09-23</td>
+                            <td>Ensalada César</td>
+                            <td>Wrap de pollo</td>
+                            <td>
+                                <ul>
+                                    <li>Entrada: Gazpacho</li>
+                                    <li>Postre: Helado de frutas</li>
+                                    <li>Bebida: Limonada</li>
+                                </ul>
+                            </td>
+                            <td>10</td>
+                            <td>5</td>
+                            <td>15</td>
+                            <td><button class="btn" onclick="openModal('Menú 6')">Ver </button></td>
+                        </tr>
+                        <tr>
+                            <td>Viernes</td>
+                            <td>2024-09-24</td>
+                            <td>Spaghetti a la boloñesa</td>
+                            <td>Pizza de jamón</td>
+                            <td>
+                                <ul>
+                                    <li>Entrada: Pan con ajo</li>
+                                    <li>Postre: Tarta de queso</li>
+                                    <li>Bebida: Jugo de naranja</li>
+                                </ul>
+                            </td>
+                            <td>6</td>
+                            <td>8</td>
+                            <td>14</td>
+                            <td><button class="btn" onclick="openModal('Menú 7')">Ver </button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <h3>Compradores de <span id="modalMenuName"></span></h3>
+                <label for="searchDNI">Buscar por DNI:</label>
+                <input type="text" id="searchDNI" placeholder="Ingrese DNI...">
+                <table class="menu-table" id="buyerTable">
+                    <thead>
+                        <tr>
+                            <th>DNI</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Opción de Comida</th>
+                        </tr>
+                    </thead>
+                    <tbody id="buyerTableBody">
+                        <tr>
+                            <td>12345678</td>
+                            <td>Juan</td>
+                            <td>Pérez</td>
+                            <td>Opción 1</td>
+                        </tr>
+                        <tr>
+                            <td>87654321</td>
+                            <td>María</td>
+                            <td>Gómez</td>
+                            <td>Opción 2</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn" id="closeModal">Cerrar</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Taller de Tecnologías de Producción de Software</p>
+        <p>Grupo 1 - Saenz Julia & Rubiano Manuel</p>
+    </footer>
+
+    <script>
+        function openModal(menuName) {
+            document.getElementById('modalMenuName').textContent = menuName;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        document.getElementById("closeModal").addEventListener("click", function () {
+            document.getElementById("modal").style.display = "none";
+        });
+
+        document.getElementById("searchDNI").addEventListener("input", function () {
+            const filterValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll("#buyerTableBody tr");
+            rows.forEach(row => {
+                const dniCell = row.cells[0].textContent.toLowerCase();
+                row.style.display = dniCell.includes(filterValue) ? "" : "none";
+            });
+        });
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

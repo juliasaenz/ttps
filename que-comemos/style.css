@@ -410,3 +410,40 @@ footer p {
 .page-info {
     font-size: 0.9rem;
 }
+.tab {
+    display: none; /* Hide by default */
+    padding: 20px;
+    border: 1px solid var(--secondary);
+    border-radius: 5px;
+    background-color: var(--primary-bg);
+    margin-top: -1px; /* To align with the tab button border */
+}
+
+.tab.active {
+    display: block; /* Show active tab */
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 10px; /* Space between tabs and table */
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    background: var(--primary-bg);
+    border-bottom: none; /* Remove bottom border for tabs */
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.tab-button:hover {
+    background: rgba(0, 0, 0, 0.2); /* Darker on hover */
+}
+
+.tab-button.active {
+    background: var(--secondary); /* Active tab color */
+    color: var(--secondary-text);
+    border-bottom: 1px solid transparent; /* Maintain alignment */
+}
