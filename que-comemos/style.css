@@ -113,9 +113,7 @@ main {
     gap: 1rem;
 }
 
-.card:hover {
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
+
 
 h1 {
 	font-size: 2.5rem;
@@ -144,6 +142,12 @@ label {
 	color: var(--secondary-text);
 	display: block;
 	margin-bottom: 0.5rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--secondary-text);
+    cursor: pointer;
 }
 
 input {
@@ -226,17 +230,16 @@ footer p {
     background-color: var(--primary-bg);
     border: 1px solid var(--secondary-bg); 
     border-radius: 10px;
-    padding: 1.5rem;
+    padding: 2rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    transition: transform 0.3s, box-shadow 0.3s; 
+    transition: box-shadow 0.3s; 
     display: flex;
     flex-direction: column;
     align-items: start;
+    gap: 1rem;
+    justify-content: start;
 }
-.profile-card:hover {
-    transform: translateY(-2px); 
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
+
 
 
 /* Style the section */
@@ -316,3 +319,40 @@ footer p {
     transition: background-color 0.3s ease;
     resize: none;
   }
+
+  .menu-card {
+    margin-top: 2rem;
+    padding: 2rem;
+    background-color: var(--primary-bg);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--secondary);
+}
+
+.menu-card h3 {
+    color: var(--primary-text);
+}
+
+.menu-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+.menu-table th, .menu-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--primary-text);
+}
+
+.menu-table th {
+    background-color: var(--secondary);
+    color: var(--secondary-text);
+}
+
+.menu-table tr:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.card:hover, .profile-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}

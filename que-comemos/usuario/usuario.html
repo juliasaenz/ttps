@@ -4,50 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Qué Comemos?</title>
+    <title>Editar Usuario - ¿Qué Comemos?</title>
     <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
     <header>
         <div class="header-logo">
-            <h2> <a href="./usuario.html"> ¿Qué Comemos? </a></h2>
+            <h2><a href="./usuario.html">¿Qué Comemos?</a></h2>
         </div>
         <nav>
             <ul>
                 <li><a class="unselected" href="./comprar.html">Comprar</a></li>
                 <li><a class="unselected" href="./sugerencias.html">Sugerencias</a></li>
-                <li><a class="unselected" href="./editar.html">Perfil</a></li>
+                <li><a class="unselected" href="./perfil.html">Perfil</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section class="content">
-            <div class="text-section">
-                <h2>Bienvenidos</h2>
-                <p>
-                    Bienvenidos a <strong>¿Qué Comemos?</strong>, la plataforma de pedidos del buffet de la
-                    Facultad de Informática de la UNLP. <br/><br/> Aquí podrás consultar los menús diarios y realizar
-                    tus pedidos de forma rápida y sencilla. Disfruta de una experiencia eficiente y cómoda
-                    para que obtengas tu comida sin demoras.
-                </p>
+        <div class="content">
+            <div class="profile-card" style="width: 100%;">
+                <h3>Hola, Juan!</h3>
             </div>
-            
-            <div class="card">
-                <form action="#" method="POST">
-                    <div class="input-group">
-                        <label for="email">Correo electrónico</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="password">Contraseña</label>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-                    <button type="submit" class="btn">Entrar</button>
-                </form>
+
+            <div class="card menu-card">
+                <h3>Menús Comprados</h3>
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Día</th>
+                            <th>Fecha</th>
+                            <th>Menú</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lunes</td>
+                            <td>2024-09-18</td>
+                            <td>Ensalada César</td>
+                        </tr>
+                        <tr>
+                            <td>Martes</td>
+                            <td>2024-09-19</td>
+                            <td>Pizza Margarita</td>
+                        </tr>
+                        <tr>
+                            <td>Miércoles</td>
+                            <td>2024-09-20</td>
+                            <td>Pasta al Pesto</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </section>
+        </div>
     </main>
 
     <footer>
