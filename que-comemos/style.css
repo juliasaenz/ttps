@@ -321,7 +321,6 @@ footer p {
   }
 
   .menu-card {
-    margin-top: 2rem;
     padding: 2rem;
     background-color: var(--primary-bg);
     border-radius: 10px;
@@ -355,4 +354,28 @@ footer p {
 }
 .card:hover, .profile-card:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.total-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+.total-amount {
+    font-size: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+.select-btn {
+    width: 120px;
+}
+#buyButton {
+    width: 100%;
+    max-width: 800px;
+
+}
+.qr-code {
+    width: 250px;
+    height: auto; /* Adjusts height to maintain aspect ratio */
 }
