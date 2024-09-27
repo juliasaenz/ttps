@@ -18,7 +18,6 @@
             <ul>
                 <li><a class="unselected" href="./usuarios.html">Usuarios</a></li>
                 <li><a class="unselected" href="./menus.html">Menus</a></li>
-                <li><a class="unselected" href="./pagos.html">Pagos</a></li>
                 <li><a href="./buzon.html">Buzón</a></li>
                 <li><a class="unselected" href="./editar.html">Perfil</a></li>
             </ul>
@@ -34,8 +33,10 @@
                     <label for="filterType">Filtrar por tipo:</label>
                     <select style="width:fit-content" id="filterType">
                         <option value="all">Todos</option>
-                        <option value="menu">Menú</option>
+                        <option value="alimentos">Alimentos</option>
                         <option value="servicio">Servicio</option>
+                        <option value="infraestructura">Infraestructura</option>
+                        <option value="otro">Otro</option>
                     </select>
 
                     <label for="sortDate">Ordenar por fecha:</label>
@@ -45,7 +46,7 @@
                     </select>
                 </div>
 
-                <table class="menu-table">
+                <table id="suggestionsTable" class="menu-table">
                     <thead>
                         <tr>
                             <th onclick="sortTable(0)">Fecha</th>
@@ -57,7 +58,7 @@
                     <tbody id="suggestionsTable">
                         <tr>
                             <td>2024-09-18</td>
-                            <td>Menú</td>
+                            <td>Alimentos</td>
                             <td>Me gustaría que incluyan opciones vegetarianas en el menú.</td>
                             <td><button class="btn"
                                         onclick="openModal('2024-09-18', 'usuario@example.com', 'Menú', 'Me gustaría que incluyan opciones vegetarianas en el menú.');">Abrir</button>
@@ -74,7 +75,7 @@
                         </tr>
                         <tr>
                             <td>2024-09-20</td>
-                            <td>Menú</td>
+                            <td>Alimentos</td>
                             <td>Sería genial tener una opción sin gluten.</td>
                             <td><button class="btn"
                                         onclick="openModal('2024-09-20', 'usuario@example.com', 'Menú', 'Sería genial tener una opción sin gluten.');">Abrir</button>
@@ -128,30 +129,31 @@
             document.getElementById("modal").style.display = "none";
         });
 
-        function sortTable(columnIndex) {
-            const table = document.getElementById("suggestionsTable");
-            const rows = Array.from(table.rows);
-            const sortOrder = document.getElementById("sortDate").value;
-
-            const sortedRows = rows.sort((a, b) => {
-                const cellA = columnIndex === 0 ? new Date(a.cells[columnIndex].textContent) : a.cells[columnIndex].textContent;
-                const cellB = columnIndex === 0 ? new Date(b.cells[columnIndex].textContent) : b.cells[columnIndex].textContent;
-                return sortOrder === "asc" ? cellA - cellB : cellB - cellA;
-            });
-
-            table.innerHTML = "";
-            sortedRows.forEach(row => table.appendChild(row));
-        }
 
         document.getElementById("filterType").addEventListener("change", function () {
             const filterValue = this.value;
             const rows = document.querySelectorAll("#suggestionsTable tr");
             rows.forEach(row => {
-                const typeCell = row.cells[1].textContent;
+                const typeCell = row.cells[1].textContent.toLowerCase(); // Ensure case-insensitivity
                 row.style.display = (filterValue === "all" || typeCell === filterValue) ? "" : "none";
             });
             sortTable(0); // Re-sort after filtering
         });
+
+        function sortTable(columnIndex) {
+            const table = document.querySelector("#suggestionsTable tbody");
+            const rows = Array.from(table.rows);
+            const sortOrder = document.getElementById("sortDate").value;
+
+            rows.sort((a, b) => {
+                const cellA = columnIndex === 0 ? new Date(a.cells[columnIndex].textContent) : a.cells[columnIndex].textContent;
+                const cellB = columnIndex === 0 ? new Date(b.cells[columnIndex].textContent) : b.cells[columnIndex].textContent;
+                return sortOrder === "asc" ? cellA - cellB : cellB - cellA;
+            });
+
+            rows.forEach(row => table.appendChild(row)); // Re-attach sorted rows
+        }
+
     </script>
 </body>
 
