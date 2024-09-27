@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta - ¿Qué Comemos?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="header-logo">
+            <h2> <a href="./index.html"> ¿Qué Comemos? </a></h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a class="unselected" href="./comidas.html">Comidas</a></li>
+                <li><a class="unselected" href="./menus.html">Menús</a></li>
+                <li><a href="./carta.html">Carta</a></li>
+                <li><a class="unselected" href="./buzon.html">Buzón</a></li>
+                <li><a class="unselected" href="./estadisticas.html">Estadísticas</a></li>
+                <li><a class="unselected" href="./usuarios.html">Usuarios</a></li>
+                <li><a class="unselected" href="./editar.html">Perfil</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="card menu-card">
+            <div class="button-section row">
+                <button style="width: 50px" class="btn" id="prevWeek">
+                    < </button>
+                        <h3 class="fullwidth" id="weekText" style="text-align: center;"> Carta de la
+                            semana 23/09/2024 - 27/09/2024 </h3>
+                        <button style="width: 50px" class="btn" id="nextWeek"> > </button>
+                        <button class="btn btn-secondary" id="currentWeek"> Ir a semana actual
+                        </button>
+            </div>
+
+            <div id="week">
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Día</th>
+                            <th>Detalles</th>
+                            <th>Cantidad plato principal</th>
+                            <th>Cantidad opción vegetariana</th>
+                            <th>Total Comprado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="menuTable">
+                        <!-- Initial dummy data -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Taller de Tecnologías de Producción de Software</p>
+        <p>Grupo 1 - Saenz Julia & Rubiano Manuel</p>
+    </footer>
+
+    <script>
+        const weekData = [
+            {
+                weekText: "Carta de la semana 16/09/2024 - 20/09/2024",
+                data: [
+                    {
+                        dia: "Lunes",
+                        detalles: `<ul>
+                    <li><strong>Entrada:</strong> Bruschetta</li>
+                    <li><strong>Plato principal:</strong> Pescado con ensalada</li>
+                    <li><strong>Opción vegetariana:</strong> Ravioles de calabaza</li>
+                    <li><strong>Postre:</strong> Cheesecake</li>
+                    <li><strong>Bebida:</strong> Vino tinto</li>
+                </ul>`,
+                        principal: 7,
+                        vegetariano: 5,
+                        total: 12,
+                        acciones: "<button class='btn'>Ver</button>"
+                    },
+                    {
+                        dia: "Martes",
+                        detalles: `<ul>
+                    <li><strong>Entrada:</strong> Gazpacho</li>
+                    <li><strong>Plato principal:</strong> Paella</li>
+                    <li><strong>Opción vegetariana:</strong> Ensalada de quinoa</li>
+                    <li><strong>Postre:</strong> Tiramisú</li>
+                    <li><strong>Bebida:</strong> Cerveza</li>
+                </ul>`,
+                        principal: 11,
+                        vegetariano: 6,
+                        total: 17,
+                        acciones: "<button class='btn'>Ver</button>"
+                    },
+                    {
+                        dia: "Miércoles",
+                        detalles: `<ul>
+                    <li><strong>Entrada:</strong> Sopa de verduras</li>
+                    <li><strong>Plato principal:</strong> Pollo al horno</li>
+                    <li><strong>Opción vegetariana:</strong> Lasaña de verduras</li>
+                    <li><strong>Postre:</strong> Helado</li>
+                    <li><strong>Bebida:</strong> Jugo de naranja</li>
+                </ul>`,
+                        principal: 9,
+                        vegetariano: 2,
+                        total: 11,
+                        acciones: "<button class='btn'>Ver</button>"
+                    },
+                    {
+                        dia: "Jueves",
+                        detalles: `<ul>
+                    <li><strong>Entrada:</strong> Ensalada mixta</li>
+                    <li><strong>Plato principal:</strong> Carne a la parrilla</li>
+                    <li><strong>Opción vegetariana:</strong> Tarta de espinaca</li>
+                    <li><strong>Postre:</strong> Fruta</li>
+                    <li><strong>Bebida:</strong> Gaseosa</li>
+                </ul>`,
+                        principal: 12,
+                        vegetariano: 4,
+                        total: 16,
+                        acciones: "<button class='btn'>Ver</button>"
+                    },
+                    {
+                        dia: "Viernes",
+                        detalles: `<ul>
+                    <li><strong>Entrada:</strong> Papas fritas</li>
+                    <li><strong>Plato principal:</strong> Pastel de papa</li>
+                    <li><strong>Opción vegetariana:</strong> Milanesa de berenjena con papa</li>
+                    <li><strong>Postre:</strong> Brownie</li>
+                    <li><strong>Bebida:</strong> Agua</li>
+                </ul>`,
+                        principal: 8,
+                        vegetariano: 3,
+                        total: 11,
+                        acciones: "<button class='btn'>Ver</button>"
+                    }
+                ]
+            },
+            {
+                weekText: "Carta de la semana 23/09/2024 - 27/09/2024",
+                data: [
+                    {
+                        dia: "Lunes",
+                        detalles: `<ul>
+                    <li><strong>Entrada:</strong> Papas fritas</li>
+                    <li><strong>Plato principal:</strong> Pastel de papa</li>
+                    <li><strong>Opción vegetariana:</strong> Milanesa de berenjena con papa</li>
+                    <li><strong>Postre:</strong> Brownie</li>
+                    <li><strong>Bebida:</strong> Agua</li>
+                </ul>`,
+                        principal: 8,
+                        vegetariano: 3,
+                        total: 11,
+                        acciones: "<button class='btn'>Ver</button>"
+                    },
+                    {
+                        dia: "Martes",
+                        detalles: `<ul>
+                    <li><strong>Entrada:</strong> Sopa de verduras</li>
+                    <li><strong>Plato principal:</strong> Pollo al horno</li>
+                    <li><strong>Opción vegetariana:</strong> Lasaña de verduras</li>
+                    <li><strong>Postre:</strong> Helado</li>
+                    <li><strong>Bebida:</strong> Jugo de naranja</li>
+                </ul>`,
+                        principal: 9,
+                        vegetariano: 2,
+                        total: 11,
+                        acciones: "<button class='btn'>Ver</button>"
+                    },
+                    {
+                        dia: "Miércoles",
+                        detalles: `<ul>
+                    <li><strong>Entrada:</strong> Ensalada mixta</li>
+                    <li><strong>Plato principal:</strong> Carne a la parrilla</li>
+                    <li><strong>Opción vegetariana:</strong> Tarta de espinaca</li>
+                    <li><strong>Postre:</strong> Fruta</li>
+                    <li><strong>Bebida:</strong> Gaseosa</li>
+                </ul>`,
+                        principal: 12,
+                        vegetariano: 4,
+                        total: 16,
+                        acciones: "<button class='btn'>Ver</button>"
+                    },
+                    {
+                        dia: "Jueves",
+                        detalles: `<ul>
+                    <li><strong>Entrada:</strong> Bruschetta</li>
+                    <li><strong>Plato principal:</strong> Pescado con ensalada</li>
+                    <li><strong>Opción vegetariana:</strong> Ravioles de calabaza</li>
+                    <li><strong>Postre:</strong> Cheesecake</li>
+                    <li><strong>Bebida:</strong> Vino tinto</li>
+                </ul>`,
+                        principal: 7,
+                        vegetariano: 5,
+                        total: 12,
+                        acciones: "<button class='btn'>Ver</button>"
+                    },
+                    {
+                        dia: "Viernes",
+                        detalles: `<ul>
+                    <li><strong>Entrada:</strong> Gazpacho</li>
+                    <li><strong>Plato principal:</strong> Paella</li>
+                    <li><strong>Opción vegetariana:</strong> Ensalada de quinoa</li>
+                    <li><strong>Postre:</strong> Tiramisú</li>
+                    <li><strong>Bebida:</strong> Cerveza</li>
+                </ul>`,
+                        principal: 11,
+                        vegetariano: 6,
+                        total: 17,
+                        acciones: "<button class='btn'>Ver</button>"
+                    }
+                ]
+            },
+            {
+                weekText: "Carta de la semana 30/09/2024 - 04/10/2024",
+                data: [
+                    {
+                        dia: "Lunes",
+                        detalles: `<ul>
+                    <li><strong>Entrada:</strong> Ensalada mixta</li>
+                    <li><strong>Plato principal:</strong> Carne a la parrilla</li>
+                    <li><strong>Opción vegetariana:</strong> Tarta de espinaca</li>
+                    <li><strong>Postre:</strong> Fruta</li>
+                    <li><strong>Bebida:</strong> Gaseosa</li>
+                </ul>`,
+                        principal: 12,
+                        vegetariano: 4,
+                        total: 16,
+                        acciones: "<button class='btn'>Ver</button> <button class='btn'>Editar</button>"
+                    },
+                    {
+                        dia: "Martes",
+                        detalles: `<ul>
+                    <li><strong>Entrada:</strong> Bruschetta</li>
+                    <li><strong>Plato principal:</strong> Pescado con ensalada</li>
+                    <li><strong>Opción vegetariana:</strong> Ravioles de calabaza</li>
+                    <li><strong>Postre:</strong> Cheesecake</li>
+                    <li><strong>Bebida:</strong> Vino tinto</li>
+                </ul>`,
+                        principal: 7,
+                        vegetariano: 5,
+                        total: 12,
+                        acciones: "<button class='btn'>Ver</button> <button class='btn'>Editar</button>"
+                    },
+                    {
+                        dia: "Miércoles",
+                        detalles: `<ul>
+                    <li><strong>Entrada:</strong> Sopa de verduras</li>
+                    <li><strong>Plato principal:</strong> Pollo al horno</li>
+                    <li><strong>Opción vegetariana:</strong> Lasaña de verduras</li>
+                    <li><strong>Postre:</strong> Helado</li>
+                    <li><strong>Bebida:</strong> Jugo de naranja</li>
+                </ul>`,
+                        principal: 9,
+                        vegetariano: 2,
+                        total: 11,
+                        acciones: "<button class='btn'>Ver</button> <button class='btn'>Editar</button>"
+                    },
+                    {
+                        dia: "Jueves",
+                        detalles: `<ul>
+                    <li><strong>Entrada:</strong> Bruschetta</li>
+                    <li><strong>Plato principal:</strong> Pescado con ensalada</li>
+                    <li><strong>Opción vegetariana:</strong> Ravioles de calabaza</li>
+                    <li><strong>Postre:</strong> Cheesecake</li>
+                    <li><strong>Bebida:</strong> Vino tinto</li>
+                </ul>`,
+                        principal: 7,
+                        vegetariano: 5,
+                        total: 12,
+                        acciones: "<button class='btn'>Ver</button> <button class='btn'>Editar</button>"
+                    },
+                    {
+                        dia: "Viernes",
+                        detalles: `<ul>
+                    <li><strong>Entrada:</strong> Sopa de verduras</li>
+                    <li><strong>Plato principal:</strong> Pollo al horno</li>
+                    <li><strong>Othood:</strong> Lasaabouts</li>
+                    <li><strong>Postre:</strong> Helado</li>
+                    <li><strong>Bebida:</strong> Jugo de naranja</li>       
+                </ul>`,
+                        principal: 9,
+                        vegetariano: 2,
+                        total: 11,
+                        acciones: "<button class='btn'>Ver</button> <button class='btn'>Editar</button>"
+                    }
+                ]
+            }
+        ];
+
+        let currentWeekIndex = 1;
+
+        function renderTable(weekIndex) {
+            const week = weekData[weekIndex];
+            document.getElementById('weekText').textContent = week.weekText;
+
+            const tbody = document.getElementById('menuTable');
+            tbody.innerHTML = '';
+            week.data.forEach(item => {
+                const row = `<tr>
+                                <td>${item.dia}</td>
+                                <td>${item.detalles}</td>
+                                <td>${item.principal}</td>
+                                <td>${item.vegetariano}</td>
+                                <td>${item.total}</td>
+                                <td style="min-width: 150px">${item.acciones}</td>
+                             </tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+
+        document.getElementById('prevWeek').addEventListener('click', () => {
+            if (currentWeekIndex > 0) {
+                currentWeekIndex--;
+                renderTable(currentWeekIndex);
+            }
+        });
+
+        document.getElementById('nextWeek').addEventListener('click', () => {
+            if (currentWeekIndex < weekData.length - 1) {
+                currentWeekIndex++;
+                renderTable(currentWeekIndex);
+            }
+        });
+
+        document.getElementById('currentWeek').addEventListener('click', () => {
+            currentWeekIndex = 1;
+            renderTable(currentWeekIndex);
+        });
+
+        // Initial rendering of the current week
+        renderTable(currentWeekIndex);
+    </script>
+</body>
+
+</html>

@@ -54,6 +54,19 @@ header {
 	align-items: center;
 }
 
+.btn-secondary {
+	background-color: var(--secondary) !important;
+	color: var(--secondary-text) !important;
+	border: none !important;
+	font-size: 0.9rem !important;
+	width: 200px !important;
+}
+
+ul {
+	list-style: none;
+	text-align: left;
+}
+
 nav ul {
 	display: flex;
 	justify-content: center;
@@ -180,7 +193,7 @@ input:focus {
 }
 
 .btn {
-	width: 100%;
+	width: fit-content;
 	padding: 0.75rem;
 	background-color: var(--highlight);
 	color: var(--secondary-text);
