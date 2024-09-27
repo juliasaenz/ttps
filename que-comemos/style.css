@@ -2,6 +2,7 @@
 	--light: #fffbeb;
 	--primary: #d17020;
 	--secondary: #425d45;
+	--terciary: rgb(139, 151, 137);
 	--shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
 	--primary-text: #121f16;
@@ -83,6 +84,22 @@ main {
 	padding: 2rem 3rem;
 	min-height: 80vh;
 	width: 100vw;
+}
+
+.col {
+	display: flex;
+	flex-direction: column !important;
+	align-items: center;
+	gap: 1rem;
+}
+
+.row {
+	display: flex;
+	flex-direction: row !important;
+	align-items: center;
+	gap: 1rem;
+	height: 100%;
+	flex-wrap: nowrap;
 }
 
 .content {
@@ -220,8 +237,9 @@ footer p {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    max-width: 800px;
-    max-height: 80vh;
+	min-width: 450px;
+    max-width: 850px;
+    max-height: 95vh;
     overflow-y: auto;
 }
 
@@ -337,6 +355,10 @@ textarea {
 	color: var(--primary-text);
 }
 
+h4 {
+	padding-bottom: 0.5rem;
+}
+
 .menu-table {
 	width: 100%;
 	border-collapse: collapse;
@@ -345,7 +367,7 @@ textarea {
 .menu-table th,
 .menu-table td {
 	padding: 0.75rem;
-	text-align: left;
+	text-align: center;
 	border-bottom: 1px solid var(--primary-text);
 }
 
@@ -447,4 +469,9 @@ textarea {
 	background: var(--secondary); /* Active tab color */
 	color: var(--secondary-text);
 	border-bottom: 1px solid transparent; /* Maintain alignment */
+}
+
+.chart {
+	max-width: 400px;
+	height: 100%;
 }

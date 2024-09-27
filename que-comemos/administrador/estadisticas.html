@@ -4,84 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Qué Comemos? - Estadísticas</title>
+    <title>Estadísticas - ¿Qué Comemos?</title>
     <link rel="stylesheet" href="../style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        .charts-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            gap: 2rem;
-        }
-
-        .chart-card {
-            align-items: center;
-            height: fit-content !important;
-        }
-        .chart-card canvas {
-            width: 100% !important;
-            height: auto !important;
-        }
-
-        .text-section h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .chart-container {
-            width: 400px;
-            /* Set the width to a specific value */
-            margin: 20px auto;
-            /* Add some margin and center the chart */
-        }
-    </style>
 </head>
 
 <body>
     <header>
         <div class="header-logo">
-            <h2><a href="./index.html"> ¿Qué Comemos? </a></h2>
+            <h2><a href="./index.html">¿Qué Comemos?</a></h2>
         </div>
         <nav>
             <ul>
                 <li><a href="./administrarComidas.html">Comidas</a></li>
-                <li><a class="unselected" href="./administrarMenus.html">Menús</a></li>
-                <li><a class="unselected" href="./administrarBuzon.html">Buzón</a></li>
+                <li><a href="./administrarMenus.html">Menús</a></li>
+                <li><a href="./administrarBuzon.html">Buzón</a></li>
                 <li><a class="unselected" href="./estadisticas.html">Estadísticas</a></li>
-                <li><a class="unselected" href="./administrarUsuarios.html">Usuarios</a></li>
-                <li><a class="unselected" href="./editar.html">Perfil</a></li>
+                <li><a href="./administrarUsuarios.html">Usuarios</a></li>
+                <li><a href="./editar.html">Perfil</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section class="content">
-            <div class="text-section">
-                <h2>Estadísticas de Menús Comprados</h2>
-                <p>
-                    A continuación, se muestran algunas estadísticas interesantes sobre los menús
-                    más comprados, las bebidas más populares, y la evolución de las compras a lo
-                    largo del tiempo.
-                </p>
+
+
+        <section class="content row">
+            <div class="card fullwidth light-bg">
+                <h3>Los 5 Menús Más Ordenados</h3>
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Items del Menú</th>
+                            <th>Total de Órdenes</th>
+                            <th>% de Órdenes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="menuTable">
+                        <!-- Menu data will be populated here -->
+                    </tbody>
+                </table>
             </div>
 
-            <div class="charts-container">
-                <!-- First Chart: Pie Chart -->
-                <div class="card chart-card light-bg">
-                    <h3>Platos Principales más Comprados</h3>
-                    <div class="chart-container">
-                        <canvas id="menuTypePieChart"></canvas>
-                    </div>
-                </div> 
-
-                <!-- Third Chart: Line Chart -->
-                <div class="card chart-card light-bg">
-                    <h3>Compras de Menús por Mes</h3>
-                    <div class="chart-container">
-                        <canvas id="monthlySalesLineChart"></canvas>
-                    </div>
-                </div>
+            <div class="card light-bg chart">
+                <h3>Tipos de Sugerencias</h3>
+                <canvas id="suggestionChart"></canvas>
             </div>
         </section>
     </main>
@@ -92,57 +59,67 @@
     </footer>
 
     <script>
-        // Pie Chart - Menu Types
-        const menuTypePieChart = new Chart(document.getElementById('menuTypePieChart'), {
-            type: 'pie',
-            data: {
-                labels: ['Pollo con papas', 'Pizza', 'Pastel de papa', 'Guiso de lentejas'],
-                datasets: [{
-                    data: [25, 50, 15, 10], // Dummy data
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
-                    hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
-                }]
-            },
-            options: {
-                responsive: false, // Set responsive to false
-                width: 400, // Set the width to a specific value
-                height: 300, // Set the height to a specific value
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }
-        });
+        // Data for the suggestion chart
+        const suggestionData = {
+            labels: ['Alimentos', 'Servicio', 'Infraestructura', 'Otro'],
+            datasets: [{
+                label: 'Sugerencias',
+                data: [45, 35, 15, 5], // Percentages
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 205, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 205, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
 
-        // Line Chart - Monthly Sales
-        const monthlySalesLineChart = new Chart(document.getElementById('monthlySalesLineChart'), {
-            type: 'line',
-            data: {
-                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto'],
-                datasets: [{
-                    label: 'Compras de Menús',
-                    data: [20, 35, 40, 60, 70, 55, 65, 75], // Dummy data
-                    fill: false,
-                    borderColor: '#36A2EB',
-                    tension: 0.1
-                }]
-            },
+        // Config for the suggestion chart
+        const config = {
+            type: 'pie',
+            data: suggestionData,
             options: {
-                responsive: false, // Set responsive to false
-                width: 400, // Set the width to a specific value
-                height: 300, // Set the height to a specific value
+                responsive: true,
                 plugins: {
                     legend: {
-                        display: false
-                    }
+                        position: 'bottom',
+                    },
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
+            },
+        };
+
+        // Render the suggestion chart
+        const suggestionChart = new Chart(
+            document.getElementById('suggestionChart'),
+            config
+        );
+
+        // Sample data for most ordered menus
+        const menuData = [
+            { menuItem: "Ensalada César", totalOrders: 120, percentage: "24%" },
+            { menuItem: "Pizza Margherita", totalOrders: 100, percentage: "20%" },
+            { menuItem: "Hamburguesa Completa", totalOrders: 80, percentage: "16%" },
+            { menuItem: "Pasta Alfredo", totalOrders: 70, percentage: "14%" },
+            { menuItem: "Pollo a la Parrilla", totalOrders: 60, percentage: "12%" }
+        ];
+
+        // Populate menu table with data
+        const menuTable = document.getElementById("menuTable");
+        menuData.forEach(item => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${item.menuItem}</td>
+                <td>${item.totalOrders}</td>
+                <td>${item.percentage}</td>
+            `;
+            menuTable.appendChild(row);
         });
     </script>
 </body>

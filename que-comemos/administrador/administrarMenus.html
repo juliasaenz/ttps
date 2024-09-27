@@ -46,48 +46,37 @@
         <section class="content">
             <div class="card full-width light-bg">
                 <h3>Lista de Menús</h3>
-                <div class="filter-sort-container">
-                    <label for="filterStatus">Filtrar por estado:</label>
-                    <select id="filterStatus">
-                        <option value="all">Todos</option>
-                        <option value="Activo">Activo</option>
-                        <option value="En pausa">En pausa</option>
-                    </select>
-                </div>
 
                 <table class="menu-table">
                     <thead>
                         <tr>
                             <th onclick="sortTable('menuTable', 0)">Entrada</th>
-                            <th onclick="sortTable('menuTable', 1)">1er Plato Principal</th>
-                            <th onclick="sortTable('menuTable', 2)">2do Plato Principal</th>
+                            <th onclick="sortTable('menuTable', 1)">Plato Principal</th>
+                            <th onclick="sortTable('menuTable', 2)">Opción Vegetariana</th>
                             <th onclick="sortTable('menuTable', 3)">Postre</th>
                             <th onclick="sortTable('menuTable', 4)">Bebida</th>
-                            <th onclick="sortTable('menuTable', 5)">Estatus</th>
-                            <th onclick="sortTable('menuTable', 6)">Fecha Asignada</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="menuTable">
                         <tr>
                             <td>Ensalada César</td>
-                            <td>Pizza</td>
-                            <td>Calzone</td>
+                            <td> Pizza especial </td>
+                            <td> Pizza capresse </td>
                             <td> - </td>
                             <td>Agua</td>
-                            <td>Lunes</td>
-                            <td>Activo</td>
-                            <td><button class="btn eliminar">Eliminar</button></td>
+                            <td class="row"><button class="btn eliminar">Editar</button><button
+                                        class="btn eliminar">Eliminar</button></td>
                         </tr>
                         <tr>
                             <td>Sopa de Verduras</td>
                             <td>Milanesa con Puré</td>
                             <td>Wrap vegetariano</td>
                             <td>Flan</td>
-                            <td>Refresco</td>
-                            <td>Martes</td>
-                            <td>En pausa</td>
-                            <td><button class="btn eliminar">Eliminar</button></td>
+                            <td>Agua</td>
+
+                            <td class="row"><button class="btn eliminar">Editar</button><button
+                                        class="btn eliminar">Eliminar</button></td>
                         </tr>
                         <tr>
                             <td> - </td>
@@ -95,30 +84,40 @@
                             <td> Pasta con fileto </td>
                             <td> - </td>
                             <td>Limonada</td>
-                            <td>Miércoles</td>
-                            <td>Activo</td>
-                            <td><button class="btn eliminar">Eliminar</button></td>
+
+                            <td class="row"><button class="btn eliminar">Editar</button><button
+                                        class="btn eliminar">Eliminar</button></td>
                         </tr>
                         <tr>
                             <td> - </td>
-                            
+
                             <td>Lasagna</td>
-                            <td>Ensalada Griega</td>
+                            <td>Buñuelos de verdura</td>
                             <td> - </td>
                             <td>Agua</td>
-                            <td>Jueves</td>
-                            <td>En pausa</td>
-                            <td><button class="btn eliminar">Eliminar</button></td>
+
+                            <td class="row"><button class="btn eliminar">Editar</button><button
+                                        class="btn eliminar">Eliminar</button></td>
                         </tr>
                         <tr>
-                            <td>Caprese</td>
+                            <td> - </td>
                             <td>Pastel de papa</td>
                             <td> Ensalada con medallón de berenjena</td>
                             <td> - </td>
-                            <td>Zumo de Naranja</td>
-                            <td>Viernes</td>
-                            <td>Activo</td>
-                            <td><button class="btn eliminar">Eliminar</button></td>
+                            <td>Jugo de Naranja</td>
+
+                            <td class="row"><button class="btn eliminar">Editar</button><button
+                                        class="btn eliminar">Eliminar</button></td>
+                        </tr>
+                        <tr></tr>
+                        <td> - </td>
+                        <td> Fideos con bolognesa </td>
+                        <td> Verduras al horno </td>
+                        <td> - </td>
+                        <td> Limonada </td>
+
+                        <td class="row"><button class="btn eliminar">Editar</button><button
+                                    class="btn eliminar">Eliminar</button></td>
                         </tr>
                     </tbody>
 
@@ -139,32 +138,34 @@
                     <div class="input-group">
                         <label for="entrada">Selecciona la <strong>entrada</strong>:</label>
                         <select id="entrada" name="entrada" required>
+                            <option value="-"> - </option>
                             <option value="Ensalada">Ensalada</option>
                             <option value="Sopa">Sopa</option>
                             <option value="Bruschetta">Bruschetta</option>
                         </select>
                     </div>
                     <div class="input-group">
-                        <label for="principal1">Selecciona el <strong>1er Plato
-                                Principal</strong>:</label>
+                        <label for="principal1">Selecciona el <strong> plato
+                                principal</strong>:</label>
                         <select id="principal1" name="principal1" required>
                             <option value="Milanesa con puré">Milanesa con puré</option>
-                            <option value="Pastas">Pastas</option>
-                            <option value="Pizza">Pizza</option>
+                            <option value="Pastas"> Hamburguesa </option>
+                            <option value="Pizza"> Pastel de papa</option>
                         </select>
                     </div>
                     <div class="input-group">
-                        <label for="principal2">Selecciona el <strong>2do Plato
-                                Principal</strong>:</label>
+                        <label for="principal2">Selecciona la <strong>opción
+                                vegetariana</strong>:</label>
                         <select id="principal2" name="principal2" required>
-                            <option value="Hamburguesa">Hamburguesa</option>
-                            <option value="Pollo asado">Pollo asado</option>
+                            <option value="Hamburguesa">Ensalada con medallón de verengena</option>
+                            <option value="Pollo asado"> Fideos con pesto</option>
                             <option value="Risotto">Risotto</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label for="postre">Selecciona el <strong>postre</strong>:</label>
                         <select id="postre" name="postre" required>
+                            <option value="-"> - </option>
                             <option value="Helado">Helado</option>
                             <option value="Fruta">Fruta</option>
                             <option value="Tarta">Tarta</option>
@@ -172,30 +173,16 @@
                     </div>
                     <div class="input-group">
                         <label for="bebida">Selecciona la <strong>bebida</strong>:</label>
+
                         <select id="bebida" name="bebida" required>
+                            <option value="-"> - </option>
                             <option value="Agua">Agua</option>
-                            <option value="Refresco">Refresco</option>
+                            <option value="Refresco"> Soda </option>
                             <option value="Jugo">Jugo</option>
                         </select>
                     </div>
-                    <div class="input-group">
-                        <label for="estatus">Estatus:</label>
-                        <select id="estatus" name="estatus" required>
-                            <option value="Activo">Activo</option>
-                            <option value="En Pausa">En Pausa</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label for="fechaAsignada">Fecha Asignada:</label>
-                        <select id="fechaAsignada" name="fechaAsignada" required>
-                            <option value="Ninguna">Ninguna</option>
-                            <option value="Lunes">Lunes</option>
-                            <option value="Martes">Martes</option>
-                            <option value="Miércoles">Miércoles</option>
-                            <option value="Jueves">Jueves</option>
-                            <option value="Viernes">Viernes</option>
-                        </select>
-                    </div>
+
+
                     <div class="input-group">
                         <button type="button" class="btn" id="confirmarMenuBtn">Confirmar</button>
                         <button type="button" class="btn" id="cerrarModalBtn">Cerrar</button>
@@ -259,7 +246,7 @@
                     <td>${bebida}</td>
                     <td>${estatus}</td>
                     <td>${fechaAsignada}</td>
-                    <td><button class="btn eliminar">Eliminar</button></td>
+                    <td class="row"><button class="btn eliminar">Editar</button><button class="btn eliminar">Eliminar</button></td>
                 `;
                 menuTable.appendChild(tr);
 
@@ -274,36 +261,6 @@
                 modalAgregarMenu.style.display = 'none';
             }
         };
-
-        // Filtering functionality by status
-        document.getElementById("filterStatus").addEventListener("change", function () {
-            const selectedStatus = this.value;
-            const rows = document.querySelectorAll("#menuTable tr");
-            rows.forEach(row => {
-                const statusCell = row.cells[4].textContent;
-                if (selectedStatus === "all" || statusCell === selectedStatus) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            });
-        });
-
-        function sortTable(tableId, columnIndex) {
-            const table = document.getElementById(tableId);
-            const rows = Array.from(table.rows);
-            const header = rows.shift(); // Keep header
-
-            const sortedRows = rows.sort((a, b) => {
-                const cellA = a.cells[columnIndex].textContent;
-                const cellB = b.cells[columnIndex].textContent;
-                return cellA.localeCompare(cellB);
-            });
-
-            table.innerHTML = "";
-            table.appendChild(header); // Append header back
-            sortedRows.forEach(row => table.appendChild(row));
-        }
     </script>
 </body>
 

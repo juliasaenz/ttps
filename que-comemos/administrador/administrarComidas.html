@@ -56,6 +56,7 @@
                         <tr>
                             <th onclick="sortTable('comidaTable', 0)">Nombre</th>
                             <th onclick="sortTable('comidaTable', 1)">Tipo</th>
+                            <th>Vegetariana</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -63,21 +64,25 @@
                         <tr>
                             <td>Ensalada César</td>
                             <td>Entrada</td>
+                            <td>Si</td>
                             <td><button class="btn eliminar">Eliminar</button></td>
                         </tr>
                         <tr>
                             <td>Pizza Margherita</td>
                             <td>Plato Principal</td>
+                            <td>Si</td>
                             <td><button class="btn eliminar">Eliminar</button></td>
                         </tr>
                         <tr>
                             <td>Refresco</td>
                             <td>Bebida</td>
+                            <td> N/A </td>
                             <td><button class="btn eliminar">Eliminar</button></td>
                         </tr>
                         <tr>
                             <td>Flan</td>
                             <td>Postre</td>
+                            <td>Si</td>
                             <td><button class="btn eliminar">Eliminar</button></td>
                         </tr>
                     </tbody>
@@ -96,9 +101,17 @@
                 <h2>Agregar Comida</h2>
                 <form id="formAgregarComida" class="fullwidth" onsubmit="return false;">
                     <div class="input-group">
-                        <label for="nombreComida">Introduce el <strong>nombre</strong> de la
+                        <label for="nombreComida"><strong>Nombre</strong> de la
                             comida:</label>
                         <input type="text" id="nombreComida" name="nombreComida" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="vegetariana">¿Es <strong>vegetariana</strong>?</label>
+                        <select id="vegetariana" name="vegetariana" required>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                            <option value="N/A"> N/A </option>
+                        </select>
                     </div>
                     <div class="input-group">
                         <label for="tipoComida">Selecciona el <strong>tipo</strong> de

@@ -100,58 +100,7 @@
                 </div>
             </div>
 
-            <div class="card full-width light-bg">
-                <h3>Lista de Clientes</h3>
-                <div class="filter-sort-container">
-                    <label for="filterDNICustomer">Filtrar por DNI:</label>
-                    <input type="text" id="filterDNICustomer" placeholder="Buscar por DNI...">
-                </div>
-
-                <table class="menu-table">
-                    <thead>
-                        <tr>
-                            <th onclick="sortTable('clientTable', 0)">Nombre</th>
-                            <th onclick="sortTable('clientTable', 1)">Apellido</th>
-                            <th onclick="sortTable('clientTable', 2)">DNI</th>
-                            <th onclick="sortTable('clientTable', 3)">Email</th>
-                            <th onclick="sortTable('clientTable', 4)">Total Pagos</th>
-                            <th onclick="sortTable('clientTable', 5)">Pagos Pendientes</th>
-                        </tr>
-                    </thead>
-                    <tbody id="clientTable">
-                        <tr>
-                            <td>Juan</td>
-                            <td>Pérez</td>
-                            <td>12345678</td>
-                            <td>juan@example.com</td>
-                            <td>5</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>María</td>
-                            <td>Gómez</td>
-                            <td>87654321</td>
-                            <td>maria@example.com</td>
-                            <td>3</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td>Carlos</td>
-                            <td>Lopez</td>
-                            <td>11223344</td>
-                            <td>carlos@example.com</td>
-                            <td>4</td>
-                            <td>2</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="pagination">
-                    <button class="prev-page">&laquo; Anterior</button>
-                    <span class="page-info">1 de 1 páginas</span>
-                    <button class="next-page">Siguiente &raquo;</button>
-                </div>
-            </div>
+            
         </section>
 
         <!-- Modal para agregar usuario -->
@@ -273,15 +222,6 @@
         document.getElementById("filterDNIResponsable").addEventListener("input", function () {
             const filterValue = this.value.toLowerCase();
             const rows = document.querySelectorAll("#responsibleTable tr");
-            rows.forEach(row => {
-                const dniCell = row.cells[2].textContent.toLowerCase();
-                row.style.display = dniCell.includes(filterValue) ? "" : "none";
-            });
-        });
-
-        document.getElementById("filterDNICustomer").addEventListener("input", function () {
-            const filterValue = this.value.toLowerCase();
-            const rows = document.querySelectorAll("#clientTable tr");
             rows.forEach(row => {
                 const dniCell = row.cells[2].textContent.toLowerCase();
                 row.style.display = dniCell.includes(filterValue) ? "" : "none";
