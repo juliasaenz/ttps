@@ -1,0 +1,134 @@
+@startuml
+package entregable3 {
+
+class Usuario {
+    - String dni
+    - String clave
+    - String nombre
+    - String apellido
+    - String fotoUrl
+    - String email
+    + Usuario(String dni, String clave, String nombre, String apellido, String email)
+    + autenticar(String dni, String clave): boolean
+}
+
+class Personal extends Usuario {
+    + Personal(String dni, String clave, String nombre, String apellido, String email)
+}
+
+class Administrador extends Personal {
+    + Administrador(String dni, String clave, String nombre, String apellido, String email)
+    + crearResponsable(String dni, String nombre, String apellido, String email): Responsable
+    + editarTurno(Responsable r)
+    + crearComida(String nombre, String tipo, boolean vegetariano): Comida
+    + crearMenu(): Menu
+    + crearCarta(Date semana): Carta
+}
+
+class Cliente extends Usuario {
+    - ArrayList<Compra> compras
+    - boolean vegetariano
+    + Cliente(String dni, String clave, String nombre, String apellido, String email)
+    + isVegetariano(): boolean
+    + setVegetariano(boolean vegetariano)
+    + getCompras(): ArrayList<Compra>
+    + getComprasDia(Date fecha): ArrayList<Compra>
+    + comprarMenu(Date fecha, Menu menu): Compra
+    + crearSugerencia(String texto, String tipo): Sugerencia
+}
+
+class Responsable extends Personal {
+    - String turno
+    + Responsable(String dni, String clave, String nombre, String apellido, String email)
+    + getTurno(): String
+    + verComprasSemana(ArrayList<Compra> c, Date semana): ArrayList<Compra>
+}
+
+class Comida {
+    - String nombre
+    - String tipo
+    - boolean vegetariano
+    + Comida(String nombre, String tipo, boolean vegetariano)
+    + getNombre(): String
+    + getTipo(): String
+    + isVegetariano(): boolean
+}
+
+class Compra {
+    - Cliente cliente
+    - Date fecha
+    - Menu menu
+    + Compra(Cliente cliente, Date fecha, Menu menu)
+    + getCliente(): Cliente
+    + getFecha(): Date
+    + getMenu(): Menu
+}
+
+class Menu {
+    - ArrayList<Comida> comidas
+    - double precio
+    + Menu()
+    + getComidas(): ArrayList<Comida>
+    + setComidas(ArrayList<Comida> comidas)
+    + getPrecio(): double
+    + setPrecio(double precio)
+    + agregarComida(Comida c)
+    + eliminarComida(Comida c)
+}
+
+class Carta {
+    - Date semana
+    - Map<String, Menu> menus
+    + Carta(Date semana)
+    + getSemana(): Date
+    + setSemana(Date semana)
+    + getMenus(): Map<String, Menu>
+    + setMenus(Map<String, Menu> menus)
+    + agregarMenu(Menu m)
+    + eliminarMenu(Menu m)
+    + getMenuDia(String n): Menu
+}
+
+class Plataforma {
+    - ArrayList<Usuario> usuarios
+    - ArrayList<Comida> comidas
+    - ArrayList<Menu> menus
+    - ArrayList<Carta> cartas
+    - ArrayList<Sugerencia> sugerencias
+    - ArrayList<Compra> compras
+    + Plataforma()
+    + verCartaSemana(Date semana): Carta
+    + verSugerencias(): ArrayList<Sugerencia>
+    + crearUsuario(String dni, String clave, String nombre, String apellido, String email)
+    + getUsuarios(): ArrayList<Usuario>
+    + getComidas(): ArrayList<Comida>
+    + getMenus(): ArrayList<Menu>
+    + getCartas(): ArrayList<Carta>
+    + getSugerencias(): ArrayList<Sugerencia>
+}
+
+class Sugerencia {
+    - String tipo
+    - String texto
+    - Date fecha
+    - Cliente cliente
+    + Sugerencia(String tipo, String texto, Cliente cliente)
+    + getTipo(): String
+    + getTexto(): String
+    + getFecha(): Date
+    + getCliente(): Cliente
+}
+
+Usuario <|-- Personal
+Personal <|-- Administrador
+Personal <|-- Responsable
+Usuario <|-- Cliente
+Carta --> Menu
+Carta --> Plataforma
+Menu --> Comida
+Compra --> Cliente
+Compra --> Menu
+Sugerencia --> Cliente
+
+}
+@enduml
