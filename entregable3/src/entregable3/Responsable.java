@@ -1,5 +1,20 @@
 package entregable3;
 
-public class Responsable extends Personal {
+import java.sql.Date;
+import java.util.ArrayList;
 
+public class Responsable extends Personal {
+	String turno;
+
+	public Responsable(String dni, String clave, String nombre, String apellido, String email) {
+		super(dni, clave, nombre, apellido, email);
+	}
+
+	public String getTurno() {
+		return turno;
+	}
+
+	public ArrayList<Compra> verComprasSemana(ArrayList<Compra> c, Date semana){
+		return null;
+	}
 }
