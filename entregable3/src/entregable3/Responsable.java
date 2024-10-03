@@ -14,7 +14,5 @@ public class Responsable extends Personal {
 		return turno;
 	}
 
-	public ArrayList<Compra> verComprasSemana(ArrayList<Compra> c, Date semana){
-		return null;
-	}
+	
 }

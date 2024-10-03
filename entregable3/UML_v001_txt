@@ -14,9 +14,10 @@ class Usuario {
 
 class Personal extends Usuario {
     + Personal(String dni, String clave, String nombre, String apellido, String email)
+    + verComprasSemana(ArrayList<Compra> c, Date semana): ArrayList<Compra>
 }
 
-class Administrador extends Personal {
+class Administrador extends Personal{
     + Administrador(String dni, String clave, String nombre, String apellido, String email)
     + crearResponsable(String dni, String nombre, String apellido, String email): Responsable
     + editarTurno(Responsable r)
@@ -41,7 +42,6 @@ class Responsable extends Personal {
     - String turno
     + Responsable(String dni, String clave, String nombre, String apellido, String email)
     + getTurno(): String
-    + verComprasSemana(ArrayList<Compra> c, Date semana): ArrayList<Compra>
 }
 
 class Comida {
@@ -119,10 +119,8 @@ class Sugerencia {
     + getCliente(): Cliente
 }
 
-Usuario <|-- Personal
-Personal <|-- Administrador
-Personal <|-- Responsable
-Usuario <|-- Cliente
+
+
 Carta --> Menu
 Carta --> Plataforma
 Menu --> Comida
