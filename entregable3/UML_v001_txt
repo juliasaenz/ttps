@@ -1,7 +1,7 @@
 @startuml
 package entregable3 {
 
-class Usuario {
+abstract class Usuario {
     - String dni
     - String clave
     - String nombre
@@ -12,7 +12,7 @@ class Usuario {
     + autenticar(String dni, String clave): boolean
 }
 
-class Personal extends Usuario {
+abstract class Personal extends Usuario {
     + Personal(String dni, String clave, String nombre, String apellido, String email)
     + verComprasSemana(ArrayList<Compra> c, Date semana): ArrayList<Compra>
 }
@@ -58,6 +58,7 @@ class Compra {
     - Cliente cliente
     - Date fecha
     - Menu menu
+    - double precio
     + Compra(Cliente cliente, Date fecha, Menu menu)
     + getCliente(): Cliente
     + getFecha(): Date
@@ -121,12 +122,13 @@ class Sugerencia {
 
 
 
-Carta --> Menu
+Carta --> "menus 1..*" Menu
 Carta --> Plataforma
-Menu --> Comida
+Menu --> "comidas 1..*" Comida
 Compra --> Cliente
 Compra --> Menu
 Sugerencia --> Cliente
+Cliente --> "compras 1..*" Compra
 
 }
 @enduml
