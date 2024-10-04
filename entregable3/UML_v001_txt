@@ -90,24 +90,6 @@ class Carta {
     + getMenuDia(String n): Menu
 }
 
-class Plataforma {
-    - ArrayList<Usuario> usuarios
-    - ArrayList<Comida> comidas
-    - ArrayList<Menu> menus
-    - ArrayList<Carta> cartas
-    - ArrayList<Sugerencia> sugerencias
-    - ArrayList<Compra> compras
-    + Plataforma()
-    + verCartaSemana(Date semana): Carta
-    + verSugerencias(): ArrayList<Sugerencia>
-    + crearUsuario(String dni, String clave, String nombre, String apellido, String email)
-    + getUsuarios(): ArrayList<Usuario>
-    + getComidas(): ArrayList<Comida>
-    + getMenus(): ArrayList<Menu>
-    + getCartas(): ArrayList<Carta>
-    + getSugerencias(): ArrayList<Sugerencia>
-}
-
 class Sugerencia {
     - String tipo
     - String texto
