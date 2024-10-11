@@ -1,22 +1,35 @@
 package quecomemos.model;
 
-import java.sql.Date;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "Usuarios")
 public class Usuario {
-    String dni;
-    String clave;
-    String nombre;
-    String apellido;
-    String fotoUrl;
-    String email;
+	@Id
+	private Long id;
 
-    public Usuario(String dni, String clave, String nombre, String apellido, String email) {
-        this.dni = dni;
-        this.clave = clave;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-    }
+	String dni;
+	String clave;
+	String nombre;
+	String apellido;
+	String fotoUrl;
+	String email;
+
+	public Usuario(String dni, String clave, String nombre, String apellido, String email) {
+		this.dni = dni;
+		this.clave = clave;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getDni() {
 		return dni;
@@ -66,8 +79,8 @@ public class Usuario {
 		this.email = email;
 	}
 
-    public boolean autenticar(String dni, String clave) {
-    	return true;
-    }
-    
+	public boolean autenticar(String dni, String clave) {
+		return true;
+	}
+
 }

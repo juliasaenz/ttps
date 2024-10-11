@@ -32,17 +32,14 @@
 			<property name="jakarta.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />
 
-			<!-- Dialecto de Hibernate (ajustado para MySQL en este caso) -->
+			<!-- Dialecto de Hibernate -->
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQLDialect" />
 
 			<!-- Configuración adicional -->
-			<property name="hibernate.hbm2ddl.auto" value="update" /> <!--
-			"create", "update", "validate", "none" -->
-			<property name="hibernate.show_sql" value="true" /> <!-- Para ver las
-			consultas SQL en la consola -->
-			<property name="hibernate.format_sql" value="true" /> <!-- Formatea
-			el SQL para facilitar la lectura -->
+			<property name="hibernate.hbm2ddl.auto" value="update" /> 
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" /> 
 		</properties>
 	</persistence-unit>
 
