@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+	version="3.0">
+
+	<persistence-unit name="Modelos"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+		<!-- Lista de entidades -->
+		<class>com.example.model.Administrador</class>
+		<class>com.example.model.Carta</class>
+		<class>com.example.model.Cliente</class>
+		<class>com.example.model.Compra</class>
+		<class>com.example.model.Menu</class>
+		<class>com.example.model.Responsable</class>
+		<class>com.example.model.Sugerencia</class>
+		<class>com.example.model.Personal</class>
+		<class>com.example.model.Usuario</class>
+
+		<!-- Configuración de conexión a la base de datos -->
+		<properties>
+			<!-- URL, usuario y contraseña de la base de datos -->
+			<property name="jakarta.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/ttps" />
+			<property name="jakarta.persistence.jdbc.user" value="ttps" />
+			<property name="jakarta.persistence.jdbc.password"
+				value="4qwvQMFK" />
+
+			<!-- Driver JDBC -->
+			<property name="jakarta.persistence.jdbc.driver"
+				value="com.mysql.cj.jdbc.Driver" />
+
+			<!-- Dialecto de Hibernate (ajustado para MySQL en este caso) -->
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQLDialect" />
+
+			<!-- Configuración adicional -->
+			<property name="hibernate.hbm2ddl.auto" value="update" /> <!--
+			"create", "update", "validate", "none" -->
+			<property name="hibernate.show_sql" value="true" /> <!-- Para ver las
+			consultas SQL en la consola -->
+			<property name="hibernate.format_sql" value="true" /> <!-- Formatea
+			el SQL para facilitar la lectura -->
+		</properties>
+	</persistence-unit>
+
+</persistence>
