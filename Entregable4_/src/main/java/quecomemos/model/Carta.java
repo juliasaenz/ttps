@@ -27,6 +27,7 @@ public class Carta {
 		this.menus = menus;
 	}
 	
+	// TODO Consultar esto (y similares)
 	public void agregarMenu(Menu m) {
 		
 	}

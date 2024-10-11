@@ -81,6 +81,7 @@ public class Usuario {
 
 	public boolean autenticar(String dni, String clave) {
 		return true;
+		// TODO implementar
 	}
 
 }
