@@ -4,7 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Usuarios")
-public class Usuario {
+@Inheritance(strategy = InheritanceType.JOINED) // esto va a hacer una tabla x clase y subclase
+public abstract class Usuario {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,7 @@ public class Usuario {
     @Column(nullable = false)
     private String apellido;
 
+    @Column
     private String fotoUrl;
 
     @Column(nullable = false, unique = true)
