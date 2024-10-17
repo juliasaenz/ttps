@@ -35,4 +35,8 @@ public class Menu {
 		
 	}
 	
+	public boolean isVegetariano() {
+		return this.comidas.stream().allMatch(comida -> comida.isVegetariano());
+	}
+	
 }
