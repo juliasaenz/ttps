@@ -1,11 +1,12 @@
 package quecomemos.jpa;
 
 import quecomemos.dao.PersonalDAO;
+import quecomemos.model.Personal;
 
-public class PersonalDAO_JPA<T> extends GenericDAO_JPA<T> implements PersonalDAO<T> {
+public class PersonalDAO_JPA extends GenericDAO_JPA<Personal> implements PersonalDAO {
 
-	public PersonalDAO_JPA(Class<T> clase) {
-		super(clase);
+	public PersonalDAO_JPA() {
+		super(Personal.clase);
 		// TODO Auto-generated constructor stub
 	}
 

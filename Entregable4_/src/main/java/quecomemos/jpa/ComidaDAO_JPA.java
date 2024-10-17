@@ -1,11 +1,12 @@
 package quecomemos.jpa;
 
 import quecomemos.dao.ComidaDAO;
+import quecomemos.model.Comida;
 
-public class ComidaDAO_JPA<T> extends GenericDAO_JPA<T> implements ComidaDAO<T> {
+public class ComidaDAO_JPA extends GenericDAO_JPA<Comida> implements ComidaDAO {
 
-	public ComidaDAO_JPA(Class<T> clase) {
-		super(clase);
+	public ComidaDAO_JPA() {
+		super(Comida.class);
 		// TODO Auto-generated constructor stub
 	}
 

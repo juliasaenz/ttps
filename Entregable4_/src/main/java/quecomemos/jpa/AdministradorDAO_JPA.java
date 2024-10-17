@@ -1,11 +1,12 @@
 package quecomemos.jpa;
 
 import quecomemos.dao.AdministradorDAO;
+import quecomemos.model.Administrador;
 
-public class AdministradorDAO_JPA<T> extends GenericDAO_JPA<T> implements AdministradorDAO<T> {
+public class AdministradorDAO_JPA extends GenericDAO_JPA<Administrador> implements AdministradorDAO {
 
-	public AdministradorDAO_JPA(Class<T> clase) {
-		super(clase);
+	public AdministradorDAO_JPA() {
+		super(Administrador.class);
 		// TODO Auto-generated constructor stub
 	}
 
