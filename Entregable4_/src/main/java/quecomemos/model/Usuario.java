@@ -5,83 +5,93 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Usuarios")
 public class Usuario {
-	@Id
-	private Long id;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	String dni;
-	String clave;
-	String nombre;
-	String apellido;
-	String fotoUrl;
-	String email;
+    @Column(nullable = false, unique = true)
+    private String dni;
 
-	public Usuario(String dni, String clave, String nombre, String apellido, String email) {
-		this.dni = dni;
-		this.clave = clave;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.email = email;
-	}
+    @Column(nullable = false)
+    private String clave;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(nullable = false)
+    private String nombre;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(nullable = false)
+    private String apellido;
 
-	public String getDni() {
-		return dni;
-	}
+    private String fotoUrl;
 
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
+    @Column(nullable = false, unique = true)
+    private String email;
 
-	public String getClave() {
-		return clave;
-	}
+    public Usuario(String dni, String clave, String nombre, String apellido, String email) {
+        this.dni = dni;
+        this.clave = clave;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+    }
+    
+    public Long getId() {
+        return id;
+    }
 
-	public void setClave(String clave) {
-		this.clave = clave;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public String getDni() {
+        return dni;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
 
-	public String getApellido() {
-		return apellido;
-	}
+    public String getClave() {
+        return clave;
+    }
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
 
-	public String getFotoUrl() {
-		return fotoUrl;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setFotoUrl(String fotoUrl) {
-		this.fotoUrl = fotoUrl;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getApellido() {
+        return apellido;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
-	public boolean autenticar(String dni, String clave) {
-		return true;
-		// TODO implementar
-	}
+    public String getFotoUrl() {
+        return fotoUrl;
+    }
 
+    public void setFotoUrl(String fotoUrl) {
+        this.fotoUrl = fotoUrl;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean autenticar(String dni, String clave) {
+        return this.dni.equals(dni) && this.clave.equals(clave);
+    }
 }

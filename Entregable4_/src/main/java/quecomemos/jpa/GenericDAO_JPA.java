@@ -80,20 +80,30 @@ public class GenericDAO_JPA<T> implements GenericDAO<T> {
 
 	@Override
 	public boolean existe(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+	    EntityManager em = EMF.getEMF().createEntityManager();
+	    boolean exists = em.find(clasePersistente, id) != null;
+	    em.close();
+	    return exists;
 	}
+
 
 	@Override
 	public T recuperar(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+	    EntityManager em = EMF.getEMF().createEntityManager();
+	    T entity = em.find(clasePersistente, id);
+	    em.close();
+	    return entity;
 	}
+
 
 	@Override
 	public List<T> recuperarTodos(String column) {
-		// TODO Completar
-		return null;
+	    EntityManager em = EMF.getEMF().createEntityManager();
+	    List<T> entities = em.createQuery("SELECT e FROM " + clasePersistente.getSimpleName() + " e ORDER BY e." + column, clasePersistente)
+	                         .getResultList();
+	    em.close();
+	    return entities;
 	}
+
 
 }
