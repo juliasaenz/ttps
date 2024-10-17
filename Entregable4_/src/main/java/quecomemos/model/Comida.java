@@ -1,30 +1,44 @@
 package quecomemos.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Comidas")
 public class Comida {
-	
-	String nombre;
-	String tipo;
-	boolean vegetariano;
-	
-	public Comida(String nombre, String tipo, boolean vegetariano) {
-		super();
-		this.nombre = nombre;
-		this.tipo = tipo;
-		this.vegetariano = vegetariano;
-	}
 
-	public String getNombre() {
-		return nombre;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public String getTipo() {
-		return tipo;
-	}
+    @Column(nullable = false, unique = true)
+    private String nombre;
 
-	public boolean isVegetariano() {
-		return vegetariano;
-	}
-	
-	
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TipoComida tipo;
 
+    @Column(nullable = false)
+    private boolean vegetariano;
+
+    public Comida(String nombre, TipoComida tipo, boolean vegetariano) {
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.vegetariano = vegetariano;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public TipoComida getTipo() {
+        return tipo;
+    }
+
+    public boolean isVegetariano() {
+        return vegetariano;
+    }
+
+	public Long getId() {
+		return this.id;
+	}
 }
