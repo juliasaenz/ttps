@@ -9,4 +9,8 @@ public interface UsuarioDAO extends GenericDAO<Usuario> {
     Usuario findByDni(String dni);
     
     Usuario autenticar(String dni, String clave);
+    
+    boolean existsByEmail(String email);
+    
+    boolean existsByDni(String dni);
 }

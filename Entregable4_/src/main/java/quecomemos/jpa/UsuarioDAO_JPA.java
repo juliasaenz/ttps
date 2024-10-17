@@ -54,4 +54,39 @@ public class UsuarioDAO_JPA extends GenericDAO_JPA<Usuario> implements UsuarioDA
             em.close();
         }
     }
+
+    public boolean existsByDni(String dni) {
+        EntityManager em = EMF.getEMF().createEntityManager();
+        try {
+            Long count = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.dni = :dni", Long.class)
+                           .setParameter("dni", dni)
+                           .getSingleResult();
+            return count > 0;
+        } finally {
+            em.close();
+        }
+    }
+
+    public boolean existsByEmail(String email) {
+        EntityManager em = EMF.getEMF().createEntityManager();
+        try {
+            Long count = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.email = :email", Long.class)
+                           .setParameter("email", email)
+                           .getSingleResult();
+            return count > 0;
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public Usuario persistir(Usuario usuario) {
+        if (existsByDni(usuario.getDni())) {
+            throw new IllegalArgumentException("Ya existe un usuario con ese DNI.");
+        }
+        if (existsByEmail(usuario.getEmail())) {
+            throw new IllegalArgumentException("Ya existe un usuario con ese mail.");
+        }
+        return super.persistir(usuario);
+    }
 }

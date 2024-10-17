@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "Clientes")
 public class Cliente extends Usuario {
     
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
     private List<Compra> compras = new ArrayList<>();
 	
 	@Column(nullable = false)
