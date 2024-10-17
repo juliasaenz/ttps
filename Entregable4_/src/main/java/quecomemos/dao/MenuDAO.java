@@ -1,5 +1,7 @@
 package quecomemos.dao;
 
-public interface MenuDAO<T> extends GenericDAO<T> {
+import quecomemos.model.Menu;
+
+public interface MenuDAO extends GenericDAO<Menu> {
 
 }

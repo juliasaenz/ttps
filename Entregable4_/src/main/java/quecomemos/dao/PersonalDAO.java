@@ -1,5 +1,7 @@
 package quecomemos.dao;
 
-public interface PersonalDAO<T> extends GenericDAO<T> {
+import quecomemos.model.Personal;
+
+public interface PersonalDAO extends GenericDAO<Personal> {
 
 }

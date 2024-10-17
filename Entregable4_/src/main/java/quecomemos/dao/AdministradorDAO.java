@@ -1,5 +1,7 @@
 package quecomemos.dao;
 
-public interface AdministradorDAO<T> extends GenericDAO<T> {
+import quecomemos.model.Administrador;
+
+public interface AdministradorDAO extends GenericDAO<Administrador> {
 
 }

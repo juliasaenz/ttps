@@ -1,5 +1,7 @@
 package quecomemos.dao;
 
-public interface CartaDAO<T> extends GenericDAO<T> {
+import quecomemos.model.Carta;
+
+public interface CartaDAO extends GenericDAO<Carta> {
 
 }

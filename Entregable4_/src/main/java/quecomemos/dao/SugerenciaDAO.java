@@ -1,5 +1,7 @@
 package quecomemos.dao;
 
-public interface SugerenciaDAO<T> extends GenericDAO<T> {
+import quecomemos.model.Sugerencia;
+
+public interface SugerenciaDAO extends GenericDAO<Sugerencia> {
 
 }
