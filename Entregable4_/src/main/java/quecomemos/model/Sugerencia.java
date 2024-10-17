@@ -1,18 +1,39 @@
 package quecomemos.model;
 
 import java.sql.Date;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "sugerencias")
 public class Sugerencia {
-	String tipo;
-	String texto;
-	Date fecha;
-	Cliente cliente;
 	
-	public Sugerencia(String tipo, String texto, Cliente cliente) {
-		super();
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+	
+	@Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+	private TipoSugerencia tipo;
+	
+	@Column(nullable = false)
+	private String texto;
+	
+	@Column(nullable = false)
+	private Date fecha;
+	
+	@ManyToOne
+	@JoinColumn(name = "cliente_id", nullable = false)
+	private Cliente cliente;
+	
+	public Sugerencia(TipoSugerencia tipo, String texto, Cliente cliente) {
 		this.tipo = tipo;
 		this.texto = texto;
 		this.cliente = cliente;
+		this.fecha = new Date(System.currentTimeMillis());
+	}
+	
+	public Long getId() {
+		return id;
 	}
 
 	@Override
@@ -20,7 +41,7 @@ public class Sugerencia {
 		return "Sugerencia [tipo=" + tipo + ", texto=" + texto + ", fecha=" + fecha + ", cliente=" + cliente + "]";
 	}
 
-	public String getTipo() {
+	public TipoSugerencia getTipo() {
 		return tipo;
 	}
 
@@ -35,7 +56,4 @@ public class Sugerencia {
 	public Cliente getCliente() {
 		return cliente;
 	}
-	
-	
-	
 }
