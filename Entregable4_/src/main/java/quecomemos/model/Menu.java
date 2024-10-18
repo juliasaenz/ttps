@@ -2,10 +2,15 @@ package quecomemos.model;
 
 import java.util.ArrayList;
 
+@Entity
+@Table(name = "Compras")
 public class Menu {
 	
-	ArrayList<Comida> comidas;
-	double precio;
+	@OneToMany(mappedBy = "Comida", cascade = CascadeType.PERSIST)
+	private ArrayList<Comida> comidas;
+
+	@Column
+	private double precio;
 	
 	public Menu() {
 		comidas = new ArrayList<Comida>();

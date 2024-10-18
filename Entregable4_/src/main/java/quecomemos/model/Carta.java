@@ -4,39 +4,41 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+@Entity
+@Table(name = "Cartas")
 public class Carta {
 	
-	Date semana;
-	Map<String, Menu> menus = new HashMap<>();
+	@Column
+	private Date semana;
+
+	@Column
+	private Menu menu = new Menu();
+
+	@Column
+	private Menu menuVeggie = new Menu();
 	
-	public Carta(Date semana) {
+	public Carta(Date dia) {
 		super();
-		this.semana = semana;
+		this.dia = dia;
 	}
 	
-	public Date getSemana() {
-		return semana;
+	public Date getDia() {
+		return dia;
 	}
-	public void setSemana(Date semana) {
-		this.semana = semana;
+	public void setDia(Date dia) {
+		this.dia = dia;
 	}
-	public Map<String, Menu> getMenus() {
-		return menus;
+	public Menu getMenu() {
+		return menu;
 	}
-	public void setMenus(Map<String, Menu> menus) {
-		this.menus = menus;
+	public void setMenu(Menu menu) {
+		this.menu = menu;
 	}
-	
-	// TODO Consultar esto (y similares)
-	public void agregarMenu(Menu m) {
-		
+
+	public Menu getMenuVeggie() {
+		return menuVeggie;
 	}
-	
-	public void eliminarMenu(Menu m) {
-		
-	}
-	
-	public Menu getMenuDia (String n) {
-		return null;
+	public void setMenusVeggie(Menu menuVeggie) {
+		this.menuVeggie = menuVeggie;
 	}
 }
