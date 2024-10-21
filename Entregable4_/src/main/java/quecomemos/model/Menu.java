@@ -1,31 +1,44 @@
 package quecomemos.model;
-import javax.persistence.*;
+import java.util.List;
 
-import java.util.ArrayList;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "Compras")
+@Table(name = "Menu")
 public class Menu {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@OneToMany(mappedBy = "Comida", cascade = CascadeType.PERSIST)
-	private ArrayList<Comida> comidas;
+	@ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+        name = "Menu_Comida", // Name of the join table
+        joinColumns = @JoinColumn(name = "menu_id"), // Foreign key to Menu
+        inverseJoinColumns = @JoinColumn(name = "comida_id") // Foreign key to Comida
+    )
+	private List<Comida> comidas;
 
 	@Column
 	private double precio;
 	
 	public Menu() {
-		comidas = new ArrayList<Comida>();
 	}
 
-	public ArrayList<Comida> getComidas() {
+	public List<Comida> getComidas() {
 		return comidas;
 	}
 
-	public void setComidas(ArrayList<Comida> comidas) {
+	public void setComidas(List<Comida> comidas) {
 		this.comidas = comidas;
 	}
 

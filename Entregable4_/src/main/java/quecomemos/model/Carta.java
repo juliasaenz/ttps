@@ -16,10 +16,12 @@ public class Carta {
 	@Column
 	private Date dia;
 
-	@Column
+	@ManyToOne
+    @JoinColumn(name = "menu_id", referencedColumnName = "id")
 	private Menu menu = new Menu();
 
-	@Column
+	@ManyToOne
+    @JoinColumn(name = "menu_veggie_id", referencedColumnName = "id")
 	private Menu menuVeggie = new Menu();
 	
 	public Carta(Date dia) {
