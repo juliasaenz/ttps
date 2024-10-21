@@ -37,14 +37,6 @@ public class Menu {
 		this.precio = precio;
 	}
 	
-	public void agregarComida(Comida c) {
-		
-	}
-	
-	public void eliminarComida(Comida c) {
-		
-	}
-	
 	public boolean isVegetariano() {
 		return this.comidas.stream().allMatch(comida -> comida.isVegetariano());
 	}

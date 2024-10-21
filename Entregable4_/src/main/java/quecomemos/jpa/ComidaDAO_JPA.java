@@ -1,8 +1,10 @@
 package quecomemos.jpa;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
 import quecomemos.dao.ComidaDAO;
 import quecomemos.model.Comida;
 import quecomemos.model.Menu;

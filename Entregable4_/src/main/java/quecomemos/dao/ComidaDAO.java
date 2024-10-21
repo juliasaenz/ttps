@@ -1,8 +1,9 @@
 package quecomemos.dao;
 
+import java.util.List;
+
 import quecomemos.model.Comida;
 import quecomemos.model.TipoComida;
-import java.util.List;
 
 public interface ComidaDAO extends GenericDAO<Comida> {
 
