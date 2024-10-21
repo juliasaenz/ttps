@@ -4,8 +4,7 @@
 	xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
 	version="3.0">
 
-	<persistence-unit name="Modelos"
-		transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="unlp" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 		<!-- Lista de entidades -->
@@ -16,31 +15,18 @@
 		<class>com.example.model.Menu</class>
 		<class>com.example.model.Responsable</class>
 		<class>com.example.model.Sugerencia</class>
-		<class>com.example.model.Personal</class>
 		<class>com.example.model.Usuario</class>
 
 		<!-- Configuración de conexión a la base de datos -->
 		<properties>
-			<!-- URL, usuario y contraseña de la base de datos -->
-			<property name="jakarta.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/ttps" />
+			<property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ttps" />
 			<property name="jakarta.persistence.jdbc.user" value="ttps" />
-			<property name="jakarta.persistence.jdbc.password"
-				value="4qwvQMFK" />
-
-			<!-- Driver JDBC -->
-			<property name="jakarta.persistence.jdbc.driver"
-				value="com.mysql.cj.jdbc.Driver" />
-
-			<!-- Dialecto de Hibernate -->
-			<property name="hibernate.dialect"
-				value="org.hibernate.dialect.MySQLDialect" />
-
-			<!-- Configuración adicional -->
+			<property name="jakarta.persistence.jdbc.password" value="4qwvQMFK" />
+			<property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" /> 
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" /> 
 		</properties>
 	</persistence-unit>
-
 </persistence>
