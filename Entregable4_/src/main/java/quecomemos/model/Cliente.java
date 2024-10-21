@@ -1,10 +1,13 @@
 package quecomemos.model;
-import javax.persistence.*;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "Clientes")
@@ -32,24 +35,12 @@ public class Cliente extends Usuario {
         return new ArrayList<>(compras);
     }
 
-    public List<Compra> getComprasDia(Date fecha) {
-        List<Compra> comprasDelDia = new ArrayList<>();
+    public Compra getCompraDia(Date fecha) {
         for (Compra compra : compras) {
             if (compra.getFecha().equals(fecha)) {
-                comprasDelDia.add(compra);
+                return compra;
             }
         }
-        return comprasDelDia;
-    }
-
-    public Compra comprarMenu(Date fecha, Menu menu) {
-        Compra nuevaCompra = new Compra(this, fecha, menu);
-        this.compras.add(nuevaCompra);
-        return nuevaCompra;
-    }
-
-    public Sugerencia crearSugerencia(String texto, TipoSugerencia tipo) {
-        Sugerencia nuevaSugerencia = new Sugerencia(tipo, texto, this);
-        return nuevaSugerencia;
+        return null;
     }
 }
