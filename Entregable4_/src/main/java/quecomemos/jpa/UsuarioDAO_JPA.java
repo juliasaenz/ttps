@@ -2,6 +2,7 @@ package quecomemos.jpa;
 
 import quecomemos.dao.UsuarioDAO;
 import quecomemos.model.Usuario;
+import quecomemos.util.EMF;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;

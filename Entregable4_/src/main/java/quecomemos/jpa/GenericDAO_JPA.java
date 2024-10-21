@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import quecomemos.dao.GenericDAO;
+import quecomemos.util.EMF;
 
 public class GenericDAO_JPA<T> implements GenericDAO<T> {
 	protected Class<T> clasePersistente;

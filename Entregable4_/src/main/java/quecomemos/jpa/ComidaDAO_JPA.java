@@ -9,6 +9,7 @@ import quecomemos.dao.ComidaDAO;
 import quecomemos.model.Comida;
 import quecomemos.model.Menu;
 import quecomemos.model.TipoComida;
+import quecomemos.util.EMF;
 
 public class ComidaDAO_JPA extends GenericDAO_JPA<Comida> implements ComidaDAO {
 
