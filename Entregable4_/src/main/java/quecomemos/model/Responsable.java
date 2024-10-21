@@ -1,10 +1,7 @@
 package quecomemos.model;
-import javax.persistence.*;
-
-
-import java.sql.Date;
-import java.util.ArrayList;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "Responsables")
