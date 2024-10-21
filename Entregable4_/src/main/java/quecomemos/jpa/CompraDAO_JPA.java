@@ -20,13 +20,13 @@ public class CompraDAO_JPA extends GenericDAO_JPA<Compra> implements CompraDAO {
 	}
 
 	@Override
-	public List<Compra> verComprasCliente(Long clienteId) {
+	public List<Compra> verComprasDeCliente(Long clienteId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Compra> verComprasMenu(Long menuId) {
+	public List<Compra> verComprasDeMenu(Long menuId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
