@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class UsuarioTest {
+public class ClienteTest {
 
-	private Usuario usuario;
+	private Cliente usuario;
 
 	@BeforeEach
 	public void setUp() {
-		usuario = new Usuario("12345678", "password123", "Juan", "Perez", "juan.perez@example.com");
+		usuario = new Cliente("12345678", "password123", "Juan", "Perez", "juan.perez@example.com");
 	}
 
 	@Test

@@ -10,4 +10,10 @@ public class ResponsableDAO_JPA extends GenericDAO_JPA<Responsable> implements R
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void editarTurno(Responsable r) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

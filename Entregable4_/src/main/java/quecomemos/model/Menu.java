@@ -1,10 +1,15 @@
 package quecomemos.model;
+import javax.persistence.*;
 
 import java.util.ArrayList;
 
 @Entity
 @Table(name = "Compras")
 public class Menu {
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 	
 	@OneToMany(mappedBy = "Comida", cascade = CascadeType.PERSIST)
 	private ArrayList<Comida> comidas;
@@ -42,6 +47,10 @@ public class Menu {
 	
 	public boolean isVegetariano() {
 		return this.comidas.stream().allMatch(comida -> comida.isVegetariano());
+	}
+
+	public Long getId() {
+		return id;
 	}
 	
 }

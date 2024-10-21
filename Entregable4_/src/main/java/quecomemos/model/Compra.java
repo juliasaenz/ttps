@@ -1,10 +1,14 @@
 package quecomemos.model;
-
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 @Table(name = "Compras")
 public class Compra {
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "cliente_id", nullable = false)
@@ -32,6 +36,11 @@ public class Compra {
 	public Menu getMenu() {
 		return menu;
 	}
+	public Long getId() {
+		return id;
+	}
+	
+	
 	
 	
 

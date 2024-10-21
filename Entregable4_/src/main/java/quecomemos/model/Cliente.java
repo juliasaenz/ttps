@@ -1,4 +1,5 @@
 package quecomemos.model;
+import javax.persistence.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class Cliente extends Usuario {
         return nuevaCompra;
     }
 
-    public Sugerencia crearSugerencia(String texto, String tipo) {
+    public Sugerencia crearSugerencia(String texto, TipoSugerencia tipo) {
         Sugerencia nuevaSugerencia = new Sugerencia(tipo, texto, this);
         return nuevaSugerencia;
     }

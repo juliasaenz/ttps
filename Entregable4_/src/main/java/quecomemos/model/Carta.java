@@ -1,4 +1,5 @@
 package quecomemos.model;
+import javax.persistence.*;
 
 import java.sql.Date;
 import java.util.HashMap;
@@ -8,8 +9,12 @@ import java.util.Map;
 @Table(name = "Cartas")
 public class Carta {
 	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+	
 	@Column
-	private Date semana;
+	private Date dia;
 
 	@Column
 	private Menu menu = new Menu();
@@ -22,6 +27,10 @@ public class Carta {
 		this.dia = dia;
 	}
 	
+	public Long getId() {
+		return id;
+	}
+
 	public Date getDia() {
 		return dia;
 	}

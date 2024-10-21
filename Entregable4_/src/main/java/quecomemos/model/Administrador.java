@@ -1,4 +1,5 @@
 package quecomemos.model;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Administradores")
