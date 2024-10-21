@@ -37,7 +37,7 @@ public class Cliente extends Usuario {
 
     public Compra getCompraDia(Date fecha) {
         for (Compra compra : compras) {
-            if (compra.getFecha().equals(fecha)) {
+            if (compra.getFechaMenu().equals(fecha)) {
                 return compra;
             }
         }

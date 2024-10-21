@@ -14,9 +14,28 @@ public class CompraDAO_JPA extends GenericDAO_JPA<Compra> implements CompraDAO {
 	}
 
 	@Override
-	public List<Compra> verComprasSemana(Date semana) {
+	public List<Compra> verComprasDia(Date semana) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Compra> verComprasCliente(Long clienteId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Compra> verComprasMenu(Long menuId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean clienteComproParaDia(Long clienteId, Date dia) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }

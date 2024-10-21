@@ -19,22 +19,26 @@ public class Compra {
 
 	@OneToOne
 	@JoinColumn
-	private Menu menu;
+	private Carta carta;
 
-	public Compra(Cliente cliente, Date fecha, Menu menu) {
+	public Compra(Cliente cliente, Date fecha, Carta carta) {
 		super();
 		this.cliente = cliente;
 		this.fecha = fecha;
-		this.menu = menu;
+		this.carta = carta;
 	}
 	public Cliente getCliente() {
 		return cliente;
 	}
-	public Date getFecha() {
+	public Date getFechaCompra() {
 		return fecha;
 	}
+	
+	public Date getFechaMenu() {
+		return carta.getDia();
+	}
 	public Menu getMenu() {
-		return menu;
+		return carta.getMenu();
 	}
 	public Long getId() {
 		return id;
