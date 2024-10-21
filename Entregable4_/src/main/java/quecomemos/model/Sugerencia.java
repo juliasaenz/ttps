@@ -3,6 +3,8 @@ package quecomemos.model;
 import java.sql.Date;
 import javax.persistence.*;
 
+import quecomemos.util.TipoSugerencia;
+
 @Entity
 @Table(name = "sugerencias")
 public class Sugerencia {

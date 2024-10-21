@@ -3,7 +3,7 @@ package quecomemos.dao;
 import java.util.List;
 
 import quecomemos.model.Comida;
-import quecomemos.model.TipoComida;
+import quecomemos.util.TipoComida;
 
 public interface ComidaDAO extends GenericDAO<Comida> {
 

@@ -1,4 +1,4 @@
-package quecomemos.model;
+package quecomemos.util;
 
 public enum TipoComida {
     ENTRADA,
