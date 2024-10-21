@@ -14,7 +14,7 @@ public class SugerenciaDAO_JPA extends GenericDAO_JPA<Sugerencia> implements Sug
 	}
 
 	@Override
-	public List<Sugerencia> getTipo(String tipo) {
+	public List<Sugerencia> sugerenciasPorTipo(String tipo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
