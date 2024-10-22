@@ -68,13 +68,28 @@ public class GenericDAO_JPA<T> implements GenericDAO<T> {
 
 	@Override
 	public T borrar(Long id) {
-		EntityManager em = EMF.getEMF().createEntityManager();
-		T entity = (T) em.find(this.getPersistentClass(), id);
-		if (entity != null) {
-			em.remove(entity);
-		}
-		em.close();
-		return entity;
+	    EntityManager em = EMF.getEMF().createEntityManager();
+	    EntityTransaction tx = em.getTransaction(); 
+
+	    T entity = em.find(this.getPersistentClass(), id);
+	    if (entity != null) {
+	        try {
+	            tx.begin(); 
+	            em.remove(entity); 
+	            tx.commit(); 
+	        } catch (Exception e) {
+	            if (tx.isActive()) {
+	                tx.rollback();
+	            }
+	            throw e;
+	        } finally {
+	            em.close(); 
+	        }
+	    } else {
+	        em.close(); 
+	    }
+
+	    return entity;
 	}
 
 	private Class<T> getPersistentClass() {
@@ -83,30 +98,31 @@ public class GenericDAO_JPA<T> implements GenericDAO<T> {
 
 	@Override
 	public boolean existe(Long id) {
-	    EntityManager em = EMF.getEMF().createEntityManager();
-	    boolean exists = em.find(clasePersistente, id) != null;
-	    em.close();
-	    return exists;
+		EntityManager em = EMF.getEMF().createEntityManager();
+		boolean exists = em.find(clasePersistente, id) != null;
+		em.close();
+		return exists;
 	}
-
 
 	@Override
 	public T recuperar(Serializable id) {
-	    EntityManager em = EMF.getEMF().createEntityManager();
-	    T entity = em.find(clasePersistente, id);
-	    em.close();
-	    return entity;
+		EntityManager em = EMF.getEMF().createEntityManager();
+		T entity = em.find(clasePersistente, id);
+		em.close();
+		return entity;
 	}
-
 
 	@Override
 	public List<T> recuperarTodos(String column) {
-	    EntityManager em = EMF.getEMF().createEntityManager();
-	    List<T> entities = em.createQuery("SELECT e FROM " + clasePersistente.getSimpleName() + " e ORDER BY e." + column, clasePersistente)
-	                         .getResultList();
-	    em.close();
-	    return entities;
-	}
+		EntityManager em = EMF.getEMF().createEntityManager();
+		String orderByColumn = (column == null || column.isEmpty()) ? "id" : column;
 
+		List<T> entities = em
+				.createQuery("SELECT e FROM " + clasePersistente.getSimpleName() + " e ORDER BY e." + orderByColumn,
+						clasePersistente)
+				.getResultList();
+		em.close();
+		return entities;
+	}
 
 }

@@ -36,6 +36,8 @@ public class Sugerencia {
 	@ManyToOne
 	@JoinColumn(name = "cliente_id", nullable = false)
 	private Cliente cliente;
+	
+	protected Sugerencia() {}
 
 	public Sugerencia(TipoSugerencia tipo, String texto, Cliente cliente) {
 		this.tipo = tipo;

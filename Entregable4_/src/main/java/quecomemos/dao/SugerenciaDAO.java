@@ -1,11 +1,10 @@
 package quecomemos.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import quecomemos.model.Sugerencia;
+import quecomemos.util.TipoSugerencia;
 
 public interface SugerenciaDAO extends GenericDAO<Sugerencia> {
-    public List<Sugerencia> sugerenciasPorTipo(String tipo);
-    public List<Sugerencia> getFecha(Date fecha);
+    public List<Sugerencia> sugerenciasPorTipo(TipoSugerencia tipo);
 }
