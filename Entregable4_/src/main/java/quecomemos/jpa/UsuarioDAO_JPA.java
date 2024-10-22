@@ -1,23 +1,26 @@
 package quecomemos.jpa;
 
-import quecomemos.dao.UsuarioDAO;
-import quecomemos.model.Usuario;
-import quecomemos.util.EMF;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-public class UsuarioDAO_JPA extends GenericDAO_JPA<Usuario> implements UsuarioDAO {
+import quecomemos.dao.UsuarioDAO;
+import quecomemos.model.Responsable;
+import quecomemos.model.Usuario;
+import quecomemos.util.EMF;
 
-    public UsuarioDAO_JPA() {
-        super(Usuario.class);
+public abstract class UsuarioDAO_JPA<T extends Usuario> extends GenericDAO_JPA<T> implements UsuarioDAO<T> {
+
+    public UsuarioDAO_JPA(Class<T> clase) {
+        super(clase);
     }
 
-    @Override
-    public Usuario findByEmail(String email) {
+	@Override
+    public T findByEmail(String email) {
         EntityManager em = EMF.getEMF().createEntityManager();
         try {
-            return em.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class)
+            return em.createQuery("SELECT u FROM " + this.clasePersistente.getSimpleName() +" u WHERE u.email = :email", this.clasePersistente)
                      .setParameter("email", email)
                      .getSingleResult();
         } catch (NoResultException e) {
@@ -28,10 +31,10 @@ public class UsuarioDAO_JPA extends GenericDAO_JPA<Usuario> implements UsuarioDA
     }
 
     @Override
-    public Usuario findByDni(String dni) {
+    public T findByDni(String dni) {
         EntityManager em = EMF.getEMF().createEntityManager();
         try {
-            return em.createQuery("SELECT u FROM Usuario u WHERE u.dni = :dni", Usuario.class)
+            return em.createQuery("SELECT u FROM " + this.clasePersistente.getSimpleName() + " u WHERE u.dni = :dni", this.clasePersistente)
                      .setParameter("dni", dni)
                      .getSingleResult();
         } catch (NoResultException e) {
@@ -42,10 +45,11 @@ public class UsuarioDAO_JPA extends GenericDAO_JPA<Usuario> implements UsuarioDA
     }
 
     @Override
-    public Usuario autenticar(String dni, String clave) {
+    public T autenticar(String dni, String clave) {
         EntityManager em = EMF.getEMF().createEntityManager();
+        System.out.println("The clase persistente es: "+ this.clasePersistente);
         try {
-            return em.createQuery("SELECT u FROM Usuario u WHERE u.dni = :dni AND u.clave = :clave", Usuario.class)
+            return em.createQuery("SELECT u FROM " + this.clasePersistente.getSimpleName() + " u WHERE u.dni = :dni AND u.clave = :clave", this.clasePersistente)
                      .setParameter("dni", dni)
                      .setParameter("clave", clave)
                      .getSingleResult();
@@ -56,7 +60,8 @@ public class UsuarioDAO_JPA extends GenericDAO_JPA<Usuario> implements UsuarioDA
         }
     }
 
-    public boolean existsByDni(String dni) {
+    @Override
+	public boolean existsByDni(String dni) {
         EntityManager em = EMF.getEMF().createEntityManager();
         try {
             Long count = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.dni = :dni", Long.class)
@@ -68,7 +73,8 @@ public class UsuarioDAO_JPA extends GenericDAO_JPA<Usuario> implements UsuarioDA
         }
     }
 
-    public boolean existsByEmail(String email) {
+    @Override
+	public boolean existsByEmail(String email) {
         EntityManager em = EMF.getEMF().createEntityManager();
         try {
             Long count = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.email = :email", Long.class)
@@ -81,7 +87,7 @@ public class UsuarioDAO_JPA extends GenericDAO_JPA<Usuario> implements UsuarioDA
     }
 
     @Override
-    public Usuario persistir(Usuario usuario) {
+    public T persistir(T usuario) {
         if (existsByDni(usuario.getDni())) {
             throw new IllegalArgumentException("Ya existe un usuario con ese DNI.");
         }
@@ -90,4 +96,5 @@ public class UsuarioDAO_JPA extends GenericDAO_JPA<Usuario> implements UsuarioDA
         }
         return super.persistir(usuario);
     }
+
 }

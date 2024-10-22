@@ -13,11 +13,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Cartas")
 public class Carta {
-	
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
+
 	@Column
 	private Date dia;
 
@@ -28,12 +28,12 @@ public class Carta {
 	@ManyToOne
     @JoinColumn(name = "menu_veggie_id", referencedColumnName = "id")
 	private Menu menuVeggie = new Menu();
-	
+
 	public Carta(Date dia) {
 		super();
 		this.dia = dia;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}

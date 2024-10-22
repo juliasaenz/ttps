@@ -13,7 +13,7 @@ public class GenericDAO_JPA<T> implements GenericDAO<T> {
 	protected Class<T> clasePersistente;
 
 	public GenericDAO_JPA(Class<T> clase) {
-		clasePersistente = clase;
+		this.clasePersistente = clase;
 	}
 
 	@Override
@@ -26,8 +26,9 @@ public class GenericDAO_JPA<T> implements GenericDAO<T> {
 			em.persist(entity);
 			tx.commit();
 		} catch (RuntimeException e) {
-			if (tx != null && tx.isActive())
+			if (tx != null && tx.isActive()) {
 				tx.rollback();
+			}
 			throw e; // escribir en un log o mostrar un mensaje
 		} finally {
 			em.close();
@@ -35,6 +36,7 @@ public class GenericDAO_JPA<T> implements GenericDAO<T> {
 		return entity;
 	}
 
+	@Override
 	public T actualizar(T entity) {
 		EntityManager em = EMF.getEMF().createEntityManager();
 		EntityTransaction etx = em.getTransaction();
@@ -55,8 +57,9 @@ public class GenericDAO_JPA<T> implements GenericDAO<T> {
 			em.remove(em.merge(entity));
 			tx.commit();
 		} catch (RuntimeException e) {
-			if (tx != null && tx.isActive())
+			if (tx != null && tx.isActive()) {
 				tx.rollback();
+			}
 			throw e; // escribir en un log o mostrar un mensaje
 		} finally {
 			em.close();
@@ -74,8 +77,7 @@ public class GenericDAO_JPA<T> implements GenericDAO<T> {
 		return entity;
 	}
 
-	// TODO Preguntar si esto va acá
-	private Class getPersistentClass() {
+	private Class<T> getPersistentClass() {
 		return clasePersistente;
 	}
 

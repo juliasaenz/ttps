@@ -15,11 +15,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Menu")
 public class Menu {
-	
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
+
 	@ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
         name = "Menu_Comida", // Name of the join table
@@ -30,7 +30,7 @@ public class Menu {
 
 	@Column
 	private double precio;
-	
+
 	public Menu() {
 	}
 
@@ -49,7 +49,7 @@ public class Menu {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-	
+
 	public boolean isVegetariano() {
 		return this.comidas.stream().allMatch(comida -> comida.isVegetariano());
 	}
@@ -57,5 +57,5 @@ public class Menu {
 	public Long getId() {
 		return id;
 	}
-	
+
 }

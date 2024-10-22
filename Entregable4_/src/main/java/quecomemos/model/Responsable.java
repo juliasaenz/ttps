@@ -13,6 +13,8 @@ public class Responsable extends Usuario {
 	public Responsable(String dni, String clave, String nombre, String apellido, String email) {
 		super(dni, clave, nombre, apellido, email);
 	}
+	
+	protected Responsable() {}
 
 	public String getTurno() {
 		return turno;
@@ -22,5 +24,5 @@ public class Responsable extends Usuario {
 		this.turno = turno;
 	}
 
-	
+
 }

@@ -41,7 +41,8 @@ public class ComidaDAO_JPA extends GenericDAO_JPA<Comida> implements ComidaDAO {
         return result;
     }
 
-    public boolean isComidaInMenu(Long comidaId) {
+    @Override
+	public boolean isComidaInMenu(Long comidaId) {
         EntityManager em = EMF.getEMF().createEntityManager();
         TypedQuery<Menu> query = em.createQuery(
             "SELECT m FROM Menu m JOIN m.comidas c WHERE c.id = :comidaId", Menu.class
@@ -52,7 +53,8 @@ public class ComidaDAO_JPA extends GenericDAO_JPA<Comida> implements ComidaDAO {
         return inUse;
     }
 
-    public boolean existsByNombre(String nombre) {
+    @Override
+	public boolean existsByNombre(String nombre) {
         EntityManager em = EMF.getEMF().createEntityManager();
         TypedQuery<Long> query = em.createQuery(
             "SELECT COUNT(c) FROM Comida c WHERE c.nombre = :nombre", Long.class

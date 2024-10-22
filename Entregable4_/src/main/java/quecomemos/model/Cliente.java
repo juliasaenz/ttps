@@ -12,13 +12,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Clientes")
 public class Cliente extends Usuario {
-    
+
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
     private List<Compra> compras = new ArrayList<>();
-	
+
 	@Column(nullable = false)
     private boolean vegetariano = false;
-	
+
 	protected Cliente() {
 		super();
 	}

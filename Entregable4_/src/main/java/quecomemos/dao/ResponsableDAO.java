@@ -1,7 +1,10 @@
 package quecomemos.dao;
 
+import java.util.List;
+
 import quecomemos.model.Responsable;
 
-public interface ResponsableDAO extends GenericDAO<Responsable> {
-    public void editarTurno(Responsable r);
+public interface ResponsableDAO extends UsuarioDAO<Responsable> {
+
+	public List<Responsable> getResponsablesbyTurno(String turno);
 }

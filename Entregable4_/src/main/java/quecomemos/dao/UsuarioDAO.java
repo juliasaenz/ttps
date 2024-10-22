@@ -2,15 +2,15 @@ package quecomemos.dao;
 
 import quecomemos.model.Usuario;
 
-public interface UsuarioDAO extends GenericDAO<Usuario> {
-    
-    Usuario findByEmail(String email);
-    
-    Usuario findByDni(String dni);
-    
-    Usuario autenticar(String dni, String clave);
-    
+public interface UsuarioDAO<T extends Usuario> extends GenericDAO<T> {
+
+    T findByEmail(String email);
+
+    T findByDni(String dni);
+
+    T autenticar(String dni, String clave);
+
     boolean existsByEmail(String email);
-    
+
     boolean existsByDni(String dni);
 }

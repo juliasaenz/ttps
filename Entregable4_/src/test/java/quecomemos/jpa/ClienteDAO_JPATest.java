@@ -1,22 +1,27 @@
 package quecomemos.jpa;
 
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 import quecomemos.dao.ClienteDAO;
 import quecomemos.model.Cliente;
 import quecomemos.model.Usuario;
 import quecomemos.util.EMF;
-
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class ClienteDAO_JPATest {
@@ -31,12 +36,12 @@ public class ClienteDAO_JPATest {
 
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        
+
         Cliente cliente1 = new Cliente("12345678", "password1", "John", "Doe", "john.doe@example.com");
         Cliente cliente2 = new Cliente("87654321", "password2", "Jane", "Doe", "jane.doe@example.com");
         em.persist(cliente1);
         em.persist(cliente2);
-        
+
         tx.commit();
     }
 
@@ -64,16 +69,16 @@ public class ClienteDAO_JPATest {
 
     @Test
     public void testAutenticar() {
-        Cliente user = (Cliente) clienteDao.autenticar("12345678", "password1");
+        Cliente user = clienteDao.autenticar("12345678", "password1");
         assertNotNull(user);
-        assertEquals("John", user.getNombre());
+        assertEquals("John", user.getNombre()); 
     }
 
     @Test
     public void testPersistir() {
         Cliente newUser = new Cliente("11223344", "password3", "Mike", "Smith", "mike.smith@example.com");
         clienteDao.persistir(newUser);
-        
+
         Cliente foundUser = (Cliente) clienteDao.findByEmail("mike.smith@example.com");
         assertNotNull(foundUser);
         assertEquals("Mike", foundUser.getNombre());
@@ -103,7 +108,7 @@ public class ClienteDAO_JPATest {
     public void testExistsByEmail() {
         boolean exists = clienteDao.existsByEmail("john.doe@example.com");
         assertTrue(exists);
-        
+
         exists = clienteDao.existsByEmail("non.existing@example.com");
         assertFalse(exists);
     }
@@ -119,10 +124,10 @@ public class ClienteDAO_JPATest {
 
     @Test
     public void testRecuperarTodos() {
-        List<Usuario> usuarios = clienteDao.recuperarTodos("nombre");
+        List<Cliente> usuarios = clienteDao.recuperarTodos("nombre");
         assertEquals(2, usuarios.size());
     }
-    
+
     @Test
     public void testIsVegetariano() {
         Cliente clienteVeggie = new Cliente("98889998", "password1", "John", "Doe", "julia@example.com");
@@ -133,10 +138,10 @@ public class ClienteDAO_JPATest {
         clienteVeggie.setVegetariano(false);
         clienteDao.persistir(clienteNoVeggie);
 
-        boolean isVegetarian = ((ClienteDAO) clienteDao).isVegetariano(clienteVeggie.getId());
+        boolean isVegetarian = clienteDao.isVegetariano(clienteVeggie.getId());
         assertTrue(isVegetarian, "El cliente es vegetariano");
 
-        boolean isNonVegetarian = ((ClienteDAO) clienteDao).isVegetariano(clienteNoVeggie.getId());
+        boolean isNonVegetarian = clienteDao.isVegetariano(clienteNoVeggie.getId());
         assertFalse(isNonVegetarian, "El cliente no es vegetariano");
     }
 

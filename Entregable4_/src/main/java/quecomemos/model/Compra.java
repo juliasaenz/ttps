@@ -1,11 +1,20 @@
 package quecomemos.model;
-import javax.persistence.*;
 import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "Compras")
 public class Compra {
-	
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,9 +48,9 @@ public class Compra {
 	public Long getId() {
 		return id;
 	}
-	
-	
-	
-	
+
+
+
+
 
 }

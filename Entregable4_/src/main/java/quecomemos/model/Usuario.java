@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "Usuarios")
 @Inheritance(strategy = InheritanceType.JOINED) // esto va a hacer una tabla x clase y subclase
 public abstract class Usuario {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,9 +35,9 @@ public abstract class Usuario {
 
     @Column(nullable = false, unique = true)
     private String email;
-    
+
     protected Usuario() {
-    	
+
     }
 
     public Usuario(String dni, String clave, String nombre, String apellido, String email) {
@@ -47,7 +47,7 @@ public abstract class Usuario {
         this.apellido = apellido;
         this.email = email;
     }
-    
+
     public Long getId() {
         return id;
     }

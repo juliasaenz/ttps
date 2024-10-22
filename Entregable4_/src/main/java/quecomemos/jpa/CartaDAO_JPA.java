@@ -1,11 +1,10 @@
 package quecomemos.jpa;
-import quecomemos.model.Menu;
-
 import java.util.Date;
 import java.util.List;
 
 import quecomemos.dao.CartaDAO;
 import quecomemos.model.Carta;
+import quecomemos.model.Menu;
 
 public class CartaDAO_JPA extends GenericDAO_JPA<Carta> implements CartaDAO {
 
