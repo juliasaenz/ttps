@@ -1,7 +1,11 @@
 package quecomemos.jpa;
 
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+
 import quecomemos.dao.ClienteDAO;
 import quecomemos.model.Cliente;
+import quecomemos.util.EMF;
 
 public class ClienteDAO_JPA extends GenericDAO_JPA<Cliente> implements ClienteDAO {
 
@@ -11,8 +15,17 @@ public class ClienteDAO_JPA extends GenericDAO_JPA<Cliente> implements ClienteDA
 
 	@Override
 	public boolean isVegetariano(Long clienteId) {
-		// TODO Auto-generated method stub
-		return false;
+	    EntityManager em = EMF.getEMF().createEntityManager();
+	    try {
+	        Boolean vegetariano = em.createQuery("SELECT c.vegetariano FROM Cliente c WHERE c.id = :clienteId", Boolean.class)
+	                               .setParameter("clienteId", clienteId)
+	                               .getSingleResult();
+	        return vegetariano != null ? vegetariano : false;
+	    } catch (NoResultException e) {
+	        return false;
+	    } finally {
+	        em.close();
+	    }
 	}
 
 }

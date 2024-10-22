@@ -11,6 +11,6 @@ public class TestMain {
         em.close();
         emf.close();
         
-        System.out.println("Entities should be created in the database!");
+        System.out.println("Entidades subidas a la base de datos");
     }
 }
