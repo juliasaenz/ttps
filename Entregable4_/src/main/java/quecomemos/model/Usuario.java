@@ -35,6 +35,10 @@ public abstract class Usuario {
 
     @Column(nullable = false, unique = true)
     private String email;
+    
+    protected Usuario() {
+    	
+    }
 
     public Usuario(String dni, String clave, String nombre, String apellido, String email) {
         this.dni = dni;

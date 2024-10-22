@@ -4,13 +4,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import quecomemos.dao.ClienteDAO;
-import quecomemos.model.Cliente;
 import quecomemos.util.EMF;
 
-public class ClienteDAO_JPA extends GenericDAO_JPA<Cliente> implements ClienteDAO {
+public class ClienteDAO_JPA extends UsuarioDAO_JPA implements ClienteDAO {
 
 	public ClienteDAO_JPA() {
-		super(Cliente.class);
+		super();
 	}
 
 	@Override

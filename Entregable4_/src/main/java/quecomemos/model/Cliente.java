@@ -18,6 +18,10 @@ public class Cliente extends Usuario {
 	
 	@Column(nullable = false)
     private boolean vegetariano = false;
+	
+	protected Cliente() {
+		super();
+	}
 
     public Cliente(String dni, String clave, String nombre, String apellido, String email) {
         super(dni, clave, nombre, apellido, email);
