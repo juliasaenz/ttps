@@ -20,7 +20,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 import quecomemos.dao.ClienteDAO;
 import quecomemos.model.Cliente;
-import quecomemos.model.Usuario;
 import quecomemos.util.EMF;
 
 @TestInstance(Lifecycle.PER_CLASS)

@@ -136,6 +136,20 @@ public class ResponsableDAO_JPATest {
         List<Responsable> responsables = responsableDao.recuperarTodos("nombre");
         assertEquals(2, responsables.size());
     }
+    
+    @Test
+    public void testRecuperarPorTurno() {
+    	Responsable newUser = new Responsable("11223344", "password3", "Mike", "Smith", "mike.smith@example.com");
+        newUser.setTurno("mañana");
+        responsableDao.persistir(newUser);
+        
+        List<Responsable> responsablesTarde = responsableDao.getResponsablesbyTurno("tarde");
+        assertEquals(2, responsablesTarde.size());
+        
+        List<Responsable> responsablesManana = responsableDao.getResponsablesbyTurno("mañana");
+        assertEquals(1, responsablesManana.size());
+    	
+    }
 
 
 }

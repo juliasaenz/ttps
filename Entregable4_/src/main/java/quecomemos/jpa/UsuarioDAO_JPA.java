@@ -1,12 +1,9 @@
 package quecomemos.jpa;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import quecomemos.dao.UsuarioDAO;
-import quecomemos.model.Responsable;
 import quecomemos.model.Usuario;
 import quecomemos.util.EMF;
 
