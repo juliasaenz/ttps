@@ -10,7 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import quecomemos.dao.UsuarioDAO;
+import quecomemos.dao.ClienteDAO;
 import quecomemos.model.Cliente;
 import quecomemos.model.Usuario;
 import quecomemos.util.EMF;
@@ -21,15 +21,14 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class ClienteDAO_JPATest {
 
-    private UsuarioDAO usuarioDAO;
+    private ClienteDAO clienteDao;
     private EntityManager em;
 
     @BeforeEach
     public void setUp() throws Exception {
-        usuarioDAO = new ClienteDAO_JPA();
+        clienteDao = new ClienteDAO_JPA();
         em = EMF.getEMF().createEntityManager();
 
-        // Populate database with some users (Clientes)
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         
@@ -44,28 +43,28 @@ public class ClienteDAO_JPATest {
     @AfterEach
     public void tearDown() throws Exception {
         em.getTransaction().begin();
-        em.createQuery("DELETE FROM Usuario").executeUpdate();  // Clean the database
+        em.createQuery("DELETE FROM Usuario").executeUpdate();
         em.getTransaction().commit();
         em.close();
     }
 
     @Test
     public void testFindByEmail() {
-        Cliente user = (Cliente) usuarioDAO.findByEmail("john.doe@example.com");
+        Cliente user = (Cliente) clienteDao.findByEmail("john.doe@example.com");
         assertNotNull(user);
         assertEquals("John", user.getNombre());
     }
 
     @Test
     public void testFindByDni() {
-        Cliente user = (Cliente) usuarioDAO.findByDni("87654321");
+        Cliente user = (Cliente) clienteDao.findByDni("87654321");
         assertNotNull(user);
         assertEquals("Jane", user.getNombre());
     }
 
     @Test
     public void testAutenticar() {
-        Cliente user = (Cliente) usuarioDAO.autenticar("12345678", "password1");
+        Cliente user = (Cliente) clienteDao.autenticar("12345678", "password1");
         assertNotNull(user);
         assertEquals("John", user.getNombre());
     }
@@ -73,54 +72,72 @@ public class ClienteDAO_JPATest {
     @Test
     public void testPersistir() {
         Cliente newUser = new Cliente("11223344", "password3", "Mike", "Smith", "mike.smith@example.com");
-        usuarioDAO.persistir(newUser);
+        clienteDao.persistir(newUser);
         
-        Cliente foundUser = (Cliente) usuarioDAO.findByEmail("mike.smith@example.com");
+        Cliente foundUser = (Cliente) clienteDao.findByEmail("mike.smith@example.com");
         assertNotNull(foundUser);
         assertEquals("Mike", foundUser.getNombre());
     }
 
     @Test
     public void testActualizar() {
-        Cliente user = (Cliente) usuarioDAO.findByDni("12345678");
+        Cliente user = (Cliente) clienteDao.findByDni("12345678");
         user.setNombre("John Updated");
-        usuarioDAO.actualizar(user);
+        clienteDao.actualizar(user);
 
-        Cliente updatedUser = (Cliente) usuarioDAO.findByDni("12345678");
+        Cliente updatedUser = (Cliente) clienteDao.findByDni("12345678");
         assertEquals("John Updated", updatedUser.getNombre());
     }
 
     @Test
     public void testBorrar() {
-        Cliente user = (Cliente) usuarioDAO.findByDni("12345678");
+        Cliente user = (Cliente) clienteDao.findByDni("12345678");
         assertNotNull(user);
 
-        usuarioDAO.borrar(user);
-        Cliente deletedUser = (Cliente) usuarioDAO.findByDni("12345678");
+        clienteDao.borrar(user);
+        Cliente deletedUser = (Cliente) clienteDao.findByDni("12345678");
         assertNull(deletedUser);
     }
 
     @Test
     public void testExistsByEmail() {
-        boolean exists = usuarioDAO.existsByEmail("john.doe@example.com");
+        boolean exists = clienteDao.existsByEmail("john.doe@example.com");
         assertTrue(exists);
         
-        exists = usuarioDAO.existsByEmail("non.existing@example.com");
+        exists = clienteDao.existsByEmail("non.existing@example.com");
         assertFalse(exists);
     }
 
     @Test
     public void testExistsByDni() {
-        boolean exists = usuarioDAO.existsByDni("12345678");
+        boolean exists = clienteDao.existsByDni("12345678");
         assertTrue(exists);
 
-        exists = usuarioDAO.existsByDni("00000000");
+        exists = clienteDao.existsByDni("00000000");
         assertFalse(exists);
     }
 
     @Test
     public void testRecuperarTodos() {
-        List<Usuario> usuarios = usuarioDAO.recuperarTodos("nombre");
+        List<Usuario> usuarios = clienteDao.recuperarTodos("nombre");
         assertEquals(2, usuarios.size());
     }
+    
+    @Test
+    public void testIsVegetariano() {
+        Cliente clienteVeggie = new Cliente("98889998", "password1", "John", "Doe", "julia@example.com");
+        clienteVeggie.setVegetariano(true);
+        clienteDao.persistir(clienteVeggie);
+
+        Cliente clienteNoVeggie = new Cliente("6776677", "password2", "Jane", "Doe", "manuel@example.com");
+        clienteVeggie.setVegetariano(false);
+        clienteDao.persistir(clienteNoVeggie);
+
+        boolean isVegetarian = ((ClienteDAO) clienteDao).isVegetariano(clienteVeggie.getId());
+        assertTrue(isVegetarian, "El cliente es vegetariano");
+
+        boolean isNonVegetarian = ((ClienteDAO) clienteDao).isVegetariano(clienteNoVeggie.getId());
+        assertFalse(isNonVegetarian, "El cliente no es vegetariano");
+    }
+
 }
