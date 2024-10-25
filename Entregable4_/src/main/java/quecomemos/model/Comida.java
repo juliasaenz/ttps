@@ -34,6 +34,8 @@ public class Comida {
         this.tipo = tipo;
         this.vegetariano = vegetariano;
     }
+    
+    protected Comida() {}
 
     public String getNombre() {
         return nombre;

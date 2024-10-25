@@ -1,6 +1,8 @@
 package quecomemos.model;
 import java.sql.Date;
+import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,29 +21,31 @@ public class Carta {
     private Long id;
 
 	@Column
-	private Date dia;
+	private LocalDate dia;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "menu_id", referencedColumnName = "id")
 	private Menu menu = new Menu();
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "menu_veggie_id", referencedColumnName = "id")
 	private Menu menuVeggie = new Menu();
 
-	public Carta(Date dia) {
+	public Carta(LocalDate localDate) {
 		super();
-		this.dia = dia;
+		this.dia = localDate;
 	}
+	
+	protected Carta() {}
 
 	public Long getId() {
 		return id;
 	}
 
-	public Date getDia() {
+	public LocalDate getDia() {
 		return dia;
 	}
-	public void setDia(Date dia) {
+	public void setDia(LocalDate dia) {
 		this.dia = dia;
 	}
 	public Menu getMenu() {

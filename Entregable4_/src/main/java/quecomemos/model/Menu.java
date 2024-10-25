@@ -20,7 +20,7 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
         name = "Menu_Comida", // Name of the join table
         joinColumns = @JoinColumn(name = "menu_id"), // Foreign key to Menu

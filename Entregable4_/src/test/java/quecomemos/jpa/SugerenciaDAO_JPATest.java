@@ -76,9 +76,11 @@ public class SugerenciaDAO_JPATest {
         List<Sugerencia> sugerencias = sugerenciaDao.recuperarTodos(null);
         assertEquals(2,sugerencias.size());
         
+        Cliente cliente = sugerencias.get(0).getCliente();
         sugerenciaDao.borrar(sugerencias.get(0).getId());
         
         List<Sugerencia> nueLista = sugerenciaDao.recuperarTodos(null);
+        //clienteDao.existe(cliente.getId());
         assertEquals(1,nueLista.size());
     }
 
