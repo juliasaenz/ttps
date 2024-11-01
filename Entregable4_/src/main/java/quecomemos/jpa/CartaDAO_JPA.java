@@ -1,6 +1,7 @@
 package quecomemos.jpa;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -80,16 +81,16 @@ public class CartaDAO_JPA extends GenericDAO_JPA<Carta> implements CartaDAO {
     }
 
     @Override
-    public List<Carta> recuperarTodos(String column) {
+    public List<Carta> recuperarTodos() {
         EntityManager em = EMF.getEMF().createEntityManager();
-        TypedQuery<Carta> query = em.createQuery("SELECT c FROM Carta c ORDER BY c." + column, Carta.class);
+        TypedQuery<Carta> query = em.createQuery("SELECT c FROM Carta c ORDER BY c.dia", Carta.class);
         List<Carta> result = query.getResultList();
         em.close();
         return result;
     }
 
     @Override
-    public Carta getCartaDia(Date d) {
+    public Carta getCartaDia(LocalDate d) {
         EntityManager em = EMF.getEMF().createEntityManager();
         TypedQuery<Carta> query = em.createQuery(
             "SELECT c FROM Carta c WHERE c.dia = :dia", Carta.class
@@ -137,4 +138,6 @@ public class CartaDAO_JPA extends GenericDAO_JPA<Carta> implements CartaDAO {
         em.close();
         return result;
     }
+
+	
 }

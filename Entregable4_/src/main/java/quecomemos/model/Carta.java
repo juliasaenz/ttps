@@ -25,11 +25,11 @@ public class Carta {
 
 	@ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "menu_id", referencedColumnName = "id")
-	private Menu menu = new Menu();
+	private Menu menu;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "menu_veggie_id", referencedColumnName = "id")
-	private Menu menuVeggie = new Menu();
+	private Menu menuVeggie;
 
 	public Carta(LocalDate localDate) {
 		super();

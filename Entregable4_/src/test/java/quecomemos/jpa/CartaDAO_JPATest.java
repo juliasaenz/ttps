@@ -2,6 +2,8 @@ package quecomemos.jpa;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -67,11 +69,6 @@ public class CartaDAO_JPATest {
         menuMixto.setComidas(comidasMixtas);
         menuMixto.setPrecio(200.0);
         em.persist(menuMixto);
-
-        //Crear carta
-        carta = new Carta();
-        carta.setMenu(menuMixto);
-        //em.persist(carta);
          
         tx.commit();
     }
@@ -87,15 +84,12 @@ public class CartaDAO_JPATest {
         em.close();
     }
     
-    @Test
-    public void prueba() {
-    	System.out.println("hola");
-    }
 
-    /*@Test
+    @Test
     public void testPersistirCarta() {
         Carta nuevaCarta = new Carta(LocalDate.now());
         nuevaCarta.setMenu(menuMixto);
+        nuevaCarta.setMenusVeggie(menuVegetariano);
         cartaDao.persistir(nuevaCarta);
 
         Carta cartaRecuperada = cartaDao.recuperar(nuevaCarta.getId());
@@ -104,110 +98,66 @@ public class CartaDAO_JPATest {
     }
 
 
-    /*@Test
+    @Test
     public void testActualizarCarta() {
-        // Crear una carta
-        Menu menu = new Menu(); // Crear y configurar el menú
-        menuDAO.persistir(menu);
+        Carta cartaN = new Carta(LocalDate.of(2024, 10, 3));
+        cartaN.setMenu(menuMixto);
+        cartaN.setMenusVeggie(menuVegetariano);
+        cartaDao.persistir(cartaN);
 
-        Carta carta = new Carta(Date.valueOf("2024-10-25"));
-        carta.setMenu(menu);
-        cartaDAO.persistir(carta);
+        cartaN.setDia(LocalDate.of(2024, 11, 4));
+        Carta updatedCarta = cartaDao.actualizar(cartaN);
 
-        // Actualizar la carta
-        carta.setDia(Date.valueOf("2024-10-26"));
-        Carta updatedCarta = cartaDAO.actualizar(carta);
-
-        assertEquals(Date.valueOf("2024-10-26"), updatedCarta.getDia());
+        assertEquals(LocalDate.of(2024, 11, 4), updatedCarta.getDia());
     }
 
     @Test
     public void testBorrarCarta() {
-        // Crear y persistir una carta
-        Menu menu = new Menu(); // Crear y configurar el menú
-        menuDAO.persistir(menu);
+        Carta carta = new Carta(LocalDate.of(2024, 10, 3));
+        carta.setMenu(menuMixto);
+        carta.setMenusVeggie(menuVegetariano);
+        cartaDao.persistir(carta);
+        Carta normalCarta = cartaDao.recuperar(carta.getId());
+        assertNotNull(normalCarta);
 
-        Carta carta = new Carta(Date.valueOf("2024-10-25"));
-        carta.setMenu(menu);
-        cartaDAO.persistir(carta);
+        cartaDao.borrar(carta);
 
-        // Borrar la carta
-        cartaDAO.borrar(carta);
-
-        // Verificar que la carta fue borrada
-        Carta deletedCarta = cartaDAO.recuperar(carta.getId());
+        Carta deletedCarta = cartaDao.recuperar(carta.getId());
         assertNull(deletedCarta);
     }
 
-    @Test
-    public void testRecuperarCarta() {
-        // Crear y persistir una carta
-        Menu menu = new Menu(); // Crear y configurar el menú
-        menuDAO.persistir(menu);
-
-        Carta carta = new Carta(Date.valueOf("2024-10-25"));
-        carta.setMenu(menu);
-        cartaDAO.persistir(carta);
-
-        // Recuperar la carta
-        Carta retrievedCarta = cartaDAO.recuperar(carta.getId());
-
-        assertNotNull(retrievedCarta);
-        assertEquals(carta.getId(), retrievedCarta.getId());
-    }
 
     @Test
     public void testRecuperarTodosCartas() {
-        // Crear y persistir varias cartas
-        Menu menu = new Menu(); // Crear y configurar el menú
-        menuDAO.persistir(menu);
 
-        Carta carta1 = new Carta(Date.valueOf("2024-10-25"));
-        carta1.setMenu(menu);
-        cartaDAO.persistir(carta1);
+        Carta carta1 = new Carta(LocalDate.of(2024, 10, 4));
+        carta1.setMenu(menuMixto);
+        carta1.setMenusVeggie(menuVegetariano);
+        cartaDao.persistir(carta1);
 
-        Carta carta2 = new Carta(Date.valueOf("2024-10-26"));
-        carta2.setMenu(menu);
-        cartaDAO.persistir(carta2);
+        Carta carta2 = new Carta(LocalDate.of(2024, 11, 5));
+        carta2.setMenu(menuMixto);
+        carta2.setMenusVeggie(menuVegetariano);
+        cartaDao.persistir(carta2);
 
-        // Recuperar todas las cartas
-        List<Carta> cartas = cartaDAO.recuperarTodos("dia");
+        List<Carta> cartas = cartaDao.recuperarTodos();
 
         assertEquals(2, cartas.size());
     }
 
     @Test
     public void testGetCartaDia() {
-        // Crear y persistir una carta
-        Menu menu = new Menu(); // Crear y configurar el menú
-        menuDAO.persistir(menu);
 
-        Carta carta = new Carta(Date.valueOf("2024-10-25"));
-        carta.setMenu(menu);
-        cartaDAO.persistir(carta);
+        Carta carta = new Carta(LocalDate.now());
+        carta.setMenu(menuMixto);
+        carta.setMenusVeggie(menuVegetariano);
+        cartaDao.persistir(carta);
 
-        // Recuperar la carta por día
-        Carta cartaRecuperada = cartaDAO.getCartaDia(Date.valueOf("2024-10-25"));
+        Carta cartaRecuperada = cartaDao.getCartaDia(LocalDate.now());
 
         assertNotNull(cartaRecuperada);
         assertEquals(carta.getId(), cartaRecuperada.getId());
     }
 
-    @Test
-    public void testGetMenusDia() {
-        // Crear y persistir una carta
-        Menu menu = new Menu(); // Crear y configurar el menú
-        menuDAO.persistir(menu);
-
-        Carta carta = new Carta(Date.valueOf("2024-10-25"));
-        carta.setMenu(menu);
-        cartaDAO.persistir(carta);
-
-        // Obtener menús del día
-        List<Menu> menus = cartaDAO.getMenusDia(Date.valueOf("2024-10-25"));
-
-        assertEquals(1, menus.size());
-        assertEquals(menu.getId(), menus.get(0).getId());
-    }*/
 
 }
