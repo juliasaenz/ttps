@@ -1,15 +1,22 @@
 package quecomemos.jpa;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+import quecomemos.dao.CartaDAO;
 import quecomemos.dao.MenuDAO;
 import quecomemos.model.Carta;
 import quecomemos.model.Comida;
@@ -17,17 +24,56 @@ import quecomemos.model.Menu;
 import quecomemos.util.EMF;
 import quecomemos.util.TipoComida;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class CartaDAO_JPATest {
 
-    private CartaDAO_JPA cartaDAO;
-    private MenuDAO_JPA menuDAO;
+	private CartaDAO cartaDao;
+    private MenuDAO menuDao;
     private EntityManager em;
-
+    private Carta carta;
+    private Menu menuVegetariano;
+    private Menu menuMixto;
+    private Comida comidaVeggie;
+    private Comida comidaNoVeggie;
+    
     @BeforeEach
-    public void setUp() {
-        cartaDAO = new CartaDAO_JPA();
-        menuDAO = new MenuDAO_JPA();
+    public void setUp() throws Exception {
+        cartaDao = new CartaDAO_JPA();
+        menuDao = new MenuDAO_JPA();
         em = EMF.getEMF().createEntityManager();
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        // Crear comidas con TipoComida (como VEGETARIANO y CARNE por ejemplo)
+        comidaVeggie = new Comida("Ensalada", TipoComida.ENTRADA, true);
+        comidaNoVeggie = new Comida("Milanesa", TipoComida.POSTRE, false);
+        em.persist(comidaVeggie);
+        em.persist(comidaNoVeggie);
+
+        // Crear menú vegetariano
+        menuVegetariano = new Menu();
+        List<Comida> comidasVegetarianas = new ArrayList<>();
+        comidasVegetarianas.add(comidaVeggie);
+        menuVegetariano.setComidas(comidasVegetarianas);
+        menuVegetariano.setPrecio(150.0);
+        em.persist(menuVegetariano);
+        
+        // Crear menú mixto
+        menuMixto = new Menu();
+        List<Comida> comidasMixtas = new ArrayList<>();
+        comidasMixtas.add(comidaVeggie);
+        comidasMixtas.add(comidaNoVeggie);
+        menuMixto.setComidas(comidasMixtas);
+        menuMixto.setPrecio(200.0);
+        em.persist(menuMixto);
+
+        //Crear carta
+        carta = new Carta();
+        carta.setMenu(menuMixto);
+        //em.persist(carta);
+         
+        tx.commit();
     }
 
     @AfterEach
@@ -40,26 +86,23 @@ public class CartaDAO_JPATest {
         em.getTransaction().commit();
         em.close();
     }
-
+    
     @Test
-    public void testPersistirCarta() {
-    	Comida nuevaComida = new Comida("Pasta", TipoComida.PLATO_PRINCIPAL, true);
-        
-        MenuDAO menuDao = new MenuDAO_JPA();
-        Menu menu = new Menu();
-        
-        List<Comida> lista = new ArrayList<>();
-        lista.add(nuevaComida);
-        menu.setComidas(lista);
-        menuDao.actualizar(menu);
-        
-        Carta carta = new Carta( LocalDate.now());
-        carta.setMenu(menu);
-        cartaDAO.persistir(carta);
-
-        
-        
+    public void prueba() {
+    	System.out.println("hola");
     }
+
+    /*@Test
+    public void testPersistirCarta() {
+        Carta nuevaCarta = new Carta(LocalDate.now());
+        nuevaCarta.setMenu(menuMixto);
+        cartaDao.persistir(nuevaCarta);
+
+        Carta cartaRecuperada = cartaDao.recuperar(nuevaCarta.getId());
+        assertNotNull(cartaRecuperada);
+        assertEquals(nuevaCarta.getDia(), cartaRecuperada.getDia());
+    }
+
 
     /*@Test
     public void testActualizarCarta() {

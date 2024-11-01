@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+import quecomemos.dao.ComidaDAO;
 import quecomemos.dao.MenuDAO;
 import quecomemos.model.Comida;
 import quecomemos.model.Menu;
@@ -28,6 +29,7 @@ import quecomemos.util.TipoComida;
 public class MenuDAO_JPATest {
 
     private MenuDAO menuDao;
+    private ComidaDAO comidaDao;
     private EntityManager em;
     private Comida comidaVeggie;
     private Comida comidaNoVeggie;
@@ -37,13 +39,14 @@ public class MenuDAO_JPATest {
     @BeforeEach
     public void setUp() throws Exception {
         menuDao = new MenuDAO_JPA();
+        comidaDao = new ComidaDAO_JPA();
         em = EMF.getEMF().createEntityManager();
 
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
         // Crear comidas con TipoComida (como VEGETARIANO y CARNE por ejemplo)
-       comidaVeggie = new Comida("Ensalada", TipoComida.ENTRADA, true);
+        comidaVeggie = new Comida("Ensalada", TipoComida.ENTRADA, true);
         comidaNoVeggie = new Comida("Milanesa", TipoComida.POSTRE, false);
         em.persist(comidaVeggie);
         em.persist(comidaNoVeggie);
@@ -102,6 +105,7 @@ public class MenuDAO_JPATest {
     public void testBorrar() {
         menuDao.borrar(menuMixto);
         Menu menuEliminado = menuDao.recuperar(menuMixto.getId());
+        assertTrue(comidaDao.existe(comidaNoVeggie.getId()));
         assertNull(menuEliminado);
     }
 

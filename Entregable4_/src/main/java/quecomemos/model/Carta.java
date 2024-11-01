@@ -36,7 +36,7 @@ public class Carta {
 		this.dia = localDate;
 	}
 	
-	protected Carta() {}
+	public Carta() {}
 
 	public Long getId() {
 		return id;

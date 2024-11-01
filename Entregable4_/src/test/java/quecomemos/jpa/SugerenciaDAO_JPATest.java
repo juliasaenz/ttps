@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+import quecomemos.dao.ClienteDAO;
 import quecomemos.dao.SugerenciaDAO;
 import quecomemos.model.Cliente;
 import quecomemos.model.Sugerencia;
@@ -26,11 +27,13 @@ import quecomemos.util.TipoSugerencia;
 public class SugerenciaDAO_JPATest {
 
     private SugerenciaDAO sugerenciaDao;
+    private ClienteDAO clienteDao;
     private EntityManager em;
 
     @BeforeEach
     public void setUp() throws Exception {
         sugerenciaDao = new SugerenciaDAO_JPA();
+        clienteDao = new ClienteDAO_JPA();
         em = EMF.getEMF().createEntityManager();
 
         EntityTransaction tx = em.getTransaction();
@@ -80,7 +83,7 @@ public class SugerenciaDAO_JPATest {
         sugerenciaDao.borrar(sugerencias.get(0).getId());
         
         List<Sugerencia> nueLista = sugerenciaDao.recuperarTodos(null);
-        //clienteDao.existe(cliente.getId());
+        assertTrue(clienteDao.existe(cliente.getId()));
         assertEquals(1,nueLista.size());
     }
 
