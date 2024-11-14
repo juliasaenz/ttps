@@ -1,7 +1,9 @@
 package ttps.spring.test;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
+
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import ttps.spring.config.PersistenceConfig;

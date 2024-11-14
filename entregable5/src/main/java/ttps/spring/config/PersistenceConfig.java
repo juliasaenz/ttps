@@ -1,6 +1,6 @@
 package ttps.spring.config;
 
-import java.util.Properties;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -49,13 +49,15 @@ public class PersistenceConfig {
 		emf.setPackagesToScan("ttps.spring");
 		emf.setEntityManagerFactoryInterface(jakarta.persistence.EntityManagerFactory.class);
 		JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-
-		// Adding Hibernate properties for schema generation
-		Properties jpaProperties = new Properties();
-		jpaProperties.put("hibernate.hbm2ddl.auto", "update"); // Change to "create" to recreate schema on each run
-		jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect"); // Adjust dialect if needed
-
 		emf.setJpaVendorAdapter(jpaVendorAdapter);
+		
+		// Hibernate properties for schema generation
+        emf.setJpaPropertyMap(Map.of(
+            "hibernate.hbm2ddl.auto", "update", // Auto-generate the schema (or "create" for fresh schema)
+            "hibernate.dialect", "org.hibernate.dialect.MySQLDialect", // MySQL dialect
+            "hibernate.show_sql", "true", // Show generated SQL in logs (optional)
+            "hibernate.format_sql", "true" // Format the generated SQL
+        ));
 		return emf;
 	}
 
