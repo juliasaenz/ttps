@@ -1,23 +1,24 @@
 package ttps.spring.model;
 
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import org.springframework.stereotype.Component;
-
-@Entity 
+@Entity
 @Component("prueba")
 public class MiPrimerEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String data;
-	
-	public MiPrimerEntity() {}
+
+	public MiPrimerEntity() {
+	}
 
 	public Long getId() {
 		return id;
@@ -34,8 +35,9 @@ public class MiPrimerEntity {
 	public void setData(String data) {
 		this.data = data;
 	}
-	public String hola(){
-		return "MiPrimerEntity"; 
-	}	
-	
+
+	public String hola() {
+		return "MiPrimerEntity";
+	}
+
 }
