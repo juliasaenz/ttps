@@ -11,33 +11,33 @@ import jakarta.persistence.Id;
 @Component("prueba")
 public class MiPrimerEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private String data;
+    private String data;
 
-	public MiPrimerEntity() {
-	}
+    public MiPrimerEntity() {
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getData() {
-		return data;
-	}
+    public String getData() {
+        return data;
+    }
 
-	public void setData(String data) {
-		this.data = data;
-	}
+    public void setData(String data) {
+        this.data = data;
+    }
 
-	public String hola() {
-		return "MiPrimerEntity";
-	}
+    public String hola() {
+        return "MiPrimerEntity";
+    }
 
 }
