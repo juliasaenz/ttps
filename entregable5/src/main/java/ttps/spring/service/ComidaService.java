@@ -15,7 +15,7 @@ public class ComidaService {
     @Autowired
     private ComidaDAO comidaDAO;
 
-    @Transactional
+    @Transactional(rollbackFor = IllegalArgumentException.class)
     public Comida registrarComida(Comida comida) {
         if (comidaDAO.existsByNombre(comida.getNombre())) {
             throw new IllegalArgumentException("El nombre de la comida ya existe.");

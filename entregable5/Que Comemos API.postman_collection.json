@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "18288144-66be-463a-8a11-f8395dd001b2",
+		"name": "Que Comemos API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "34983272"
+	},
+	"item": [
+		{
+			"name": "Comida",
+			"item": [
+				{
+					"name": "Registrar Comida",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 201\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(201);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the required fields\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData).to.have.property('id');\r",
+									"    pm.expect(responseData).to.have.property('nombre');\r",
+									"    pm.expect(responseData).to.have.property('tipo');\r",
+									"    pm.expect(responseData).to.have.property('vegetariano');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Canelones\",\r\n  \"tipo\": \"PLATO_PRINCIPAL\",\r\n  \"vegetariano\": true\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/comidas/"
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Comida Repetida",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 500\", function () {\r",
+									"  pm.expect(pm.response.code).to.equal(500);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Canelones\",\r\n  \"tipo\": \"PLATO_PRINCIPAL\",\r\n  \"vegetariano\": false\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/comidas"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Comida",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate the response schema - id, nombre, tipo, and vegetariano fields\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.id).to.exist.and.to.be.a('number');\r",
+									"    pm.expect(responseData.nombre).to.exist.and.to.be.a('string');\r",
+									"    pm.expect(responseData.tipo).to.exist.and.to.be.a('string');\r",
+									"    pm.expect(responseData.vegetariano).to.exist.and.to.be.a('boolean');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Flan\",\r\n  \"tipo\": \"POSTRE\",\r\n  \"vegetariano\": false\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/comidas/6"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/comidas"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Vegetarianas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Schema is valid\", function () {\r",
+									"  var schema = {\r",
+									"    type: \"array\",\r",
+									"    items: {\r",
+									"      type: \"object\",\r",
+									"      properties: {\r",
+									"        id: { type: \"number\" },\r",
+									"        nombre: { type: \"string\" },\r",
+									"        tipo: { type: \"string\" },\r",
+									"        vegetariano: { type: \"boolean\" }\r",
+									"      },\r",
+									"      required: [\"id\", \"nombre\", \"tipo\", \"vegetariano\"]\r",
+									"    }\r",
+									"  };\r",
+									"\r",
+									"  var response = pm.response.json();\r",
+									"  pm.expect(tv4.validate(response, schema)).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/comidas/vegetarianas"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Menu",
+			"item": []
+		}
+	]
+}

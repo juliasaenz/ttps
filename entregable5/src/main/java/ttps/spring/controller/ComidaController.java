@@ -19,8 +19,8 @@ public class ComidaController {
 
     @PostMapping
     public ResponseEntity<Comida> registrarComida(@RequestBody Comida comida) {
-        Comida nuevaComida = comidaService.registrarComida(comida);
-        return new ResponseEntity<>(nuevaComida, HttpStatus.CREATED);
+         Comida nuevaComida = comidaService.registrarComida(comida);
+         return new ResponseEntity<>(nuevaComida, HttpStatus.CREATED);
     }
 
     @GetMapping
