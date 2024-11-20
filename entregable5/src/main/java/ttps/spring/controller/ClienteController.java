@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/clientes")
-public class ClienteController extends UsuarioController<Cliente> {
+public class ClienteController{
 
     @Autowired
     private ClienteService clienteService;

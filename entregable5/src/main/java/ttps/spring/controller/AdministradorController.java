@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/administradores")
-public class AdministradorController extends UsuarioController<Administrador> {
+public class AdministradorController{
 
     @Autowired
     private AdministradorService administradorService;

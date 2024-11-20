@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/responsables")
-public class ResponsableController extends UsuarioController<Responsable> {
+public class ResponsableController{
 
     @Autowired
     private ResponsableService responsableService;
