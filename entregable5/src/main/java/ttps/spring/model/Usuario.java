@@ -8,10 +8,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
+import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "Usuarios")
 @Inheritance(strategy = InheritanceType.JOINED) // esto va a hacer una tabla x clase y subclase
+@Component
 public abstract class Usuario {
 
     @Id
