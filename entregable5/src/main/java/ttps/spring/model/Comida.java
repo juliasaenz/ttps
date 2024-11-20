@@ -26,6 +26,10 @@ public class Comida {
 	@Column(nullable = false)
 	private TipoComida tipo;
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Column(nullable = false)
 	private boolean vegetariano;
 

@@ -40,7 +40,11 @@ public class Menu {
         return comidas;
     }
 
-    public void setComidas(List<Comida> comidas) {
+    public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setComidas(List<Comida> comidas) {
         this.comidas = comidas;
     }
 

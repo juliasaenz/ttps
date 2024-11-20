@@ -54,9 +54,9 @@ public class ClienteController {
         return new ResponseEntity<>(vegetariano, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/compras/{fecha}")
+   /*@GetMapping("/{id}/compras/{fecha}")
     public ResponseEntity<Cliente> obtenerCompraDelDia(@PathVariable Long id, @PathVariable Date fecha) {
         Cliente cliente = clienteService.getCompraDelDia(id, fecha);
         return cliente != null ? new ResponseEntity<>(cliente, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+    }*/
 }

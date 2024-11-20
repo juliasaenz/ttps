@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ttps.spring.dao.ClienteDAO;
 import ttps.spring.model.Cliente;
+import ttps.spring.model.Compra;
 
 import java.sql.Date;
 import java.util.List;
@@ -62,8 +63,9 @@ public class ClienteService {
     }
 
     @Transactional(readOnly = true)
-    public Cliente getCompraDelDia(Long clienteId, Date fecha) {
+    public Compra getCompraDelDia(Long clienteId, Date fecha) {
         Cliente cliente = clienteDAO.recuperar(clienteId);
-        return cliente != null ? cliente.getCompraDia(fecha) : null;
+        Compra compra =  cliente.getCompraDia(fecha);
+        return compra != null ? compra : null;
     }
 }
