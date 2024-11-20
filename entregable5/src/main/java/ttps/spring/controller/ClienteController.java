@@ -26,7 +26,7 @@ public class ClienteController extends UsuarioController<Cliente> {
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> actualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
         cliente.setId(id);
-        Cliente clienteActualizado = clienteService.actualizarCliente(cliente);
+        Cliente clienteActualizado = clienteService.actualizarUsuario(cliente);
         return new ResponseEntity<>(clienteActualizado, HttpStatus.OK);
     }
 

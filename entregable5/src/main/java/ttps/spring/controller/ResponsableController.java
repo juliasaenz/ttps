@@ -25,7 +25,7 @@ public class ResponsableController extends UsuarioController<Responsable> {
     @PutMapping("/{id}")
     public ResponseEntity<Responsable> actualizarResponsable(@PathVariable Long id, @RequestBody Responsable responsable) {
         responsable.setId(id);
-        Responsable responsableActualizado = responsableService.actualizarResponsable(responsable);
+        Responsable responsableActualizado = responsableService.actualizarUsuario(responsable);
         return new ResponseEntity<>(responsableActualizado, HttpStatus.OK);
     }
 

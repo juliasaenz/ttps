@@ -25,7 +25,7 @@ public class AdministradorController extends UsuarioController<Administrador> {
     @PutMapping("/{id}")
     public ResponseEntity<Administrador> actualizarAdministrador(@PathVariable Long id, @RequestBody Administrador administrador) {
         administrador.setId(id);
-        Administrador administradorActualizado = administradorService.actualizarAdministrador(administrador);
+        Administrador administradorActualizado = administradorService.actualizarUsuario(administrador);
         return new ResponseEntity<>(administradorActualizado, HttpStatus.OK);
     }
 
