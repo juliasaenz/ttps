@@ -9,7 +9,7 @@ import ttps.spring.model.Responsable;
 import java.util.List;
 
 @Service
-public class ResponsableService {
+public class ResponsableService extends UsuarioService<Responsable>{
 
     @Autowired
     private ResponsableDAO responsableDAO;

@@ -11,7 +11,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Service
-public class ClienteService {
+public class ClienteService extends UsuarioService<Cliente> {
 
     @Autowired
     private ClienteDAO clienteDAO;

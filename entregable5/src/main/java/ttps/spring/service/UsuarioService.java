@@ -9,23 +9,23 @@ import ttps.spring.model.Usuario;
 import java.util.List;
 
 @Service 
-public class UsuarioService {
+public abstract class UsuarioService<T extends Usuario> {
 
     @Autowired
-    private UsuarioDAO<Usuario> usuarioDAO;
+    private UsuarioDAO<T> usuarioDAO;
 
     @Transactional(readOnly = true)
-    public Usuario buscarPorEmail(String email) {
+    public T buscarPorEmail(String email) {
         return usuarioDAO.findByEmail(email);
     }
 
     @Transactional(readOnly = true)
-    public Usuario buscarPorDni(String dni) {
+    public T buscarPorDni(String dni) {
         return usuarioDAO.findByDni(dni);
     }
 
     @Transactional
-    public Usuario registrarUsuario(Usuario usuario) {
+    public T registrarUsuario(T usuario) {
         if (usuarioDAO.existsByEmail(usuario.getEmail())) {
             throw new IllegalArgumentException("El email ya está registrado");
         }
@@ -36,13 +36,13 @@ public class UsuarioService {
     }
 
     @Transactional
-    public Usuario actualizarUsuario(Usuario usuario) {
+    public T actualizarUsuario(T usuario) {
         return usuarioDAO.actualizar(usuario);
     }
 
     @Transactional
     public void eliminarUsuario(Long id) {
-        Usuario usuario = usuarioDAO.recuperar(id);
+        T usuario = usuarioDAO.recuperar(id);
         if (usuario != null) {
             usuarioDAO.borrar(usuario);
         } else {
@@ -51,12 +51,12 @@ public class UsuarioService {
     }
 
     @Transactional(readOnly = true)
-    public List<Usuario> listarUsuarios() {
+    public List<T> listarUsuarios() {
         return usuarioDAO.recuperarTodos("nombre");
     }
 
     @Transactional(readOnly = true)
-    public Usuario autenticarUsuario(String dni, String clave) {
+    public T autenticarUsuario(String dni, String clave) {
         return usuarioDAO.autenticar(dni, clave);
     }
 }

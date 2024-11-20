@@ -9,7 +9,7 @@ import ttps.spring.model.Administrador;
 import java.util.List;
 
 @Service
-public class AdministradorService {
+public class AdministradorService extends UsuarioService<Administrador>{
 
     @Autowired
     private AdministradorDAO administradorDAO;

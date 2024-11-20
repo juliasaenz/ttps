@@ -11,21 +11,21 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios") 
-public class UsuarioController {
+public abstract class UsuarioController<T extends Usuario> {
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioService<T> usuarioService;
 
     @PostMapping("/registrar")
-    public ResponseEntity<Usuario> registrarUsuario(@RequestBody Usuario usuario) {
-        Usuario nuevoUsuario = usuarioService.registrarUsuario(usuario);
+    public ResponseEntity<T> registrarUsuario(@RequestBody T usuario) {
+        T nuevoUsuario = usuarioService.registrarUsuario(usuario);
         return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
+    public ResponseEntity<T> actualizarUsuario(@PathVariable Long id, @RequestBody T usuario) {
         usuario.setId(id);
-        Usuario usuarioActualizado = usuarioService.actualizarUsuario(usuario);
+        T usuarioActualizado = usuarioService.actualizarUsuario(usuario);
         return new ResponseEntity<>(usuarioActualizado, HttpStatus.OK);
     }
 
@@ -36,20 +36,20 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> listarUsuarios() {
-        List<Usuario> usuarios = usuarioService.listarUsuarios();
+    public ResponseEntity<List<T>> listarUsuarios() {
+        List<T> usuarios = usuarioService.listarUsuarios();
         return new ResponseEntity<>(usuarios, HttpStatus.OK);
     }
 
     @GetMapping("/{dni}")
-    public ResponseEntity<Usuario> buscarPorDni(@PathVariable String dni) {
-        Usuario usuario = usuarioService.buscarPorDni(dni);
+    public ResponseEntity<T> buscarPorDni(@PathVariable String dni) {
+        T usuario = usuarioService.buscarPorDni(dni);
         return usuario != null ? new ResponseEntity<>(usuario, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Usuario> autenticar(@RequestParam String dni, @RequestParam String clave) {
-        Usuario usuario = usuarioService.autenticarUsuario(dni, clave);
+    public ResponseEntity<T> autenticar(@RequestParam String dni, @RequestParam String clave) {
+        T usuario = usuarioService.autenticarUsuario(dni, clave);
         return usuario != null ? new ResponseEntity<>(usuario, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 }
