@@ -14,16 +14,6 @@ public class ResponsableService extends UsuarioService<Responsable>{
     @Autowired
     private ResponsableDAO responsableDAO;
 
-    @Transactional(readOnly = true)
-    public Responsable buscarPorEmail(String email) {
-        return responsableDAO.findByEmail(email);
-    }
-
-    @Transactional(readOnly = true)
-    public Responsable buscarPorDni(String dni) {
-        return responsableDAO.findByDni(dni);
-    }
-
     @Transactional
     public Responsable registrarResponsable(Responsable responsable) {
         if (responsableDAO.existsByEmail(responsable.getEmail())) {
@@ -33,11 +23,6 @@ public class ResponsableService extends UsuarioService<Responsable>{
             throw new IllegalArgumentException("El DNI ya está registrado");
         }
         return responsableDAO.persistir(responsable);
-    }
-
-    @Transactional
-    public Responsable actualizarResponsable(Responsable responsable) {
-        return responsableDAO.actualizar(responsable);
     }
 
     @Transactional

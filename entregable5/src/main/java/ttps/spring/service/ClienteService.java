@@ -16,16 +16,6 @@ public class ClienteService extends UsuarioService<Cliente> {
     @Autowired
     private ClienteDAO clienteDAO;
 
-    @Transactional(readOnly = true)
-    public Cliente buscarPorEmail(String email) {
-        return clienteDAO.findByEmail(email);
-    }
-
-    @Transactional(readOnly = true)
-    public Cliente buscarPorDni(String dni) {
-        return clienteDAO.findByDni(dni);
-    }
-
     @Transactional
     public Cliente registrarCliente(Cliente cliente) {
         if (clienteDAO.existsByEmail(cliente.getEmail())) {
@@ -35,11 +25,6 @@ public class ClienteService extends UsuarioService<Cliente> {
             throw new IllegalArgumentException("El DNI ya está registrado");
         }
         return clienteDAO.persistir(cliente);
-    }
-
-    @Transactional
-    public Cliente actualizarCliente(Cliente cliente) {
-        return clienteDAO.actualizar(cliente);
     }
 
     @Transactional

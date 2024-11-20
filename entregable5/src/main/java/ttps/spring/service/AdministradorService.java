@@ -14,16 +14,6 @@ public class AdministradorService extends UsuarioService<Administrador>{
     @Autowired
     private AdministradorDAO administradorDAO;
 
-    @Transactional(readOnly = true)
-    public Administrador buscarPorEmail(String email) {
-        return administradorDAO.findByEmail(email);
-    }
-
-    @Transactional(readOnly = true)
-    public Administrador buscarPorDni(String dni) {
-        return administradorDAO.findByDni(dni);
-    }
-
     @Transactional
     public Administrador registrarAdministrador(Administrador administrador) {
         if (administradorDAO.existsByEmail(administrador.getEmail())) {
@@ -33,11 +23,6 @@ public class AdministradorService extends UsuarioService<Administrador>{
             throw new IllegalArgumentException("El DNI ya está registrado");
         }
         return administradorDAO.persistir(administrador);
-    }
-
-    @Transactional
-    public Administrador actualizarAdministrador(Administrador administrador) {
-        return administradorDAO.actualizar(administrador);
     }
 
     @Transactional
