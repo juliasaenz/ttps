@@ -19,7 +19,7 @@ public class MenuJPA extends GenericJPA<Menu> implements MenuDAO {
 
     @PersistenceContext
     private EntityManager entityManager;
-    
+
     @Autowired
     private ComidaDAO comidaDAO;
 
@@ -57,12 +57,12 @@ public class MenuJPA extends GenericJPA<Menu> implements MenuDAO {
             entityManager.remove(menuABorrar); // Remove the menu if it exists
         }
     }
-    
+
     private List<Comida> resolverComidas (Menu menu){
     	if (menu.getComidas().isEmpty()) {
             throw new IllegalArgumentException("Un menú debe tener al menos una comida.");
         }
-        
+
         // Validar ids de comida
         for (Comida comida : menu.getComidas()) {
             if (!comidaDAO.existe(comida.getId())) {
@@ -83,13 +83,13 @@ public class MenuJPA extends GenericJPA<Menu> implements MenuDAO {
         menu.setComidas(this.resolverComidas(menu));
         return super.persistir(menu);
     }
-    
+
     @Override
     @Transactional
     public Menu actualizar(Menu menu) {
         menu.setComidas(this.resolverComidas(menu));
         return super.actualizar(menu);
     }
-    
-    
+
+
 }

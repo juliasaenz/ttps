@@ -1,13 +1,14 @@
 package ttps.spring.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import ttps.spring.dao.SugerenciaDAO;
 import ttps.spring.model.Sugerencia;
 import ttps.spring.model.TipoSugerencia;
-
-import java.util.List;
 
 @Service
 public class SugerenciaService {

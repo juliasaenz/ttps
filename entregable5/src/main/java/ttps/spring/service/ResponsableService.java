@@ -1,12 +1,13 @@
 package ttps.spring.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import ttps.spring.dao.ResponsableDAO;
 import ttps.spring.model.Responsable;
-
-import java.util.List;
 
 @Service
 public class ResponsableService extends UsuarioService<Responsable>{

@@ -1,11 +1,10 @@
 package ttps.spring.jpa;
 
+import org.springframework.stereotype.Repository;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-
-import org.springframework.stereotype.Repository;
-
 import ttps.spring.dao.AdministradorDAO;
 import ttps.spring.model.Administrador;
 
@@ -19,7 +18,8 @@ public class AdministradorJPA extends UsuarioJPA<Administrador> implements Admin
         super(Administrador.class);
     }
 
-    public Administrador findByEmail(String email) {
+    @Override
+	public Administrador findByEmail(String email) {
         TypedQuery<Administrador> query = entityManager.createQuery(
                 "SELECT a FROM Administrador a WHERE a.email = :email", Administrador.class
         );

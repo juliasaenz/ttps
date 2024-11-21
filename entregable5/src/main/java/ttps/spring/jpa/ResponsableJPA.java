@@ -6,10 +6,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import jakarta.persistence.PersistenceContext;
-
-
+import jakarta.persistence.TypedQuery;
 import ttps.spring.dao.ResponsableDAO;
 import ttps.spring.model.Responsable;
 

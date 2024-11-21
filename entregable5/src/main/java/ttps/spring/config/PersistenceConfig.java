@@ -50,11 +50,10 @@ public class PersistenceConfig {
 		emf.setEntityManagerFactoryInterface(jakarta.persistence.EntityManagerFactory.class);
 		JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
 		emf.setJpaVendorAdapter(jpaVendorAdapter);
-		
+
 		// Hibernate properties for schema generation
         emf.setJpaPropertyMap(Map.of(
             "hibernate.hbm2ddl.auto", "update", // Auto-generate the schema (or "create" for fresh schema)
-            "hibernate.dialect", "org.hibernate.dialect.MySQLDialect", // MySQL dialect
             "hibernate.show_sql", "true", // Show generated SQL in logs (optional)
             "hibernate.format_sql", "true" // Format the generated SQL
         ));

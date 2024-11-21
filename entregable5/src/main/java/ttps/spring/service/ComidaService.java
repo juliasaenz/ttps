@@ -1,13 +1,14 @@
 package ttps.spring.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import ttps.spring.dao.ComidaDAO;
 import ttps.spring.model.Comida;
 import ttps.spring.model.TipoComida;
-
-import java.util.List;
 
 @Service
 public class ComidaService {
@@ -21,6 +22,11 @@ public class ComidaService {
             throw new IllegalArgumentException("El nombre de la comida ya existe.");
         }
         return comidaDAO.persistir(comida);
+    }
+    
+    @Transactional(readOnly = true)
+    public Comida recuperarPorNombre(String nombre) {
+    	return comidaDAO.recuperarPorNombre(nombre);
     }
 
     @Transactional(readOnly = true)

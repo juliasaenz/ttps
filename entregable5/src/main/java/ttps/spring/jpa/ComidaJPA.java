@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import ttps.spring.dao.ComidaDAO;
@@ -72,5 +73,19 @@ public class ComidaJPA extends GenericJPA<Comida> implements ComidaDAO {
             throw new IllegalArgumentException("Ya existe una comida con este nombre");
         }
         return super.persistir(comida);
+    }
+
+    @Override
+    public Comida recuperarPorNombre(String nombre) {
+        TypedQuery<Comida> query = entityManager.createQuery(
+            "SELECT c FROM Comida c WHERE c.nombre = :nombre", Comida.class
+        );
+        query.setParameter("nombre", nombre);
+        
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            throw new IllegalArgumentException("Comida not found with nombre: " + nombre);
+        }
     }
 }

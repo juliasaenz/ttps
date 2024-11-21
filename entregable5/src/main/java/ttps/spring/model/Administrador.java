@@ -1,8 +1,9 @@
 package ttps.spring.model;
 
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "Administradores")

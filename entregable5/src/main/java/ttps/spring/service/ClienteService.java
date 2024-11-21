@@ -1,14 +1,15 @@
 package ttps.spring.service;
 
+import java.sql.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import ttps.spring.dao.ClienteDAO;
 import ttps.spring.model.Cliente;
 import ttps.spring.model.Compra;
-
-import java.sql.Date;
-import java.util.List;
 
 @Service
 public class ClienteService extends UsuarioService<Cliente> {

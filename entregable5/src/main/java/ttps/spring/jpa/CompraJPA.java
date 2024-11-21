@@ -7,14 +7,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.TypedQuery;
 import jakarta.persistence.PersistenceContext;
-
-
+import jakarta.persistence.TypedQuery;
 import ttps.spring.dao.CompraDAO;
 import ttps.spring.model.Compra;
-import ttps.spring.model.Menu;
 
 @Repository
 public class CompraJPA extends GenericJPA<Compra> implements CompraDAO {

@@ -14,4 +14,6 @@ public interface ComidaDAO extends GenericDAO<Comida> {
     public boolean existsByNombre(String nombre);
 
     public boolean isComidaInMenu(Long comidaId);
+    
+    public Comida recuperarPorNombre(String nombre);
 }

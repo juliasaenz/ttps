@@ -9,8 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import ttps.spring.model.TipoComida;
-
 @Entity
 @Table(name = "Comidas")
 public class Comida {

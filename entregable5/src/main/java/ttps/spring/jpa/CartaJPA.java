@@ -22,21 +22,21 @@ public class CartaJPA extends GenericJPA<Carta> implements CartaDAO {
 
     @PersistenceContext
     private EntityManager entityManager;
-    
+
     @Autowired
     private MenuDAO menuDAO;
 
     public CartaJPA() {
         super(Carta.class);
     }
-    
+
     private Menu recuperarMenu(Menu m) {
     	if(!menuDAO.existe(m.getId())) {
     		throw new IllegalArgumentException("Menu con ID " + m.getId() + " no existe");
     	}
     	return menuDAO.recuperar(m.getId());
     }
-    
+
     @Override
     @Transactional
     public Carta persistir(Carta carta) {
