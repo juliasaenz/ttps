@@ -2,22 +2,26 @@ package ttps.spring.jpa;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import jakarta.persistence.PersistenceContext;
-
-
+import jakarta.persistence.TypedQuery;
+import ttps.spring.dao.ComidaDAO;
 import ttps.spring.dao.MenuDAO;
+import ttps.spring.model.Comida;
 import ttps.spring.model.Menu;
 
 @Repository
 public class MenuJPA extends GenericJPA<Menu> implements MenuDAO {
 
     @PersistenceContext
-    private EntityManager entityManager; // Spring injects the EntityManager
+    private EntityManager entityManager;
+    
+    @Autowired
+    private ComidaDAO comidaDAO;
 
     public MenuJPA() {
         super(Menu.class);
@@ -53,13 +57,39 @@ public class MenuJPA extends GenericJPA<Menu> implements MenuDAO {
             entityManager.remove(menuABorrar); // Remove the menu if it exists
         }
     }
+    
+    private List<Comida> resolverComidas (Menu menu){
+    	if (menu.getComidas().isEmpty()) {
+            throw new IllegalArgumentException("Un menú debe tener al menos una comida.");
+        }
+        
+        // Validar ids de comida
+        for (Comida comida : menu.getComidas()) {
+            if (!comidaDAO.existe(comida.getId())) {
+                throw new IllegalArgumentException("Comida con ID " + comida.getId() + " no existe");
+            }
+        }
+
+        return menu.getComidas().stream()
+        	    .map(comida -> {
+        	        return comidaDAO.recuperar(comida.getId());
+        	    })
+        	    .toList();
+    }
 
     @Override
     @Transactional
     public Menu persistir(Menu menu) {
-        if (menu.getComidas().isEmpty()) {
-            throw new IllegalArgumentException("Un menú debe tener al menos una comida.");
-        }
-        return super.persistir(menu); // Persist the menu using the superclass method
+        menu.setComidas(this.resolverComidas(menu));
+        return super.persistir(menu);
     }
+    
+    @Override
+    @Transactional
+    public Menu actualizar(Menu menu) {
+        menu.setComidas(this.resolverComidas(menu));
+        return super.actualizar(menu);
+    }
+    
+    
 }

@@ -30,8 +30,8 @@ public class MenuService {
     }
 
     @Transactional
-    public void actualizarMenu(Menu menu) {
-        menuDAO.actualizar(menu);
+    public Menu actualizarMenu(Menu menu) {
+        return menuDAO.actualizar(menu);
     }
 
     @Transactional

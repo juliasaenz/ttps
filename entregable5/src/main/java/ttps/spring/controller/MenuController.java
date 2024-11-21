@@ -35,10 +35,10 @@ public class MenuController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> actualizarMenu(@PathVariable Long id, @RequestBody Menu menu) {
+    public ResponseEntity<Menu> actualizarMenu(@PathVariable Long id, @RequestBody Menu menu) {
         menu.setId(id);
-        menuService.actualizarMenu(menu);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        Menu m = menuService.actualizarMenu(menu);
+        return new ResponseEntity<>(m, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
