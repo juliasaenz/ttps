@@ -5,14 +5,15 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import ttps.spring.dao.CartaDAO;
+import ttps.spring.dao.MenuDAO;
 import ttps.spring.model.Carta;
 import ttps.spring.model.Menu;
 
@@ -21,15 +22,38 @@ public class CartaJPA extends GenericJPA<Carta> implements CartaDAO {
 
     @PersistenceContext
     private EntityManager entityManager;
+    
+    @Autowired
+    private MenuDAO menuDAO;
 
     public CartaJPA() {
         super(Carta.class);
     }
+    
+    private Menu recuperarMenu(Menu m) {
+    	if(!menuDAO.existe(m.getId())) {
+    		throw new IllegalArgumentException("Menu con ID " + m.getId() + " no existe");
+    	}
+    	return menuDAO.recuperar(m.getId());
+    }
+    
+    @Override
+    @Transactional
+    public Carta persistir(Carta carta) {
+    	if (carta.getMenu() == null || carta.getMenuVeggie() == null) {
+            throw new IllegalArgumentException("Una carta debe tener un menú regular y uno vegetariano.");
+        }
+    	carta.setMenu(this.recuperarMenu(carta.getMenu()));
+    	carta.setMenusVeggie(this.recuperarMenu(carta.getMenuVeggie()));
+    	return super.persistir(carta);
+    }
 
     @Override
     @Transactional
-    public Carta actualizar(Carta entity) {
-        return entityManager.merge(entity);
+    public Carta actualizar(Carta carta) {
+    	carta.setMenu(this.recuperarMenu(carta.getMenu()));
+    	carta.setMenusVeggie(this.recuperarMenu(carta.getMenuVeggie()));
+        return entityManager.merge(carta);
     }
 
     @Override

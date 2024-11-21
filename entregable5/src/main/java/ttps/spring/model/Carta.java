@@ -22,7 +22,7 @@ public class Carta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private LocalDate dia;
 
     @ManyToOne(cascade = CascadeType.MERGE)
