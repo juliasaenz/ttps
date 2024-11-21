@@ -1,58 +1,29 @@
 package ttps.spring.controller;
 
-import java.util.List;
+import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ttps.spring.model.Cliente;
+import ttps.spring.model.Compra;
 import ttps.spring.service.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
-public class ClienteController{
+public class ClienteController extends UsuarioController<Cliente>{
 
     @Autowired
-    private ClienteService clienteService;
+    private final ClienteService clienteService;
 
-    @PostMapping("/registrar")
-    public ResponseEntity<Cliente> registrarCliente(@RequestBody Cliente cliente) {
-        Cliente nuevoCliente = clienteService.registrarCliente(cliente);
-        return new ResponseEntity<>(nuevoCliente, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Cliente> actualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
-        cliente.setId(id);
-        Cliente clienteActualizado = clienteService.actualizarUsuario(cliente);
-        return new ResponseEntity<>(clienteActualizado, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarCliente(@PathVariable Long id) {
-        clienteService.eliminarCliente(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Cliente>> listarClientes() {
-        List<Cliente> clientes = clienteService.listarClientes();
-        return new ResponseEntity<>(clientes, HttpStatus.OK);
-    }
-
-    @GetMapping("/{dni}")
-    public ResponseEntity<Cliente> buscarPorDni(@PathVariable String dni) {
-        Cliente cliente = clienteService.buscarPorDni(dni);
-        return cliente != null ? new ResponseEntity<>(cliente, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ClienteController(ClienteService clienteService) {
+        super(clienteService);
+        this.clienteService = clienteService;
     }
 
     @GetMapping("/{id}/vegetariano")
@@ -61,9 +32,9 @@ public class ClienteController{
         return new ResponseEntity<>(vegetariano, HttpStatus.OK);
     }
 
-   /*@GetMapping("/{id}/compras/{fecha}")
-    public ResponseEntity<Cliente> obtenerCompraDelDia(@PathVariable Long id, @PathVariable Date fecha) {
-        Cliente cliente = clienteService.getCompraDelDia(id, fecha);
-        return cliente != null ? new ResponseEntity<>(cliente, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }*/
+   @GetMapping("/{id}/compras/{fecha}")
+    public ResponseEntity<Compra> obtenerCompraDelDia(@PathVariable Long id, @PathVariable Date fecha) {
+        Compra compra = clienteService.getCompraDelDia(id, fecha);
+        return compra != null ? new ResponseEntity<>(compra, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }

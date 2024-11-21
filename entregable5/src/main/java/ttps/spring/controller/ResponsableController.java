@@ -19,40 +19,14 @@ import ttps.spring.service.ResponsableService;
 
 @RestController
 @RequestMapping("/responsables")
-public class ResponsableController{
+public class ResponsableController extends UsuarioController<Responsable>{
 
     @Autowired
-    private ResponsableService responsableService;
-
-    @PostMapping("/registrar")
-    public ResponseEntity<Responsable> registrarResponsable(@RequestBody Responsable responsable) {
-        Responsable nuevoResponsable = responsableService.registrarResponsable(responsable);
-        return new ResponseEntity<>(nuevoResponsable, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Responsable> actualizarResponsable(@PathVariable Long id, @RequestBody Responsable responsable) {
-        responsable.setId(id);
-        Responsable responsableActualizado = responsableService.actualizarUsuario(responsable);
-        return new ResponseEntity<>(responsableActualizado, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarResponsable(@PathVariable Long id) {
-        responsableService.eliminarResponsable(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Responsable>> listarResponsables() {
-        List<Responsable> responsables = responsableService.listarResponsables();
-        return new ResponseEntity<>(responsables, HttpStatus.OK);
-    }
-
-    @GetMapping("/{dni}")
-    public ResponseEntity<Responsable> buscarPorDni(@PathVariable String dni) {
-        Responsable responsable = responsableService.buscarPorDni(dni);
-        return responsable != null ? new ResponseEntity<>(responsable, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    private final ResponsableService responsableService;
+    
+    public ResponsableController(ResponsableService responsableService) {
+    	super(responsableService);
+    	this.responsableService = responsableService;
     }
 
     @GetMapping("/turno/{turno}")
