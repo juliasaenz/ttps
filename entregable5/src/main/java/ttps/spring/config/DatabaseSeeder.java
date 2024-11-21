@@ -43,12 +43,19 @@ public class DatabaseSeeder {
             comida5 = getOrCreateComida(comida5);
             
             Menu menu = new Menu();
-            menu.setComidas(List.of(comida1, comida2, comida3)); 
+            menu.setComidas(List.of(comida1, comida3, comida4)); 
+            menu.setPrecio(500);
             menu = menuService.registrarMenu(menu);  
             
             Menu menuVeggie = new Menu();
-            menuVeggie.setComidas(List.of(comida3, comida5)); 
+            menuVeggie.setComidas(List.of(comida2, comida5)); 
+            menuVeggie.setPrecio(500);
             menuVeggie = menuService.registrarMenu(menuVeggie); 
+            
+            Menu menu3 = new Menu();
+            menu3.setComidas(List.of(comida1, comida3, comida5, comida4)); 
+            menu3.setPrecio(500);
+            menu3 = menuService.registrarMenu(menu3); 
             
             Carta carta = new Carta(LocalDate.now());
             carta.setMenu(menu);
@@ -61,10 +68,11 @@ public class DatabaseSeeder {
     }
 
     private Comida getOrCreateComida(Comida comida) {
-        try {
-            return comidaService.recuperarPorNombre(comida.getNombre());
-        } catch (IllegalArgumentException e) {
+        if (!comidaService.existeComidaPorNombre(comida.getNombre())) {
             return comidaService.registrarComida(comida);
+        } else {
+            return comidaService.recuperarPorNombre(comida.getNombre());
         }
     }
+
 }
