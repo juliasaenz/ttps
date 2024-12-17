@@ -1,1 +1,55 @@
-<p>responsable works!</p>
+<div class="form-container">
+    <h2>Registro de Responsable</h2>
+  
+    <form [formGroup]="responsableForm" (ngSubmit)="onSubmit()">
+      <!-- Apellido -->
+      <label for="apellido">Apellido:</label>
+      <input id="apellido" type="text" formControlName="apellido" />
+      <div *ngIf="responsableForm.get('apellido')?.invalid && responsableForm.get('apellido')?.touched">
+        <small>El apellido es obligatorio y no debe exceder 50 caracteres.</small>
+      </div>
+  
+      <!-- Nombre -->
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" type="text" formControlName="nombre" />
+      <div *ngIf="responsableForm.get('nombre')?.invalid && responsableForm.get('nombre')?.touched">
+        <small>El nombre es obligatorio y no debe exceder 50 caracteres.</small>
+      </div>
+  
+      <!-- DNI -->
+      <label for="dni">DNI:</label>
+      <input id="dni" type="text" formControlName="dni" />
+      <div *ngIf="responsableForm.get('dni')?.invalid && responsableForm.get('dni')?.touched">
+        <small>El DNI es obligatorio y debe tener entre 7 y 8 dígitos.</small>
+      </div>
+  
+      <!-- Email -->
+      <label for="email">Email:</label>
+      <input id="email" type="email" formControlName="email" />
+      <div *ngIf="responsableForm.get('email')?.invalid && responsableForm.get('email')?.touched">
+        <small>Ingrese un email válido.</small>
+      </div>
+  
+      <!-- Clave -->
+      <label for="clave">Clave:</label>
+      <input id="clave" type="password" formControlName="clave" />
+      <div *ngIf="responsableForm.get('clave')?.invalid && responsableForm.get('clave')?.touched">
+        <small>La clave es obligatoria y debe tener al menos 4 caracteres.</small>
+      </div>
+
+  
+      <!-- Turno -->
+      <label for="turno">Turno:</label>
+      <select id="turno" formControlName="turno">
+        <option value="mañana">Mañana</option>
+        <option value="tarde">Tarde</option>
+      </select>
+      <div *ngIf="responsableForm.get('turno')?.invalid && responsableForm.get('turno')?.touched">
+        <small>Debe seleccionar un turno.</small>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="responsableForm.invalid" class="btn">Registrarse</button>
+    </form>
+  </div>
+  

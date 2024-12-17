@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   standalone: true, // Standalone component
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './cliente.component.html',
-  styleUrls: ['./cliente.component.css']
+  styleUrls: ['../registro.component.css']
 })
 export class ClienteRegisterComponent {
   clienteForm: FormGroup;
