@@ -1,0 +1,39 @@
+<header class="header">
+    <div class="logo">
+        <a routerLink="/" class="nav-link">
+            <h3>¿Qué Comemos?</h3>
+        </a>
+    </div>
+    <nav class="navbar">
+        <!-- Si no está logeado -->
+        <ng-container *ngIf="!isLoggedIn">
+            <a routerLink="/auth/login" class="nav-link">
+                <i class="fas fa-sign-in-alt"></i>
+                Iniciar Sesión</a>
+
+            <a routerLink="/registro" class="nav-link"> <i class="fas fa-user-plus"></i>
+                Registrarse</a>
+        </ng-container>
+
+        <!-- Si está logeado -->
+        <ng-container *ngIf="isLoggedIn">
+
+
+            <!-- Tabs para admin/responsable -->
+            <ng-container *ngIf="userRole === 'admin' || userRole === 'responsable'">
+                <a routerLink="/comidas" class="nav-link">
+                    <i class="fa-solid fa-burger"></i> Comidas</a>
+                <a routerLink="/menu" class="nav-link">
+                    <i class="fa-solid fa-utensils"></i>
+                    Menu</a>
+                <a routerLink="/carta" class="nav-link">
+                    <i class="fa-regular fa-calendar"></i>
+                    Carta</a>
+            </ng-container>
+
+            <a routerLink="/profile" class="nav-link"> <i class="fas fa-user"></i> Perfil</a>
+            <a routerLink="/logout" class="nav-link"> <i class="fas fa-sign-out-alt"></i> Cerrar
+                Sesión</a>
+        </ng-container>
+    </nav>
+</header>
