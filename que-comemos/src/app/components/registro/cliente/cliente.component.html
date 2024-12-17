@@ -1,1 +1,50 @@
-<p>cliente works!</p>
+<div class="form-container">
+    <h2>Registro de Cliente</h2>
+  
+    <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+      <!-- Apellido -->
+      <label for="apellido">Apellido:</label>
+      <input id="apellido" type="text" formControlName="apellido" />
+      <div *ngIf="clienteForm.get('apellido')?.invalid && clienteForm.get('apellido')?.touched">
+        <small>El apellido es obligatorio y no debe exceder 50 caracteres.</small>
+      </div>
+  
+      <!-- Nombre -->
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" type="text" formControlName="nombre" />
+      <div *ngIf="clienteForm.get('nombre')?.invalid && clienteForm.get('nombre')?.touched">
+        <small>El nombre es obligatorio y no debe exceder 50 caracteres.</small>
+      </div>
+  
+      <!-- DNI -->
+      <label for="dni">DNI:</label>
+      <input id="dni" type="text" formControlName="dni" />
+      <div *ngIf="clienteForm.get('dni')?.invalid && clienteForm.get('dni')?.touched">
+        <small>El DNI es obligatorio y debe tener entre 7 y 8 dígitos.</small>
+      </div>
+  
+      <!-- Email -->
+      <label for="email">Email:</label>
+      <input id="email" type="email" formControlName="email" />
+      <div *ngIf="clienteForm.get('email')?.invalid && clienteForm.get('email')?.touched">
+        <small>Ingrese un email válido.</small>
+      </div>
+  
+      <!-- Clave -->
+      <label for="clave">Clave:</label>
+      <input id="clave" type="password" formControlName="clave" />
+      <div *ngIf="clienteForm.get('clave')?.invalid && clienteForm.get('clave')?.touched">
+        <small>La clave es obligatoria y debe tener al menos 4 caracteres.</small>
+      </div>
+  
+      <!-- Vegetariano -->
+      <label for="vegetariano">
+        <input id="vegetariano" type="checkbox" formControlName="vegetariano" />
+        Vegetariano
+      </label>
+  
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="clienteForm.invalid" class="btn">Registrarse</button>
+    </form>
+  </div>
+  
