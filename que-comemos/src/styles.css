@@ -31,9 +31,9 @@ html, body {
 /* Centering the content vertically and horizontally */
 .centered {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 /* Simple typography */
@@ -63,7 +63,7 @@ p {
 button,
 .btn {
   padding: 10px 20px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 600;
   border: none;
   border-radius: 5px;
