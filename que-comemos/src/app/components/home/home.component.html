@@ -3,9 +3,12 @@
     <h2 class="title">Bienvenido a ¿Qué Comemos?</h2>
     <h3 class="subtitle">El buffet de la Facultad de Informática</h3>
   
+    <ng-container *ngIf="!isLoggedIn">
     <div class="auth-buttons">
       <button (click)="goToRegistro()" class="btn">Registrarse</button>
+      <button (click)="goToLogin()" class="btn">Iniciar Sesión</button>
     </div>
+  </ng-container>
 
     <!-- Fun animation and background image -->
     <div class="image-container">

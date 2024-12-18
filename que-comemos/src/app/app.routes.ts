@@ -6,6 +6,7 @@ import { ClienteRegisterComponent } from './components/registro/cliente/cliente.
 import { AdminRegisterComponent } from './components/registro/admin/admin.component';
 import { ResponsableRegisterComponent } from './components/registro/responsable/responsable.component';
 import { ExitoComponent } from './components/registro/exito/exito.component';
+import { LoginComponent } from './components/login/login.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,5 +14,7 @@ export const routes: Routes = [
   { path: 'registro/cliente', component: ClienteRegisterComponent },
   { path: 'registro/responsable', component: ResponsableRegisterComponent },
   { path: 'registro/admin', component: AdminRegisterComponent },
-  { path: 'registro/exito', component: ExitoComponent}
+  { path: 'registro/exito', component: ExitoComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '**', pathMatch: 'full', redirectTo: '' },
 ];
