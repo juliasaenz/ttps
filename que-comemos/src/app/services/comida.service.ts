@@ -35,4 +35,13 @@ export class ComidaService {
       })
     );
   }
+
+  editarComidas(comida: Comida): Observable<Comida> {
+    return this.http.put<Comida>(`${this.apiUrl}/${comida.id}`, comida, httpOptions).pipe(
+      catchError(() => {
+        return of(comida);
+      })
+    );
+  }
 }
+

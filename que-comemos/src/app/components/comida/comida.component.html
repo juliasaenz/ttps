@@ -1,4 +1,4 @@
-<div class="container centered ">
+<div class="container centered">
   <h2>Comidas</h2>
 
   <div class="comidas-container">
@@ -18,7 +18,7 @@
           <td>{{ comida.tipo }}</td>
           <td>{{ comida.vegetariano ? "Si" : "No" }}</td>
           <td>
-            <button class="btn" (click)="editComida(comida)"> Editar </button>
+            <button class="btn" (click)="openEditPopup(comida)">Editar</button>
           </td>
         </tr>
       </tbody>
@@ -53,14 +53,13 @@
 
         <div class="form-group">
           <label>
-           
             Vegetariana
             <input
-            type="checkbox"
-            name="vegetariano"
-            [(ngModel)]="newComida.vegetariano"
-            style="width: 40px;"
-          />
+              type="checkbox"
+              name="vegetariano"
+              [(ngModel)]="newComida.vegetariano"
+              style="width: 40px"
+            />
           </label>
         </div>
 
@@ -69,5 +68,59 @@
         </button>
       </form>
     </div>
+  </div>
+</div>
+
+<!-- Edit Popup -->
+<div class="popup" *ngIf="isEditPopupVisible">
+  <div class="popup-content">
+    <h3>Editar Comida</h3>
+    <form #editForm="ngForm" (ngSubmit)="confirmEdit()">
+      <div class="form-group">
+        <label for="edit-nombre">Nombre</label>
+        <input
+          type="text"
+          id="edit-nombre"
+          [(ngModel)]="editableComida.nombre"
+          name="nombre"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="edit-tipo">Tipo</label>
+        <select
+          id="edit-tipo"
+          [(ngModel)]="editableComida.tipo"
+          name="tipo"
+          required
+        >
+          <option value="" disabled selected>Elegir tipo</option>
+          <option value="ENTRADA">Entrada</option>
+          <option value="PLATO_PRINCIPAL">Plato Principal</option>
+          <option value="BEBIDA">Bebida</option>
+          <option value="POSTRE">Postre</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>
+          Vegetariana
+          <input
+            type="checkbox"
+            [(ngModel)]="editableComida.vegetariano"
+            name="vegetariano"
+            style="width: 40px"
+          />
+        </label>
+      </div>
+
+      <button type="submit" class="btn" [disabled]="!editForm.form.valid">
+        Confirmar
+      </button>
+      <button type="button" class="btn btn-cancel" (click)="closeEditPopup()">
+        Cancelar
+      </button>
+    </form>
   </div>
 </div>

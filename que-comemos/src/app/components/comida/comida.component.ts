@@ -8,19 +8,25 @@ import { ComidaService } from '../../services/comida.service';
   selector: 'app-comidas',
   imports: [CommonModule, FormsModule],
   templateUrl: './comida.component.html',
-  styleUrls: ['./comida.component.css']
+  styleUrls: ['./comida.component.css'],
 })
-  
 export class ComidaComponent implements OnInit {
   comidas: Comida[] = [];
   newComida: Comida = {
     nombre: '',
     tipo: null,
-    vegetariano: false
+    vegetariano: false,
   };
   private errorMessage = '';
 
-  constructor(private comidaService: ComidaService) { }
+  isEditPopupVisible = false;
+  editableComida: Comida = {
+    nombre: '',
+    tipo: null,
+    vegetariano: false,
+  };
+
+  constructor(private comidaService: ComidaService) {}
 
   ngOnInit(): void {
     this.getComidas();
@@ -32,20 +38,26 @@ export class ComidaComponent implements OnInit {
     });
   }
 
-  addComida() {
-    const isNameUnique = !this.comidas.find(
-      comida => comida.nombre.toLowerCase() === this.newComida.nombre.toLowerCase()
+  private isNameUnique(comida: Comida): boolean {
+    return !this.comidas.find(
+      (existingComida) =>
+        existingComida.id !== comida.id &&
+        existingComida.nombre.toLowerCase() === comida.nombre.toLowerCase()
     );
+  }
 
-    if (isNameUnique) {
-      const nombreFormatted = this.newComida.nombre.charAt(0).toUpperCase() + this.newComida.nombre.slice(1).toLowerCase();
+  addComida() {
+    if (this.isNameUnique(this.newComida)) {
+      const nombreFormatted =
+        this.newComida.nombre.charAt(0).toUpperCase() +
+        this.newComida.nombre.slice(1).toLowerCase();
       this.newComida.nombre = nombreFormatted;
       this.comidaService.addComidas(this.newComida).subscribe(
-        response => {
+        (response) => {
           this.comidas.push(response);
           this.newComida = { nombre: '', tipo: null, vegetariano: false };
         },
-        error => {
+        (error) => {
           this.errorMessage = 'Hubo un error al agregar la comida';
           console.error('Error agregando comida:', error);
           alert(this.errorMessage);
@@ -57,9 +69,41 @@ export class ComidaComponent implements OnInit {
     }
   }
 
-  //TODO: Hacer funcionar
-  editComida(comida: Comida) {
-    console.log(comida);
+  openEditPopup(comida: Comida) {
+    this.isEditPopupVisible = true;
+    this.editableComida = { ...comida };
+  }
+
+  closeEditPopup() {
+    this.isEditPopupVisible = false;
+    this.editableComida = { nombre: '', tipo: null, vegetariano: false };
+  }
+
+  confirmEdit() {
+    if (!this.editableComida.nombre || !this.editableComida.tipo) {
+      alert('Por favor completa todos los campos');
+      return;
+    }
+
+    if (!this.isNameUnique(this.editableComida)) {
+      alert('Ya existe una comida con ese nombre');
+      return;
+    }
+
+    this.comidaService.editarComidas(this.editableComida).subscribe(
+      (updatedComida) => {
+        const index = this.comidas.findIndex(
+          (c) => c.nombre === updatedComida.nombre
+        );
+        if (index !== -1) {
+          this.comidas[index] = updatedComida;
+        }
+        this.closeEditPopup();
+      },
+      (error) => {
+        alert('Error al actualizar la comida');
+        console.error(error);
+      }
+    );
   }
 }
-

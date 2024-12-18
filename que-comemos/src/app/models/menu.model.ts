@@ -1,5 +1,6 @@
 import { Comida } from './comida.model';
 export interface Menu {
+  id?: number;
   entrada?: Comida | null;
   platoPrincipal: Comida | null;
   bebida?: Comida | null;

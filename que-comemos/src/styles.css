@@ -1,4 +1,4 @@
-/* Reset some default styles */
+
 *,
 *::before,
 *::after {
@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
-/* Set a clean background color and text color */
+
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f4f7fa;
@@ -15,12 +15,12 @@ body {
   line-height: 1.6;
 }
 
-/* Full-screen container */
+
 html, body {
   height: 100%;
 }
 
-/* Basic container with some padding */
+
 .container {
   width: 100%;
   max-width: 1200px;
@@ -28,7 +28,7 @@ html, body {
   padding: 20px;
 }
 
-/* Centering the content vertically and horizontally */
+
 .centered {
   display: flex;
   flex-direction: column;
@@ -36,7 +36,7 @@ html, body {
   align-items: center;
 }
 
-/* Simple typography */
+
 h1, h2, h3, h4 {
   font-family: 'Roboto', sans-serif;
   font-weight: 600;
@@ -231,3 +231,74 @@ select:focus {
     padding: 10px;
   }
 }
+
+/* popup */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  max-width: 90%; 
+  text-align: center;
+}
+
+.popup-content h3 {
+  margin: 0 0 20px;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.popup-content .form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.popup-content label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.popup-content input,
+.popup-content select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Buttons */
+.popup-content .btn {
+  margin: 10px 5px 0;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.popup-content .btn:hover {
+  opacity: 0.9;
+}
+
+.popup-content .btn[type="submit"] {
+  background-color: #20af41; /* Green */
+  color: #fff;
+}
+
