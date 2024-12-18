@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
   /* TODO: Hacer esto funcional a partir de JWT y roles*/
-  isLoggedIn = false;
+  isLoggedIn = true;
 
   userRole: 'cliente' | 'admin' | 'responsable' = "admin";
 }

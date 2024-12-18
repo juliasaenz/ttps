@@ -7,6 +7,7 @@ import { AdminRegisterComponent } from './components/registro/admin/admin.compon
 import { ResponsableRegisterComponent } from './components/registro/responsable/responsable.component';
 import { ExitoComponent } from './components/registro/exito/exito.component';
 import { LoginComponent } from './components/login/login.component';
+import { ComidaComponent } from './components/comida/comida.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,5 +17,6 @@ export const routes: Routes = [
   { path: 'registro/admin', component: AdminRegisterComponent },
   { path: 'registro/exito', component: ExitoComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'comidas', component: ComidaComponent },
   { path: '**', pathMatch: 'full', redirectTo: '' },
 ];
