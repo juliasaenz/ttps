@@ -9,6 +9,7 @@ import { ExitoComponent } from './components/registro/exito/exito.component';
 import { LoginComponent } from './components/login/login.component';
 import { ComidaComponent } from './components/comida/comida.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { CartaComponent } from './components/carta/carta.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,5 +21,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'comidas', component: ComidaComponent },
   { path: 'menu', component: MenuComponent },
+  { path: 'carta', component: CartaComponent},
   { path: '**', pathMatch: 'full', redirectTo: '' },
 ];
