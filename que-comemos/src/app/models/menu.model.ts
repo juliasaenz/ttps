@@ -7,5 +7,5 @@ export interface Menu {
   postre?: Comida | null;
   comidas? : Comida[];
   precio: number;
-  vegetariano: boolean;
+  vegetariano?: boolean;
 }

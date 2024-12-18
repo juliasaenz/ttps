@@ -13,28 +13,21 @@ import { ComidaService } from '../../services/comida.service';
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent implements OnInit {
-  //TODO: traer las comidas de la api
-  comidas: Comida[] = [];
-  comidasEntradas: Comida[] = [];
-  comidasPlatosPrincipales: Comida[] = [];
-  comidasPostres: Comida[] = [];
-  comidasBebidas: Comida[] = [];
+  entradas: Comida[] = [];
+  platosPrincipales: Comida[] = [];
+  postres: Comida[] = [];
+  bebidas: Comida[] = [];
   menus: Menu[] = [];
 
-  // Nuevo menú
-  newMenu: Menu = {
-    entrada: null,
-    platoPrincipal: null,
-    bebida: null,
-    postre: null,
-    precio: 0,
-    vegetariano: false,
-  };
+  isEditPopupVisible = false;
+
+  editableMenu: Menu = this.resetMenu();
+  newMenu: Menu = this.resetMenu();
 
   constructor(
     private menuService: MenuService,
     private comidaService: ComidaService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getComidas();
@@ -43,16 +36,10 @@ export class MenuComponent implements OnInit {
 
   private getComidas(): void {
     this.comidaService.getComidas().subscribe((data: Comida[]) => {
-      this.comidas = data;
-
-      console.log('Comidas:', this.comidas);
-
-      this.comidasEntradas = this.comidas.filter((c) => c.tipo === 'ENTRADA');
-      this.comidasPlatosPrincipales = this.comidas.filter(
-        (c) => c.tipo === 'PLATO_PRINCIPAL'
-      );
-      this.comidasPostres = this.comidas.filter((c) => c.tipo === 'POSTRE');
-      this.comidasBebidas = this.comidas.filter((c) => c.tipo === 'BEBIDA');
+      this.entradas = data.filter((c) => c.tipo === 'ENTRADA');
+      this.platosPrincipales = data.filter((c) => c.tipo === 'PLATO_PRINCIPAL');
+      this.postres = data.filter((c) => c.tipo === 'POSTRE');
+      this.bebidas = data.filter((c) => c.tipo === 'BEBIDA');
     });
   }
 
@@ -65,7 +52,6 @@ export class MenuComponent implements OnInit {
   addMenu() {
     if (this.newMenu.platoPrincipal && this.newMenu.precio > 0) {
       this.menuService.addMenu(this.newMenu).subscribe((addedMenu) => {
-        console.log('Menu added:', addedMenu);
         this.menus.push(this.parseMenuAdded(addedMenu));
         this.resetNewMenu();
       });
@@ -78,7 +64,8 @@ export class MenuComponent implements OnInit {
     return {
       id: menu.id,
       entrada: menu.entrada ?? null,
-      platoPrincipal: menu.comidas?.find((c) => c.tipo === 'PLATO_PRINCIPAL') ?? null,
+      platoPrincipal:
+        menu.comidas?.find((c) => c.tipo === 'PLATO_PRINCIPAL') ?? null,
       bebida: menu.comidas?.find((c) => c.tipo === 'BEBIDA') ?? null,
       postre: menu.comidas?.find((c) => c.tipo === 'POSTRE') ?? null,
       precio: menu.precio,
@@ -86,21 +73,57 @@ export class MenuComponent implements OnInit {
     };
   }
 
-  //TODO: Hacer el editar
-  editMenu(menu: Menu) {
-    console.log(menu);
-    // Lógica para editar el menú
+  resetNewMenu() {
+    this.newMenu = this.resetMenu();
   }
 
-  // Resetar formulario
-  resetNewMenu() {
-    this.newMenu = {
+  openEditPopup(menu: Menu) {
+    this.editableMenu = {
+      id: menu.id,
+      entrada: this.entradas.find(c => c.id === menu.entrada?.id) || null,
+      platoPrincipal: this.platosPrincipales.find(c => c.id === menu.platoPrincipal?.id) || null,
+      bebida: this.bebidas.find(c => c.id === menu.bebida?.id) || null,
+      postre: this.postres.find(c => c.id === menu.postre?.id) || null,
+      precio: menu.precio,
+      vegetariano: menu.vegetariano
+    };
+    this.isEditPopupVisible = true;
+
+    console.log("Editable menu:", this.editableMenu);
+  }
+
+  closeEditPopup() {
+    this.isEditPopupVisible = false;
+    this.editableMenu = this.resetMenu();
+  }
+
+  confirmEdit() {
+    if (!this.editableMenu.platoPrincipal && this.editableMenu.precio > 0) {
+      alert('El plato principal y el precio son obligatorios.');
+    }
+
+    this.menuService.editarMenus(this.editableMenu).subscribe(
+      (updatedMenu) => {
+        const index = this.menus.findIndex((c) => c.id === updatedMenu.id);
+        if (index !== -1) {
+          this.menus[index] = this.parseMenuAdded(updatedMenu);
+        }
+        this.closeEditPopup();
+      },
+      (error) => {
+        console.log(error);
+        alert('Error al actualizar el menu');
+      }
+    );
+  }
+
+  private resetMenu() {
+    return {
       entrada: null,
       platoPrincipal: null,
       bebida: null,
       postre: null,
       precio: 0,
-      vegetariano: false,
     };
   }
 }

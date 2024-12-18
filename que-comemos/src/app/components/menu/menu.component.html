@@ -1,106 +1,190 @@
 <div class="container centered">
-    <h2>Menús</h2>
-  
-    <div class="menu-container">
-      <!-- Tabla -->
-      <table>
-        <thead>
-          <tr>
-            <th>Entrada</th>
-            <th>Plato Principal</th>
-            <th>Bebida</th>
-            <th>Postre</th>
-            <th>Precio</th>
-            <th>Vegetariano</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let menu of menus">
-            <td>{{ menu.entrada?.nombre || '-' }}</td>
-            <td>{{ menu.platoPrincipal?.nombre }}</td>
-            <td>{{ menu.bebida?.nombre || '-' }}</td>
-            <td>{{ menu.postre?.nombre || '-' }}</td>
-            <td>{{ menu.precio }}</td>
-            <td>{{ menu.vegetariano ? 'Si' : 'No' }}</td>
-            <td>
-              <button class="btn" (click)="editMenu(menu)"> Editar </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-  
-      <!-- Form -->
-      <div class="form-container">
-        <h3>Agregar Menú</h3>
-        <form (ngSubmit)="addMenu()" #menuForm="ngForm">
-          <!-- Entrada -->
-          <div class="form-group">
-            <label for="entrada">Entrada</label>
-            <select id="entrada" name="entrada" [(ngModel)]="newMenu.entrada">
-              <option value="" disabled selected>Elegir entrada</option>
-              <option *ngFor="let comida of comidasEntradas" [ngValue]="comida">
-                {{ comida.nombre }}
-              </option>
-            </select>
-          </div>
-  
-          <!-- Plato Principal -->
-          <div class="form-group">
-            <label for="platoPrincipal">Plato Principal</label>
-            <select
-              id="platoPrincipal"
-              name="platoPrincipal"
-              [(ngModel)]="newMenu.platoPrincipal"
-              required
+  <h2>Menús</h2>
+
+  <div class="menu-container">
+    <!-- Tabla -->
+    <table>
+      <thead>
+        <tr>
+          <th>Entrada</th>
+          <th>Plato Principal</th>
+          <th>Bebida</th>
+          <th>Postre</th>
+          <th>Precio</th>
+          <th>Vegetariano</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let menu of menus">
+          <td>{{ menu.entrada?.nombre || "-" }}</td>
+          <td>{{ menu.platoPrincipal?.nombre }}</td>
+          <td>{{ menu.bebida?.nombre || "-" }}</td>
+          <td>{{ menu.postre?.nombre || "-" }}</td>
+          <td>{{ menu.precio }}</td>
+          <td>{{ menu.vegetariano ? "Si" : "No" }}</td>
+          <td>
+            <button class="btn" (click)="openEditPopup(menu)">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Form -->
+    <div class="form-container">
+      <h3>Agregar Menú</h3>
+      <form (ngSubmit)="addMenu()" #menuForm="ngForm">
+        <!-- Entrada -->
+        <div class="form-group">
+          <label for="entrada">Entrada</label>
+          <select id="entrada" name="entrada" [(ngModel)]="newMenu.entrada">
+            <option value="" disabled selected>Elegir entrada</option>
+            <option *ngFor="let comida of entradas" [ngValue]="comida">
+              {{ comida.nombre }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Plato Principal -->
+        <div class="form-group">
+          <label for="platoPrincipal">Plato Principal</label>
+          <select
+            id="platoPrincipal"
+            name="platoPrincipal"
+            [(ngModel)]="newMenu.platoPrincipal"
+            required
+          >
+            <option value="" disabled selected>Elegir plato principal</option>
+            <option
+              *ngFor="let comida of platosPrincipales"
+              [ngValue]="comida"
             >
-              <option value="" disabled selected>Elegir plato principal</option>
-              <option *ngFor="let comida of comidasPlatosPrincipales" [ngValue]="comida">
-                {{ comida.nombre }}
-              </option>
-            </select>
-          </div>
-  
-          <!-- Bebida -->
-          <div class="form-group">
-            <label for="bebida">Bebida</label>
-            <select id="bebida" name="bebida" [(ngModel)]="newMenu.bebida">
-              <option value="" disabled selected>Elegir bebida</option>
-              <option *ngFor="let comida of comidasBebidas" [ngValue]="comida">
-                {{ comida.nombre }}
-              </option>
-            </select>
-          </div>
-  
-          <!-- Postre -->
-          <div class="form-group">
-            <label for="postre">Postre</label>
-            <select id="postre" name="postre" [(ngModel)]="newMenu.postre">
-              <option value="" disabled selected>Elegir postre</option>
-              <option *ngFor="let comida of comidasPostres" [ngValue]="comida">
-                {{ comida.nombre }}
-              </option>
-            </select>
-          </div>
-  
-          <!-- Precio -->
-          <div class="form-group">
-            <label for="precio">Precio</label>
-            <input
-              type="number"
-              id="precio"
-              name="precio"
-              [(ngModel)]="newMenu.precio"
-              placeholder="Enter price"
-              required
-            />
-          </div>
-  
-          <button type="submit" class="btn" [disabled]="!menuForm.form.valid">
-            Agregar Menú
-          </button>
-        </form>
-      </div>
+              {{ comida.nombre }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Bebida -->
+        <div class="form-group">
+          <label for="bebida">Bebida</label>
+          <select id="bebida" name="bebida" [(ngModel)]="newMenu.bebida">
+            <option value="" disabled selected>Elegir bebida</option>
+            <option *ngFor="let comida of bebidas" [ngValue]="comida">
+              {{ comida.nombre }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Postre -->
+        <div class="form-group">
+          <label for="postre">Postre</label>
+          <select id="postre" name="postre" [(ngModel)]="newMenu.postre">
+            <option value="" disabled selected>Elegir postre</option>
+            <option *ngFor="let comida of postres" [ngValue]="comida">
+              {{ comida.nombre }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Precio -->
+        <div class="form-group">
+          <label for="precio">Precio</label>
+          <input
+            type="number"
+            id="precio"
+            name="precio"
+            [(ngModel)]="newMenu.precio"
+            placeholder="Enter price"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn" [disabled]="!menuForm.form.valid">
+          Agregar Menú
+        </button>
+      </form>
     </div>
   </div>
-  
+</div>
+
+<!-- Edit Popup -->
+<div class="popup" *ngIf="isEditPopupVisible">
+  <div class="popup-content">
+    <h3>Editar Menu</h3>
+    <form #editForm="ngForm" (ngSubmit)="confirmEdit()">
+      <!-- Entrada -->
+      <div class="form-group">
+        <label for="entrada">Entrada</label>
+        <select id="entrada" name="entrada" [(ngModel)]="editableMenu.entrada">
+          <option value="" disabled>Elegir entrada</option>
+          <option *ngFor="let comida of entradas" [ngValue]="comida">
+            {{ comida.nombre }} 
+          </option>
+        </select>
+      </div>
+
+      <!-- Plato Principal -->
+      <div class="form-group">
+        <label for="platoPrincipal">Plato Principal</label>
+        <select
+          id="platoPrincipal"
+          name="platoPrincipal"
+          [(ngModel)]="editableMenu.platoPrincipal"
+          required
+        >
+          <option value="" disabled selected>Elegir plato principal</option>
+          <option
+            
+            *ngFor="let comida of platosPrincipales"
+            [ngValue]="comida"
+
+          >
+            {{ comida.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Bebida -->
+      <div class="form-group">
+        <label for="bebida">Bebida</label>
+        <select id="bebida" name="bebida" [(ngModel)]="editableMenu.bebida">
+          <option value="" disabled>Elegir bebida</option>
+          <option *ngFor="let comida of bebidas" [ngValue]="comida">
+            {{ comida.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Postre -->
+      <div class="form-group">
+        <label for="postre">Postre</label>
+        <select id="postre" name="postre" [(ngModel)]="editableMenu.postre">
+          <option value="" disabled>Elegir postre</option>
+          <option *ngFor="let comida of postres" [ngValue]="comida">
+            {{ comida.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Precio -->
+      <div class="form-group">
+        <label for="precio">Precio</label>
+        <input
+          type="number"
+          id="precio"
+          name="precio"
+          [(ngModel)]="editableMenu.precio"
+          placeholder="Enter price"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn" [disabled]="!editForm.form.valid">
+        Confirmar
+      </button>
+      <button type="button" class="btn btn-cancel" (click)="closeEditPopup()">
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>
