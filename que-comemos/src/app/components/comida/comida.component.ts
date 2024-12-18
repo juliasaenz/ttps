@@ -10,50 +10,55 @@ import { ComidaService } from '../../services/comida.service';
   templateUrl: './comida.component.html',
   styleUrls: ['./comida.component.css']
 })
+  
 export class ComidaComponent implements OnInit {
   comidas: Comida[] = [];
-
   newComida: Comida = {
     nombre: '',
     tipo: null,
     vegetariano: false
   };
+  private errorMessage = '';
 
   constructor(private comidaService: ComidaService) { }
 
   ngOnInit(): void {
-    console.log('ComidaComponent: ngOnInit');
     this.getComidas();
   }
 
-  getComidas(): void {
-    console.log('ComidaComponent: getComidas');
+  private getComidas(): void {
     this.comidaService.getComidas().subscribe((data: Comida[]) => {
-      console.log('ComidaComponent: getComidas: ', data);
       this.comidas = data;
     });
   }
 
-  //TODO: Hacer funcionar con API
   addComida() {
-    console.log('ComidaComponent: addComida');
     const isNameUnique = !this.comidas.find(
       comida => comida.nombre.toLowerCase() === this.newComida.nombre.toLowerCase()
     );
 
     if (isNameUnique) {
-      console.log('ComidaComponent: addComida: isNameUnique');
-      this.comidas.push({ ...this.newComida });
-      this.newComida = { nombre: '', tipo: null, vegetariano: false };
+      const nombreFormatted = this.newComida.nombre.charAt(0).toUpperCase() + this.newComida.nombre.slice(1).toLowerCase();
+      this.newComida.nombre = nombreFormatted;
+      this.comidaService.addComidas(this.newComida).subscribe(
+        response => {
+          this.comidas.push(response);
+          this.newComida = { nombre: '', tipo: null, vegetariano: false };
+        },
+        error => {
+          this.errorMessage = 'Hubo un error al agregar la comida';
+          console.error('Error agregando comida:', error);
+          alert(this.errorMessage);
+        }
+      );
     } else {
-      console.log('ComidaComponent: addComida: not isNameUnique');
-      alert('The name of the comida must be unique!');
+      this.errorMessage = 'Ya existe una comida con ese nombre';
+      alert(this.errorMessage);
     }
   }
 
-  //TODO: hacer funcionar con api
+  //TODO: Hacer funcionar
   editComida(comida: Comida) {
-    console.log('ComidaComponent: editComida');
     console.log(comida);
   }
 }

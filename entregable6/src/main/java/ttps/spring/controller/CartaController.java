@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import ttps.spring.model.Carta;
 import ttps.spring.model.Menu;
 import ttps.spring.service.CartaService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/cartas")
 public class CartaController {
 
