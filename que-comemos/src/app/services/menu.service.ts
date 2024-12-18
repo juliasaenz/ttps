@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Menu } from '../models/menu.model';
+import { Comida } from '../models/comida.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,26 +22,74 @@ export class MenuService {
 
   getMenus(): Observable<Menu[]> {
     return this.http.get<Menu[]>(this.apiUrl).pipe(
+      map((menus) =>
+        menus.map((menu) => {
+          const entrada =
+            menu.comidas?.find((comida) => comida.tipo === 'ENTRADA') || null;
+          const platoPrincipal =
+            menu.comidas?.find((comida) => comida.tipo === 'PLATO_PRINCIPAL') ||
+            null;
+          const bebida =
+            menu.comidas?.find((comida) => comida.tipo === 'BEBIDA') || null;
+          const postre =
+            menu.comidas?.find((comida) => comida.tipo === 'POSTRE') || null;
+
+          return {
+            id: menu.id,
+            entrada: entrada,
+            platoPrincipal: platoPrincipal,
+            bebida: bebida,
+            postre: postre,
+            precio: menu.precio,
+            vegetariano: menu.vegetariano,
+          };
+        })
+      ),
       catchError(() => {
         return of([]);
       })
     );
   }
 
-  addMenus(menu: Menu): Observable<Menu> {
-    return this.http.post<Menu>(this.apiUrl, menu, httpOptions).pipe(
+  addMenu(menu: Menu): Observable<Menu> {
+    const comidas: Comida[] = [];
+
+    if (menu.entrada) comidas.push(menu.entrada);
+    if (menu.platoPrincipal) comidas.push(menu.platoPrincipal);
+    if (menu.bebida) comidas.push(menu.bebida);
+    if (menu.postre) comidas.push(menu.postre);
+
+    const menuToAdd = {
+      ...menu,
+      comidas: comidas,
+    };
+
+    return this.http.post<Menu>(this.apiUrl, menuToAdd, httpOptions).pipe(
       catchError(() => {
-        return of(menu);
+        return of(menuToAdd);
       })
     );
   }
 
   editarMenus(menu: Menu): Observable<Menu> {
-    return this.http.put<Menu>(`${this.apiUrl}/${menu.id}`, menu, httpOptions).pipe(
-      catchError(() => {
-        return of(menu);
-      })
-    );
+    const comidas: Comida[] = [];
+
+    if (menu.entrada) comidas.push(menu.entrada);
+    if (menu.platoPrincipal) comidas.push(menu.platoPrincipal);
+    if (menu.bebida) comidas.push(menu.bebida);
+    if (menu.postre) comidas.push(menu.postre);
+
+    const menuToEdit = {
+      ...menu,
+      comidas: comidas,
+    };
+
+    return this.http
+      .put<Menu>(`${this.apiUrl}/${menu.id}`, menuToEdit, httpOptions)
+      .pipe(
+        catchError(() => {
+          return of(menuToEdit);
+        })
+      );
   }
 }
-

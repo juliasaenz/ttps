@@ -23,7 +23,7 @@ html, body {
 
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -40,7 +40,7 @@ html, body {
 h1, h2, h3, h4 {
   font-family: 'Roboto', sans-serif;
   font-weight: 600;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 h1 {
@@ -95,7 +95,7 @@ textarea,
 select {
   width: 100%;
   padding: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1rem;
@@ -263,7 +263,7 @@ select:focus {
 }
 
 .popup-content .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   text-align: left;
 }
 

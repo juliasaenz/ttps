@@ -5,6 +5,7 @@ export interface Menu {
   platoPrincipal: Comida | null;
   bebida?: Comida | null;
   postre?: Comida | null;
+  comidas? : Comida[];
   precio: number;
   vegetariano: boolean;
 }

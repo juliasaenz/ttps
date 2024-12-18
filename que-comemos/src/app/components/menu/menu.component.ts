@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Comida } from '../../models/comida.model';
 import { Menu } from '../../models/menu.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MenuService } from '../../services/menu.service';
+import { ComidaService } from '../../services/comida.service';
 
 @Component({
   selector: 'app-menu',
@@ -10,26 +12,13 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit {
   //TODO: traer las comidas de la api
-  comidas: Comida[] = [
-    { nombre: 'Ensalada', tipo: 'ENTRADA', vegetariano: true },
-    { nombre: 'Sopa', tipo: 'ENTRADA', vegetariano: false },
-    { nombre: 'Asado', tipo: 'PLATO_PRINCIPAL', vegetariano: false },
-    { nombre: 'Risotto', tipo: 'PLATO_PRINCIPAL', vegetariano: true },
-    { nombre: 'Jugo de Naranja', tipo: 'BEBIDA', vegetariano: true },
-    { nombre: 'Gaseosa', tipo: 'BEBIDA', vegetariano: true },
-    { nombre: 'Flan', tipo: 'POSTRE', vegetariano: true },
-    { nombre: 'Helado', tipo: 'POSTRE', vegetariano: true },
-  ];
-
-  // Filtrar comidas por tipo
-  comidasEntradas = this.comidas.filter((c) => c.tipo === 'ENTRADA');
-  comidasPlatosPrincipales = this.comidas.filter((c) => c.tipo === 'PLATO_PRINCIPAL');
-  comidasBebidas = this.comidas.filter((c) => c.tipo === 'BEBIDA');
-  comidasPostres = this.comidas.filter((c) => c.tipo === 'POSTRE');
-
-  //TODO: Traer menus con API
+  comidas: Comida[] = [];
+  comidasEntradas: Comida[] = [];
+  comidasPlatosPrincipales: Comida[] = [];
+  comidasPostres: Comida[] = [];
+  comidasBebidas: Comida[] = [];
   menus: Menu[] = [];
 
   // Nuevo menú
@@ -39,17 +28,62 @@ export class MenuComponent {
     bebida: null,
     postre: null,
     precio: 0,
-    vegetariano: false
+    vegetariano: false,
   };
 
-  //TODO: pasar por API
+  constructor(
+    private menuService: MenuService,
+    private comidaService: ComidaService
+  ) {}
+
+  ngOnInit(): void {
+    this.getComidas();
+    this.getMenus();
+  }
+
+  private getComidas(): void {
+    this.comidaService.getComidas().subscribe((data: Comida[]) => {
+      this.comidas = data;
+
+      console.log('Comidas:', this.comidas);
+
+      this.comidasEntradas = this.comidas.filter((c) => c.tipo === 'ENTRADA');
+      this.comidasPlatosPrincipales = this.comidas.filter(
+        (c) => c.tipo === 'PLATO_PRINCIPAL'
+      );
+      this.comidasPostres = this.comidas.filter((c) => c.tipo === 'POSTRE');
+      this.comidasBebidas = this.comidas.filter((c) => c.tipo === 'BEBIDA');
+    });
+  }
+
+  private getMenus(): void {
+    this.menuService.getMenus().subscribe((data: Menu[]) => {
+      this.menus = data;
+    });
+  }
+
   addMenu() {
     if (this.newMenu.platoPrincipal && this.newMenu.precio > 0) {
-      this.menus.push({ ...this.newMenu });
-      this.resetNewMenu();
+      this.menuService.addMenu(this.newMenu).subscribe((addedMenu) => {
+        console.log('Menu added:', addedMenu);
+        this.menus.push(this.parseMenuAdded(addedMenu));
+        this.resetNewMenu();
+      });
     } else {
       alert('El plato principal y el precio son obligatorios.');
     }
+  }
+
+  private parseMenuAdded(menu: Menu) {
+    return {
+      id: menu.id,
+      entrada: menu.entrada ?? null,
+      platoPrincipal: menu.comidas?.find((c) => c.tipo === 'PLATO_PRINCIPAL') ?? null,
+      bebida: menu.comidas?.find((c) => c.tipo === 'BEBIDA') ?? null,
+      postre: menu.comidas?.find((c) => c.tipo === 'POSTRE') ?? null,
+      precio: menu.precio,
+      vegetariano: menu.vegetariano,
+    };
   }
 
   //TODO: Hacer el editar
@@ -66,7 +100,7 @@ export class MenuComponent {
       bebida: null,
       postre: null,
       precio: 0,
-      vegetariano: false
+      vegetariano: false,
     };
   }
 }

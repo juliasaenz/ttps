@@ -17,10 +17,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let menu of menus">
-            <td>{{ menu.entrada?.nombre || 'N/A' }}</td>
+            <td>{{ menu.entrada?.nombre || '-' }}</td>
             <td>{{ menu.platoPrincipal?.nombre }}</td>
-            <td>{{ menu.bebida?.nombre || 'N/A' }}</td>
-            <td>{{ menu.postre?.nombre || 'N/A' }}</td>
+            <td>{{ menu.bebida?.nombre || '-' }}</td>
+            <td>{{ menu.postre?.nombre || '-' }}</td>
             <td>{{ menu.precio }}</td>
             <td>{{ menu.vegetariano ? 'Si' : 'No' }}</td>
             <td>
