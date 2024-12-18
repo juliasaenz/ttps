@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:frontend": "wait-on http://localhost:8080 && ng serve",
+    "start:backend": "java -jar ../entregable6/target/entregable5-0.0.1-SNAPSHOT.jar",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -30,6 +32,7 @@
     "@angular/compiler-cli": "^19.0.0",
     "@types/jasmine": "~5.1.0",
     "angular-eslint": "19.0.2",
+    "concurrently": "^9.1.0",
     "eslint": "^9.16.0",
     "jasmine-core": "~5.4.0",
     "karma": "~6.4.0",
@@ -38,6 +41,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.6.2",
-    "typescript-eslint": "8.18.0"
+    "typescript-eslint": "8.18.0",
+    "wait-on": "^8.0.1"
   }
 }

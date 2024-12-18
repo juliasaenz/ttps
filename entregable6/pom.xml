@@ -5,7 +5,7 @@
 	<groupId>entregable5</groupId>
 	<artifactId>entregable5</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<dependencies>
 		<!-- Jakarta Persistence API -->
@@ -125,6 +125,20 @@
 				<configuration>
 					<mainClass>ttps.spring.test.SpringTestMain</mainClass>
 				</configuration>
+			</plugin>
+
+			<!-- Spring Boot Maven Plugin -->
+			<plugin>
+    			<groupId>org.springframework.boot</groupId>
+    			<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.3.5</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
 			</plugin>
 		</plugins>
 	</build>

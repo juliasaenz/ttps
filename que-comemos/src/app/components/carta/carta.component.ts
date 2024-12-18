@@ -58,8 +58,7 @@ export class CartaComponent {
 
   //TODO: Hacer funcional
   editCarta(carta: Carta) {
-    this.newCarta = { ...carta };
-    this.cartas = this.cartas.filter((c) => c.dia !== carta.dia);
+    console.log(carta);
   }
 
   resetNewCarta() {
