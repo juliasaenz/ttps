@@ -11,6 +11,8 @@
             <th>Bebida</th>
             <th>Postre</th>
             <th>Precio</th>
+            <th>Vegetariano</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -20,6 +22,10 @@
             <td>{{ menu.bebida?.nombre || 'N/A' }}</td>
             <td>{{ menu.postre?.nombre || 'N/A' }}</td>
             <td>{{ menu.precio }}</td>
+            <td>{{ menu.vegetariano ? 'Si' : 'No' }}</td>
+            <td>
+              <button class="btn" (click)="editMenu(menu)"> Editar </button>
+            </td>
           </tr>
         </tbody>
       </table>

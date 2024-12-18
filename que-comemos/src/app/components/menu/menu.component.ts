@@ -39,6 +39,7 @@ export class MenuComponent {
     bebida: null,
     postre: null,
     precio: 0,
+    vegetariano: false
   };
 
   //TODO: pasar por API
@@ -51,6 +52,12 @@ export class MenuComponent {
     }
   }
 
+  //TODO: Hacer el editar
+  editMenu(menu: Menu) {
+    console.log(menu);
+    // Lógica para editar el menú
+  }
+
   // Resetar formulario
   resetNewMenu() {
     this.newMenu = {
@@ -59,6 +66,7 @@ export class MenuComponent {
       bebida: null,
       postre: null,
       precio: 0,
+      vegetariano: false
     };
   }
 }

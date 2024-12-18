@@ -5,4 +5,5 @@ export interface Menu {
   bebida?: Comida | null;
   postre?: Comida | null;
   precio: number;
+  vegetariano: boolean;
 }
