@@ -9,6 +9,7 @@
           <th>Nombre</th>
           <th>Tipo</th>
           <th>Vegetariano</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -16,6 +17,9 @@
           <td>{{ comida.nombre }}</td>
           <td>{{ comida.tipo }}</td>
           <td>{{ comida.vegetariano ? "Si" : "No" }}</td>
+          <td>
+            <button class="btn" (click)="editComida(comida)"> Editar </button>
+          </td>
         </tr>
       </tbody>
     </table>
