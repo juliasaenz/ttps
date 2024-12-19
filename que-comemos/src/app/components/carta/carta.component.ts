@@ -161,10 +161,6 @@ export class CartaComponent implements OnInit {
     }));
   }
 
-  deleteCarta(carta: Carta) {
-    this.cartaService.deleteCarta(carta.id ?? -1).subscribe(() => {
-      this.loadCartas();
-    });
-  }
+
 }
 
