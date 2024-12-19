@@ -43,5 +43,13 @@ export class CartaService {
       })
     );
   }
+
+  deleteCarta(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+      catchError(() => {
+        return of();
+      })
+    );
+  }
 }
 
