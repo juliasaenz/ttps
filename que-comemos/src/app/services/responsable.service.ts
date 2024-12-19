@@ -15,7 +15,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root',
 })
-export class RegistroResponsableService {
+export class ResponsableService {
   private apiUrl = 'http://localhost:8080/responsables/registrar';
 
   constructor(private http: HttpClient) {}
