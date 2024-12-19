@@ -1,5 +1,5 @@
 <div class="container centered">
-  <h2>Cartas</h2>
+  <h2>Carta</h2>
 
   <div class="carta-container">
 <!-- Tabla -->
@@ -17,32 +17,22 @@
       <td>{{ carta.dia }}</td>
       <td>
         <ul>
-          <li *ngIf="carta.menu?.entrada">
-            {{ carta.menu?.entrada?.nombre }}
+          <li *ngFor="let comida of carta.menu?.comidas">
+            {{ comida.nombre }}
           </li>
-          <li>{{ carta.menu?.platoPrincipal?.nombre }}</li>
-          <li *ngIf="carta.menu?.bebida">{{ carta.menu?.bebida?.nombre }}</li>
-          <li *ngIf="carta.menu?.postre">{{ carta.menu?.postre?.nombre }}</li>
-          <li> <strong>Precio:  </strong>{{ carta.menu?.precio }}</li>
+          <li> <strong>Precio:  </strong>${{ carta.menu?.precio }}</li>
         </ul>
       </td>
       <td>
         <ul>
-          <li *ngIf="carta.menuVeggie?.entrada">
-            {{ carta.menuVeggie?.entrada?.nombre }}
+          <li *ngFor="let comida of carta.menuVeggie?.comidas">
+            {{ comida.nombre }}
           </li>
-          <li>{{ carta.menuVeggie?.platoPrincipal?.nombre }}</li>
-          <li *ngIf="carta.menuVeggie?.bebida">
-            {{ carta.menuVeggie?.bebida?.nombre }}
-          </li>
-          <li *ngIf="carta.menuVeggie?.postre">
-            {{ carta.menuVeggie?.postre?.nombre }}
-          </li>
-          <li> <strong>Precio:  </strong>{{ carta.menuVeggie?.precio }}</li>
+          <li> <strong>Precio:  </strong>${{ carta.menuVeggie?.precio }}</li>
         </ul>
       </td>
       <td> 
-        <button class="btn" (click)="editCarta(carta)">Editar</button>
+        <button class="btn" (click)="openEditPopup(carta)">Editar</button>
       </td>
     </tr>
   </tbody>
@@ -67,8 +57,8 @@
       <label for="menu">Menú</label>
       <select id="menu" name="menu" [(ngModel)]="newCarta.menu" required>
         <option [ngValue]="null" disabled selected>Elegir menú</option>
-        <option *ngFor="let menu of menus" [ngValue]="menu">
-          {{ menu.platoPrincipal?.nombre }} - ${{ menu.precio }}
+        <option *ngFor="let menu of parsedMenus" [ngValue]="menu">
+          {{ menu.nombre }}
         </option>
       </select>
     </div>
@@ -84,9 +74,9 @@
         <option [ngValue]="null" disabled selected>
           Elegir menú vegetariano
         </option>
-        <ng-container *ngFor="let menu of menus">
-          <option *ngIf="menu.platoPrincipal?.vegetariano" [ngValue]="menu">
-            {{ menu.platoPrincipal?.nombre }} - ${{ menu.precio }}
+        <ng-container *ngFor="let menu of parsedMenusVeggie">
+          <option [ngValue]="menu">
+            {{ menu.nombre }}
           </option>
         </ng-container>
       </select>
@@ -100,4 +90,59 @@
   </div>
 
   
+</div>
+
+<!-- Edit Popup -->
+<div class="popup" *ngIf="isEditPopupVisible">
+  <div class="popup-content">
+    <h3>Editar Carta</h3>
+    <form #editForm="ngForm" (ngSubmit)="confirmEdit()">
+      <div class="form-group">
+        <label for="date">Fecha</label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          [(ngModel)]="editableCarta.dia"
+          required
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="menu">Menú</label>
+        <select id="menu" name="menu" [(ngModel)]="editableCarta.menu" required>
+          <option [ngValue]="null" disabled selected>Elegir menú</option>
+          <option *ngFor="let menu of parsedMenus" [ngValue]="menu">
+            {{ menu.nombre }}
+          </option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="vegetarianMenu">Menú Vegetariano</label>
+        <select
+          id="vegetarianMenu"
+          name="vegetarianMenu"
+          [(ngModel)]="editableCarta.menuVeggie"
+          required
+        >
+          <option [ngValue]="null" disabled selected>
+            Elegir menú vegetariano
+          </option>
+          <ng-container *ngFor="let menu of parsedMenusVeggie">
+            <option [ngValue]="menu">
+              {{ menu.nombre }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+
+      <button type="submit" class="btn" [disabled]="!editForm.form.valid">
+        Confirmar
+      </button>
+      <button type="button" class="btn btn-cancel" (click)="closeEditPopup()">
+        Cancelar
+      </button>
+    </form>
+  </div>
 </div>

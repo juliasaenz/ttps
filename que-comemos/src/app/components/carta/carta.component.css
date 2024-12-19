@@ -15,6 +15,10 @@
     border-collapse: collapse;
     margin-bottom: 20px;
   }
+
+  table .btn {
+    width: 100%;
+  }
   
   tbody{
       display: block;

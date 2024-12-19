@@ -15,10 +15,15 @@
     border-collapse: collapse;
     margin-bottom: 20px;
   }
+
+  table .btn {
+    width: 100%;
+  }
+  
   
   tbody{
       display: block;
-      height: 55vh;
+      height: 70vh;
       overflow-y: scroll;
   }
   

@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
-    "start:frontend": "wait-on http://localhost:8080 && ng serve",
+    "start:frontend": "ng serve",
     "start:backend": "java -jar ../entregable6/target/entregable5-0.0.1-SNAPSHOT.jar",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

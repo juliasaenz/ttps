@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Carta } from '../models/carta.model';
+import { Admin } from '../models/admin.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,31 +15,31 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root',
 })
-export class CartaService {
-  private apiUrl = 'http://localhost:8080/cartas';
+export class AdminService {
+  private apiUrl = 'http://localhost:8080/administradores/registrar';
 
   constructor(private http: HttpClient) {}
 
-  getCartas(): Observable<Carta[]> {
-    return this.http.get<Carta[]>(this.apiUrl).pipe(
+  getAdmins(): Observable<Admin[]> {
+    return this.http.get<Admin[]>(this.apiUrl).pipe(
       catchError(() => {
         return of([]);
       })
     );
   }
 
-  addCartas(carta: Carta): Observable<Carta> {
-    return this.http.post<Carta>(this.apiUrl, carta, httpOptions).pipe(
+  registrarAdmin(admin: Admin): Observable<Admin> {
+    return this.http.post<Admin>(this.apiUrl, admin, httpOptions).pipe(
       catchError(() => {
-        return of(carta);
+        return of(admin);
       })
     );
   }
 
-  editarCartas(carta: Carta): Observable<Carta> {
-    return this.http.put<Carta>(`${this.apiUrl}/${carta.id}`, carta, httpOptions).pipe(
+  editarAdmin(admin: Admin): Observable<Admin> {
+    return this.http.put<Admin>(`${this.apiUrl}/${admin.id}`, admin, httpOptions).pipe(
       catchError(() => {
-        return of(carta);
+        return of(admin);
       })
     );
   }

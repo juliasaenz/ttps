@@ -7,12 +7,12 @@
     <nav class="navbar">
         <!-- Si no está logeado -->
         <ng-container *ngIf="!isLoggedIn">
-            <a routerLink="/login" class="nav-link">
+            <a routerLink="/login" routerLinkActive="active" class="nav-link">
                 <i class="fas fa-sign-in-alt"></i>
-                Iniciar Sesión</a>
+                Entrar </a>
 
-            <a routerLink="/registro" class="nav-link"> <i class="fas fa-user-plus"></i>
-                Registrarse</a>
+            <a routerLink="/registro" routerLinkActive="active" class="nav-link"> <i class="fas fa-user-plus"></i>
+                Registro </a>
         </ng-container>
 
         <!-- Si está logeado -->
@@ -21,18 +21,16 @@
 
             <!-- Tabs para admin/responsable -->
             <ng-container *ngIf="userRole === 'admin' || userRole === 'responsable'">
-                <a routerLink="/comidas" class="nav-link">
+                <a routerLink="/comidas" routerLinkActive="active" class="nav-link">
                     <i class="fa-solid fa-burger"></i> Comidas</a>
-                <a routerLink="/menu" class="nav-link">
+                <a routerLink="/menu" routerLinkActive="active" class="nav-link">
                     <i class="fa-solid fa-utensils"></i>
-                    Menu</a>
-                <a routerLink="/carta" class="nav-link">
+                    Menús</a>
+                <a routerLink="/carta" routerLinkActive="active" class="nav-link">
                     <i class="fa-regular fa-calendar"></i>
                     Carta</a>
             </ng-container>
-            
-            <a routerLink="/logout" class="nav-link"> <i class="fas fa-sign-out-alt"></i> Cerrar
-                Sesión</a>
+            <a routerLink="/logout" class="nav-link"> <i class="fas fa-sign-out-alt"></i> Salir </a>
         </ng-container>
     </nav>
 </header>
