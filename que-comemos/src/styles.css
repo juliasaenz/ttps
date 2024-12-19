@@ -9,7 +9,7 @@
 
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Monserrat', sans-serif;
   background-color: #f4f7fa;
   color: #333;
   line-height: 1.6;
@@ -38,10 +38,11 @@ html, body {
 
 
 h1, h2, h3, h4 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Monserrat', sans-serif;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
+
 
 h1 {
   font-size: 2.5rem;
