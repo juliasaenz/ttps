@@ -1,12 +1,22 @@
 package ttps.spring.controller;
 
-import java.util.List; // Asegúrate de importar List
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ttps.spring.model.Usuario;
 import ttps.spring.service.UsuarioService;
 import java.util.Map;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+import javax.crypto.SecretKey;
+
+import io.jsonwebtoken.security.Keys;
+
+
+import java.util.Date;
 
 public abstract class UsuarioController<T extends Usuario> {
 
@@ -44,26 +54,37 @@ public abstract class UsuarioController<T extends Usuario> {
     @GetMapping("/{dni}")
     public ResponseEntity<T> buscarPorDni(@PathVariable String dni) {
         T usuario = usuarioService.buscarPorDni(dni);
-        return usuario != null ? new ResponseEntity<>(usuario, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return usuario != null ? new ResponseEntity<>(usuario, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-
     @PostMapping("/login")
-    public ResponseEntity<T> autenticar(@RequestBody Map<String, String> credentials) {
+    public ResponseEntity<Map<String, Object>> autenticar(@RequestBody Map<String, String> credentials) {
         String email = credentials.get("email");
         String password = credentials.get("password");
-        
+
         T usuario = usuarioService.autenticarUsuario(email, password);
-        
+
         if (usuario != null) {
-            return new ResponseEntity<>(usuario, HttpStatus.OK);
+            String token = generateToken(usuario);
+
+            return new ResponseEntity<>(Map.of("token", token, "usuario", usuario), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-}
-
-
-    private String generateToken(T usuario) {
-        return "JWT_TOKEN"; 
     }
+
+   
+   // ...
+   
+   private String generateToken(T usuario) {
+       SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+   
+       return Jwts.builder()
+               .setSubject(usuario.getEmail())
+               .setIssuedAt(new Date())
+               .setExpiration(new Date(System.currentTimeMillis() + 8900000))
+               .signWith(secretKey)
+               .compact();
+   }
 }
