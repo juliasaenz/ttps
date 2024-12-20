@@ -1,35 +1,41 @@
-import { Component, 
-  Inject
- } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent {
-  isLoggedIn = true;
-  userRole: 'clientes' | 'administradores' | 'responsables';
+export class HeaderComponent implements OnDestroy {
+  isLoggedIn = false;
+  userRole: 'clientes' | 'responsables' | 'administradores' | null = null;
+  private subscriptions: Subscription = new Subscription();
 
-  //TODO: Cambiar para que el AuthService tenga un IsLoggedIn y un getUserRole que se updatean
   constructor(@Inject(AuthService) private authService: AuthService) {
-    console.log("header");
-    const storedRole = localStorage.getItem('rol');
-    if (storedRole === 'clientes' || storedRole === 'administradores' || storedRole === 'responsables') {
-      this.userRole = storedRole;
-    } else {
-      this.userRole = 'administradores'; // default
-    }
+
+    this.subscriptions.add(
+      this.authService.isAuthenticated$.subscribe((loggedIn) => {
+        this.isLoggedIn = loggedIn;
+      })
+    );
+
+    this.subscriptions.add(
+      this.authService.userRole$.subscribe((role) => {
+        this.userRole = role;
+      })
+    );
   }
 
   logout(): void {
     this.authService.logout();
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe(); 
+  }
 }
-
