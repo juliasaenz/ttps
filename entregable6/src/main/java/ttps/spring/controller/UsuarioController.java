@@ -4,7 +4,6 @@ import java.util.List; // Asegúrate de importar List
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ttps.spring.model.UsuarioLogin; // Asegúrate de importar UsuarioLogin
 import ttps.spring.model.Usuario;
 import ttps.spring.service.UsuarioService;
 import java.util.Map;
