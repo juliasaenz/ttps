@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ClienteService } from '../../../services/cliente.service';
 import { Cliente } from '../../../models/cliente.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cliente-register',
@@ -17,7 +18,7 @@ export class ClienteRegisterComponent {
   isLoading = false;
   errorMessage = '';
 
-  constructor(private fb: FormBuilder, private registroClienteService: ClienteService) {
+  constructor(private fb: FormBuilder, private registroClienteService: ClienteService, private router: Router) {
     this.clienteForm = this.fb.group({
       apellido: ['', [Validators.required, Validators.maxLength(50)]],
       nombre: ['', [Validators.required, Validators.maxLength(50)]],
@@ -39,8 +40,10 @@ export class ClienteRegisterComponent {
       this.registroClienteService.registrarCliente(cliente).subscribe({
         next: (response) => {
           console.log('Cliente registered:', response);
-          alert('Cliente registrado exitosamente.');
-          this.clienteForm.reset(); // Reset form after successful registration
+          this.router.navigate(['/registro/exito']);
+          
+
+          
         },
         error: (error) => {
           console.error('Error registering cliente:', error);
