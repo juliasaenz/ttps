@@ -45,6 +45,7 @@ export class ResponsableRegisterComponent {
         error: (error) => {
           console.error('Error registering responsable:', error);
           this.errorMessage = 'Ocurrió un error al registrar el responsable.';
+          alert(this.errorMessage);
         },
         complete: () => {
           this.isLoading = false;

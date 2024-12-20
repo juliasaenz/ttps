@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Responsable } from '../models/responsable.model';
 
@@ -30,8 +30,8 @@ export class ResponsableService {
 
   registrarResponsable(responsable: Responsable): Observable<Responsable> {
     return this.http.post<Responsable>(this.apiUrl, responsable, httpOptions).pipe(
-      catchError(() => {
-        return of(responsable);
+      catchError((error) => {
+        return throwError(() => error);
       })
     );
   }

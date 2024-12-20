@@ -48,6 +48,7 @@ export class ClienteRegisterComponent {
         error: (error) => {
           console.error('Error registering cliente:', error);
           this.errorMessage = 'Ocurrió un error al registrar el cliente.';
+          alert(this.errorMessage);
         },
         complete: () => {
           this.isLoading = false;

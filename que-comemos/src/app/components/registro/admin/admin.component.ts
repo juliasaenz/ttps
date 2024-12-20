@@ -44,6 +44,7 @@ export class AdminRegisterComponent {
         error: (error) => {
           console.error('Error registering admin:', error);
           this.errorMessage = 'Ocurrió un error al registrar el admin.';
+          alert(this.errorMessage);
         },
         complete: () => {
           this.isLoading = false;
