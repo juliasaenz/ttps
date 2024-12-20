@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, 
+  Inject
+ } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -14,8 +17,7 @@ export class HeaderComponent {
   userRole: 'clientes' | 'administradores' | 'responsables';
 
   //TODO: Cambiar para que el AuthService tenga un IsLoggedIn y un getUserRole que se updatean
-
-  constructor() {
+  constructor(@Inject(AuthService) private authService: AuthService) {
     console.log("header");
     const storedRole = localStorage.getItem('rol');
     if (storedRole === 'clientes' || storedRole === 'administradores' || storedRole === 'responsables') {
@@ -24,5 +26,10 @@ export class HeaderComponent {
       this.userRole = 'administradores'; // default
     }
   }
+
+  logout(): void {
+    this.authService.logout();
+  }
+
 }
 
