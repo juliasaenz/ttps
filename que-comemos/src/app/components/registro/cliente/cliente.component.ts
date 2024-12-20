@@ -29,6 +29,7 @@ export class ClienteRegisterComponent {
   }
 
   onSubmit() {
+    console.log("im here");
     if (this.clienteForm.valid) {
       const cliente: Cliente = this.clienteForm.value;
 
