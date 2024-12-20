@@ -34,8 +34,7 @@ export class LoginComponent {
     }
 
     this.authService.login({ email, password }, this.role).subscribe({
-      next: (response: { token: string }) => {
-        localStorage.setItem('jwt', response.token);
+      next: () => {
         alert(this.role + ' registrado exitosamente.');
         this.router.navigate(['/carta']);
       },

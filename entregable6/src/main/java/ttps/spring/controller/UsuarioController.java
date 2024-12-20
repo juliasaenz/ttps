@@ -1,16 +1,21 @@
 package ttps.spring.controller;
 
-import java.util.List; // Asegúrate de importar List
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List; 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ttps.spring.model.Usuario;
 import ttps.spring.service.UsuarioService;
 import java.util.Map;
+import ttps.spring.service.TokenService;
 
 public abstract class UsuarioController<T extends Usuario> {
 
     private final UsuarioService<T> usuarioService;
+
+    @Autowired
+	private TokenService tokenService;
 
     public UsuarioController(UsuarioService<T> usuarioService) {
         this.usuarioService = usuarioService;
@@ -49,21 +54,24 @@ public abstract class UsuarioController<T extends Usuario> {
 
 
     @PostMapping("/login")
-    public ResponseEntity<T> autenticar(@RequestBody Map<String, String> credentials) {
-        String email = credentials.get("email");
-        String password = credentials.get("password");
-        
-        T usuario = usuarioService.autenticarUsuario(email, password);
-        
-        if (usuario != null) {
-            return new ResponseEntity<>(usuario, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
+public ResponseEntity<Map<String, String>> autenticar(@RequestBody Map<String, String> credentials) {
+    int segundosToken = 86400; // 24 horas
+    String email = credentials.get("email");
+    String password = credentials.get("password");
+
+    T usuario = usuarioService.autenticarUsuario(email, password);
+
+    if (usuario != null) {
+        String token = this.tokenService.generarToken(usuario.getEmail(), segundosToken);
+
+        Map<String, String> response = Map.of("token", token);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    } else {
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    }
 }
 
 
-    private String generateToken(T usuario) {
-        return "JWT_TOKEN"; 
-    }
+
+    
 }
