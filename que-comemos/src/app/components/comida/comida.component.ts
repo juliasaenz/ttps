@@ -12,19 +12,11 @@ import { ComidaService } from '../../services/comida.service';
 })
 export class ComidaComponent implements OnInit {
   comidas: Comida[] = [];
-  newComida: Comida = {
-    nombre: '',
-    tipo: null,
-    vegetariano: false,
-  };
+  newComida: Comida = new Comida();
   private errorMessage = '';
 
   isEditPopupVisible = false;
-  editableComida: Comida = {
-    nombre: '',
-    tipo: null,
-    vegetariano: false,
-  };
+  editableComida: Comida = new Comida();
 
   constructor(private comidaService: ComidaService) {}
 
@@ -55,7 +47,7 @@ export class ComidaComponent implements OnInit {
       this.comidaService.addComidas(this.newComida).subscribe(
         (response) => {
           this.comidas.push(response);
-          this.newComida = { nombre: '', tipo: null, vegetariano: false };
+          this.newComida = new Comida();
         },
         (error) => {
           this.errorMessage = 'Hubo un error al agregar la comida';
@@ -76,7 +68,7 @@ export class ComidaComponent implements OnInit {
 
   closeEditPopup() {
     this.isEditPopupVisible = false;
-    this.editableComida = { nombre: '', tipo: null, vegetariano: false };
+    this.editableComida = new Comida();
   }
 
   confirmEdit() {
