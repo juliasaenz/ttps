@@ -15,7 +15,7 @@ import ttps.spring.model.Responsable;
 public class ResponsableJPA extends UsuarioJPA<Responsable> implements ResponsableDAO {
 
     @PersistenceContext
-    private EntityManager entityManager; // Spring injects the EntityManager
+    private EntityManager entityManager; 
 
     public ResponsableJPA() {
         super(Responsable.class);
@@ -27,6 +27,6 @@ public class ResponsableJPA extends UsuarioJPA<Responsable> implements Responsab
         TypedQuery<Responsable> query = entityManager.createQuery(
                 "SELECT r FROM Responsable r WHERE r.turno = :turno", Responsable.class);
         query.setParameter("turno", turno);
-        return query.getResultList(); // Return the list of Responsables by turno
+        return query.getResultList(); 
     }
 }

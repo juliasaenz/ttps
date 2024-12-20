@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Usuarios")
-@Inheritance(strategy = InheritanceType.JOINED) // esto va a hacer una tabla x clase y subclase
+@Inheritance(strategy = InheritanceType.JOINED)
 @Component
 public abstract class Usuario {
 

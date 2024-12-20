@@ -16,7 +16,7 @@ import ttps.spring.model.Compra;
 public class CompraJPA extends GenericJPA<Compra> implements CompraDAO {
 
     @PersistenceContext
-    private EntityManager entityManager; // Spring injects the EntityManager
+    private EntityManager entityManager;
 
     public CompraJPA() {
         super(Compra.class);
@@ -29,7 +29,7 @@ public class CompraJPA extends GenericJPA<Compra> implements CompraDAO {
                 "SELECT c FROM Compra c WHERE c.fecha = :fecha", Compra.class
         );
         query.setParameter("fecha", dia);
-        return query.getResultList(); // Return the list of purchases on the given day
+        return query.getResultList();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class CompraJPA extends GenericJPA<Compra> implements CompraDAO {
                 "SELECT c FROM Compra c WHERE c.cliente.id = :clienteId", Compra.class
         );
         query.setParameter("clienteId", clienteId);
-        return query.getResultList(); // Return purchases by a specific client
+        return query.getResultList(); 
     }
 
     @Override
@@ -49,7 +49,7 @@ public class CompraJPA extends GenericJPA<Compra> implements CompraDAO {
                 "SELECT c FROM Compra c WHERE c.menu.id = :menuId", Compra.class
         );
         query.setParameter("menuId", menuId);
-        return query.getResultList(); // Return purchases related to a specific menu
+        return query.getResultList(); 
     }
 
     @Override
@@ -61,6 +61,6 @@ public class CompraJPA extends GenericJPA<Compra> implements CompraDAO {
         query.setParameter("clienteId", clienteId);
         query.setParameter("fecha", dia);
         Long count = query.getSingleResult();
-        return count > 0; // Return whether the client made a purchase on the given day
+        return count > 0; 
     }
 }

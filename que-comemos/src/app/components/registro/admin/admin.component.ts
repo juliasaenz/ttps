@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-register',
-  standalone: true, // Standalone component
+  standalone: true, 
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './admin.component.html',
   styleUrls: ['../registro.component.css'],

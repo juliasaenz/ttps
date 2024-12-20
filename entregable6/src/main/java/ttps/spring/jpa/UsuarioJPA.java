@@ -13,7 +13,7 @@ import ttps.spring.model.Usuario;
 public abstract class UsuarioJPA<T extends Usuario> extends GenericJPA<T> implements UsuarioDAO<T> {
 
     @PersistenceContext
-    private EntityManager entityManager; // Spring will inject the EntityManager
+    private EntityManager entityManager; 
 
     public UsuarioJPA(Class<T> clase) {
         super(clase);

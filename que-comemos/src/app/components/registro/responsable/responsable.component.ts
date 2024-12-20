@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-responsable-register',
-  standalone: true, // Standalone component
+  standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './responsable.component.html',
   styleUrls: ['../registro.component.css'],

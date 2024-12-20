@@ -37,20 +37,18 @@ export class MenuComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // Suscribirse al estado de autenticación
     this.subscriptions.add(
       this.authService.isAuthenticated$.subscribe((loggedIn) => {
         this.isLoggedIn = loggedIn;
         if (loggedIn) {
-          this.getComidas(); // Cargar comidas si está autenticado
-          this.getMenus(); // Cargar menús si está autenticado
+          this.getComidas(); 
+          this.getMenus(); 
         } else {
-          this.clearData(); // Limpiar datos si no está autenticado
+          this.clearData(); 
         }
       })
     );
 
-    // Suscribirse al rol del usuario
     this.subscriptions.add(
       this.authService.userRole$.subscribe((role) => {
         this.userRole = role;
@@ -60,7 +58,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe(); // Limpiar suscripciones para evitar fugas de memoria
+    this.subscriptions.unsubscribe(); 
   }
 
   private getComidas(): void {

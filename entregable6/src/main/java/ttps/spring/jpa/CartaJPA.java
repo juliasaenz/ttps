@@ -107,7 +107,7 @@ public class CartaJPA extends GenericJPA<Carta> implements CartaDAO {
                 "SELECT c FROM Carta c WHERE c.dia BETWEEN :startDate AND :endDate", Carta.class
         );
         query.setParameter("startDate", d);
-        query.setParameter("endDate", new Date(d.getTime() + (7 * 24 * 60 * 60 * 1000))); // 7 days after
+        query.setParameter("endDate", new Date(d.getTime() + (7 * 24 * 60 * 60 * 1000)));
         return query.getResultList();
     }
 

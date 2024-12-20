@@ -37,7 +37,6 @@ export class CartaComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // Suscribirse al estado de autenticación
     this.subscriptions.add(
       this.authService.isAuthenticated$.subscribe((loggedIn) => {
         this.isLoggedIn = loggedIn;
@@ -50,7 +49,6 @@ export class CartaComponent implements OnInit, OnDestroy {
       })
     );
 
-    // Suscribirse al rol del usuario
     this.subscriptions.add(
       this.authService.userRole$.subscribe((role) => {
         this.userRole = role;
@@ -60,7 +58,7 @@ export class CartaComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe(); // Limpiar suscripciones para evitar fugas de memoria
+    this.subscriptions.unsubscribe();
   }
 
   addCarta(): void {

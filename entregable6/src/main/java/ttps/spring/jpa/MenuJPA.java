@@ -36,7 +36,7 @@ public class MenuJPA extends GenericJPA<Menu> implements MenuDAO {
                         "HAVING COUNT(CASE WHEN c.vegetariano = false THEN 1 END) = 0",
                 Menu.class
         );
-        return query.getResultList(); // Return the list of vegetarian menus
+        return query.getResultList();
     }
 
     @Override
@@ -46,7 +46,7 @@ public class MenuJPA extends GenericJPA<Menu> implements MenuDAO {
                 "SELECT COUNT(m) FROM Menu m", Long.class
         );
         long count = query.getSingleResult();
-        return count > 0; // Check if there are any menus in the carta
+        return count > 0; 
     }
 
     @Override
@@ -54,7 +54,7 @@ public class MenuJPA extends GenericJPA<Menu> implements MenuDAO {
     public void borrar(Menu menu) {
         Menu menuABorrar = entityManager.find(Menu.class, menu.getId());
         if (menuABorrar != null) {
-            entityManager.remove(menuABorrar); // Remove the menu if it exists
+            entityManager.remove(menuABorrar); 
         }
     }
 
@@ -63,7 +63,6 @@ public class MenuJPA extends GenericJPA<Menu> implements MenuDAO {
             throw new IllegalArgumentException("Un menú debe tener al menos una comida.");
         }
 
-        // Validar ids de comida
         for (Comida comida : menu.getComidas()) {
             if (!comidaDAO.existe(comida.getId())) {
                 throw new IllegalArgumentException("Comida con ID " + comida.getId() + " no existe");

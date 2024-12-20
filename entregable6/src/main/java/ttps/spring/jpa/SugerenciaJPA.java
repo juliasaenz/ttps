@@ -16,7 +16,7 @@ import ttps.spring.model.TipoSugerencia;
 public class SugerenciaJPA extends GenericJPA<Sugerencia> implements SugerenciaDAO {
 
     @PersistenceContext
-    private EntityManager entityManager; // Spring automatically injects the EntityManager
+    private EntityManager entityManager;
 
     public SugerenciaJPA() {
         super(Sugerencia.class);
@@ -28,6 +28,6 @@ public class SugerenciaJPA extends GenericJPA<Sugerencia> implements SugerenciaD
         TypedQuery<Sugerencia> query = entityManager.createQuery(
                 "SELECT r FROM Sugerencia r WHERE r.tipo = :tipo", this.clasePersistente);
         query.setParameter("tipo", tipo);
-        return query.getResultList(); // Return the list of Sugerencias by type
+        return query.getResultList(); 
     }
 }

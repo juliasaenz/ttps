@@ -13,7 +13,7 @@ import ttps.spring.model.Cliente;
 public class ClienteJPA extends UsuarioJPA<Cliente> implements ClienteDAO {
 
     @PersistenceContext
-    private EntityManager entityManager; // Spring injects the EntityManager
+    private EntityManager entityManager;
 
     public ClienteJPA() {
         super(Cliente.class);
@@ -29,7 +29,7 @@ public class ClienteJPA extends UsuarioJPA<Cliente> implements ClienteDAO {
                     .getSingleResult();
             return vegetariano != null ? vegetariano : false;
         } catch (NoResultException e) {
-            return false; // Return false if no result found for the query.
+            return false;
         }
     }
 }

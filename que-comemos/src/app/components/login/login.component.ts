@@ -24,7 +24,6 @@ export class LoginComponent {
   login(event: Event): void {
     event.preventDefault();
 
-    // Capturar valores de los inputs
     const form = event.target as HTMLFormElement;
     const email = (form.querySelector('#email') as HTMLInputElement).value;
     const password = (form.querySelector('#password') as HTMLInputElement).value;

@@ -26,9 +26,9 @@ public class Menu {
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
-            name = "Menu_Comida", // Name of the join table
-            joinColumns = @JoinColumn(name = "menu_id"), // Foreign key to Menu
-            inverseJoinColumns = @JoinColumn(name = "comida_id") // Foreign key to Comida
+            name = "Menu_Comida", 
+            joinColumns = @JoinColumn(name = "menu_id"), 
+            inverseJoinColumns = @JoinColumn(name = "comida_id") 
     )
     private List<Comida> comidas = new ArrayList<>();
 
