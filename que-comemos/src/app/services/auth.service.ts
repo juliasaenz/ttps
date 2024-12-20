@@ -8,17 +8,19 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly apiUrl = 'http://localhost:8080/api/login';
+  private readonly apiUrl = 'http://localhost:8080/clientes/login';
 
   constructor(private http: HttpClient, private router: Router) {}
 
   login(credentials: { email: string; password: string }): Observable<{ token: string }> {
     return this.http.post<{ token: string }>(this.apiUrl, credentials).pipe(
       tap((response) => {
-        localStorage.setItem('jwt', response.token);
+        localStorage.setItem('jwt', response.token); // Guarda el token JWT en el localStorage
       })
     );
   }
+
+  
 
   logout(): void {
     localStorage.removeItem('jwt');
