@@ -1,30 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Comida } from '../../models/comida.model';
 import { ComidaService } from '../../services/comida.service';
+import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-comidas',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './comida.component.html',
   styleUrls: ['./comida.component.css'],
 })
-export class ComidaComponent implements OnInit {
+export class ComidaComponent implements OnInit, OnDestroy {
   comidas: Comida[] = [];
   newComida: Comida = new Comida();
   private errorMessage = '';
-
   isEditPopupVisible = false;
   editableComida: Comida = new Comida();
 
-  userRole: 'clientes' | 'administradores' | 'responsables' = 'clientes';
-  // TODO: Add check of user roles
+  isLoggedIn = false;
+  userRole: 'clientes' | 'administradores' | 'responsables' | null = null;
+  private subscriptions: Subscription = new Subscription();
 
-  constructor(private comidaService: ComidaService) {}
+  constructor(
+    private comidaService: ComidaService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.getComidas();
+    this.subscriptions.add(
+      this.authService.isAuthenticated$.subscribe((loggedIn) => {
+        this.isLoggedIn = loggedIn;
+        if (loggedIn) {
+          this.getComidas(); 
+        } else {
+          this.comidas = []; 
+        }
+      })
+    );
+
+    this.subscriptions.add(
+      this.authService.userRole$.subscribe((role) => {
+        this.userRole = role;
+        console.log('Rol del usuario actualizado:', role);
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe(); 
   }
 
   private getComidas(): void {

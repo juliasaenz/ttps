@@ -1,39 +1,66 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Carta } from '../../models/carta.model';
 import { Menu } from '../../models/menu.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MenuService } from '../../services/menu.service';
 import { CartaService } from '../../services/carta.service';
+import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-carta',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './carta.component.html',
   styleUrls: ['./carta.component.css'],
 })
-export class CartaComponent implements OnInit {
+export class CartaComponent implements OnInit, OnDestroy {
   today = new Date().toISOString().split('T')[0];
   cartas: Carta[] = [];
   menus: Menu[] = [];
   parsedMenus: { id: number; nombre: string }[] = [];
   parsedMenusVeggie: { id: number; nombre: string }[] = [];
 
-  userRole: 'clientes' | 'administradores' | 'responsables' = 'clientes';
-  // TODO: Add check of user roles
-
+  isLoggedIn = false;
+  userRole: 'clientes' | 'administradores' | 'responsables' | null = null;
   newCarta: Carta = new Carta();
   editableCarta: Carta = new Carta();
   isEditPopupVisible = false;
 
+  private subscriptions: Subscription = new Subscription();
+
   constructor(
     private menuService: MenuService,
-    private cartaService: CartaService
+    private cartaService: CartaService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.loadMenus();
-    this.loadCartas();
+    // Suscribirse al estado de autenticación
+    this.subscriptions.add(
+      this.authService.isAuthenticated$.subscribe((loggedIn) => {
+        this.isLoggedIn = loggedIn;
+        if (loggedIn) {
+          this.loadMenus();
+          this.loadCartas();
+        } else {
+          this.clearData();
+        }
+      })
+    );
+
+    // Suscribirse al rol del usuario
+    this.subscriptions.add(
+      this.authService.userRole$.subscribe((role) => {
+        this.userRole = role;
+        console.log('Rol del usuario actualizado:', role);
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe(); // Limpiar suscripciones para evitar fugas de memoria
   }
 
   addCarta(): void {
@@ -147,16 +174,16 @@ export class CartaComponent implements OnInit {
   private formatMenuOptions(menus: Menu[]): { id: number; nombre: string }[] {
     return menus.map((menu) => ({
       id: menu.id ?? 0,
-      nombre: `${menu.platoPrincipal?.nombre} (${[
-        menu.entrada?.nombre,
-        menu.bebida?.nombre,
-        menu.postre?.nombre,
-      ]
+      nombre: `${menu.platoPrincipal?.nombre} (${[menu.entrada?.nombre, menu.bebida?.nombre, menu.postre?.nombre]
         .filter((nombre) => nombre !== undefined)
         .join(', ')}) - $ ${menu.precio}`,
     }));
   }
 
-
+  private clearData(): void {
+    this.cartas = [];
+    this.menus = [];
+    this.parsedMenus = [];
+    this.parsedMenusVeggie = [];
+  }
 }
-

@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Comida } from '../../models/comida.model';
 import { Menu } from '../../models/menu.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MenuService } from '../../services/menu.service';
 import { ComidaService } from '../../services/comida.service';
+import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
   entradas: Comida[] = [];
   platosPrincipales: Comida[] = [];
   postres: Comida[] = [];
@@ -20,21 +23,44 @@ export class MenuComponent implements OnInit {
   menus: Menu[] = [];
 
   isEditPopupVisible = false;
-
   editableMenu: Menu = new Menu();
   newMenu: Menu = new Menu();
 
-  userRole: 'clientes' | 'administradores' | 'responsables' = 'clientes';
-  // TODO: Add check of user roles
+  isLoggedIn = false;
+  userRole: 'clientes' | 'administradores' | 'responsables' | null = null;
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private menuService: MenuService,
-    private comidaService: ComidaService
-  ) { }
+    private comidaService: ComidaService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.getComidas();
-    this.getMenus();
+    // Suscribirse al estado de autenticación
+    this.subscriptions.add(
+      this.authService.isAuthenticated$.subscribe((loggedIn) => {
+        this.isLoggedIn = loggedIn;
+        if (loggedIn) {
+          this.getComidas(); // Cargar comidas si está autenticado
+          this.getMenus(); // Cargar menús si está autenticado
+        } else {
+          this.clearData(); // Limpiar datos si no está autenticado
+        }
+      })
+    );
+
+    // Suscribirse al rol del usuario
+    this.subscriptions.add(
+      this.authService.userRole$.subscribe((role) => {
+        this.userRole = role;
+        console.log('Rol del usuario actualizado:', role);
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe(); // Limpiar suscripciones para evitar fugas de memoria
   }
 
   private getComidas(): void {
@@ -52,7 +78,15 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  addMenu() {
+  private clearData(): void {
+    this.entradas = [];
+    this.platosPrincipales = [];
+    this.postres = [];
+    this.bebidas = [];
+    this.menus = [];
+  }
+
+  addMenu(): void {
     if (this.newMenu.platoPrincipal && this.newMenu.precio > 0) {
       this.menuService.addMenu(this.newMenu).subscribe((addedMenu) => {
         this.menus.push(this.parseMenuAdded(addedMenu));
@@ -63,7 +97,7 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  private parseMenuAdded(menu: Menu) {
+  private parseMenuAdded(menu: Menu): Menu {
     return {
       id: menu.id,
       entrada: menu.entrada ?? null,
@@ -76,29 +110,32 @@ export class MenuComponent implements OnInit {
     };
   }
 
-  openEditPopup(menu: Menu) {
+  openEditPopup(menu: Menu): void {
     this.editableMenu = {
       id: menu.id,
-      entrada: this.entradas.find(c => c.id === menu.entrada?.id) || null,
-      platoPrincipal: this.platosPrincipales.find(c => c.id === menu.platoPrincipal?.id) || null,
-      bebida: this.bebidas.find(c => c.id === menu.bebida?.id) || null,
-      postre: this.postres.find(c => c.id === menu.postre?.id) || null,
+      entrada: this.entradas.find((c) => c.id === menu.entrada?.id) || null,
+      platoPrincipal:
+        this.platosPrincipales.find((c) => c.id === menu.platoPrincipal?.id) ||
+        null,
+      bebida: this.bebidas.find((c) => c.id === menu.bebida?.id) || null,
+      postre: this.postres.find((c) => c.id === menu.postre?.id) || null,
       precio: menu.precio,
-      vegetariano: menu.vegetariano
+      vegetariano: menu.vegetariano,
     };
     this.isEditPopupVisible = true;
 
-    console.log("Editable menu:", this.editableMenu);
+    console.log('Editable menu:', this.editableMenu);
   }
 
-  closeEditPopup() {
+  closeEditPopup(): void {
     this.isEditPopupVisible = false;
     this.editableMenu = new Menu();
   }
 
-  confirmEdit() {
-    if (!this.editableMenu.platoPrincipal && this.editableMenu.precio > 0) {
+  confirmEdit(): void {
+    if (!this.editableMenu.platoPrincipal || this.editableMenu.precio <= 0) {
       alert('El plato principal y el precio son obligatorios.');
+      return;
     }
 
     this.menuService.editarMenus(this.editableMenu).subscribe(
@@ -110,8 +147,8 @@ export class MenuComponent implements OnInit {
         this.closeEditPopup();
       },
       (error) => {
-        console.log(error);
-        alert('Error al actualizar el menu');
+        console.error(error);
+        alert('Error al actualizar el menú.');
       }
     );
   }
