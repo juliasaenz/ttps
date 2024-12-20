@@ -15,3 +15,13 @@
     <a routerLink="/registro"> Registrate </a>
   </p>
 </div>
+
+<!-- Elegir rol -->
+<div id="role-popup" class="role-modal">
+  <div class="role-selection">
+    <h3>Selecciona tu rol</h3>
+    <button (click)="selectRole('clientes')">Cliente</button>
+    <button (click)="selectRole('responsables')">Responsable</button>
+    <button (click)="selectRole('administradores')">Administrador</button>
+  </div>
+</div>
