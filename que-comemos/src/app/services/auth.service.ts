@@ -17,6 +17,7 @@ export class AuthService {
     return this.http.post<{ token: string }>(endpoint, credentials).pipe(
       tap((response) => {
         localStorage.setItem('jwt', response.token); // Guarda el token JWT en el localStorage
+        localStorage.setItem('rol', role);
       })
     );
   }

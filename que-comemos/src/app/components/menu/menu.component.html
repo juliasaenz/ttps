@@ -12,7 +12,7 @@
           <th>Postre</th>
           <th>Precio</th>
           <th>Vegetariano</th>
-          <th>Acciones</th>
+          <th *ngIf="userRole === 'administradores'">Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -23,7 +23,7 @@
           <td>{{ menu.postre?.nombre || "-" }}</td>
           <td>{{ menu.precio }}</td>
           <td>{{ menu.vegetariano ? "Si" : "No" }}</td>
-          <td>
+          <td *ngIf="userRole === 'administradores'">
             <button class="btn" (click)="openEditPopup(menu)">Editar</button>
           </td>
         </tr>
@@ -31,7 +31,7 @@
     </table>
 
     <!-- Form -->
-    <div class="form-container">
+    <div *ngIf="userRole === 'administradores'" class="form-container">
       <h3>Agregar Menú</h3>
       <form (ngSubmit)="addMenu()" #menuForm="ngForm">
         <!-- Entrada -->

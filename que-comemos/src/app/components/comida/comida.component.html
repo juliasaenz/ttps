@@ -9,15 +9,15 @@
           <th>Nombre</th>
           <th>Tipo</th>
           <th>Vegetariano</th>
-          <th>Acciones</th>
+          <th *ngIf="userRole === 'administradores'">Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let comida of comidas">
           <td>{{ comida.nombre }}</td>
           <td>{{ comida.tipo }}</td>
-          <td>{{ comida.vegetariano ? "Si" : "No" }}</td>
-          <td>
+          <td >{{ comida.vegetariano ? "Si" : "No" }}</td>
+          <td *ngIf="userRole === 'administradores'">
             <button class="btn" (click)="openEditPopup(comida)">Editar</button>
           </td>
         </tr>
@@ -25,7 +25,7 @@
     </table>
 
     <!-- Form -->
-    <div class="form-container">
+    <div *ngIf="userRole === 'administradores'" class="form-container">
       <h3>Agregar Comida</h3>
       <form (ngSubmit)="addComida()" #comidaForm="ngForm">
         <div class="form-group">

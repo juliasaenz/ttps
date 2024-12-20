@@ -24,6 +24,9 @@ export class MenuComponent implements OnInit {
   editableMenu: Menu = new Menu();
   newMenu: Menu = new Menu();
 
+  userRole: 'clientes' | 'administradores' | 'responsables' = 'clientes';
+  // TODO: Add check of user roles
+
   constructor(
     private menuService: MenuService,
     private comidaService: ComidaService

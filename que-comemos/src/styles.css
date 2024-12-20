@@ -303,3 +303,88 @@ select:focus {
   color: #fff;
 }
 
+
+.container {
+  width: 100vw;
+}
+
+.carta-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: space-around;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table .btn {
+  width: 100%;
+}
+
+tbody{
+    display: block;
+    height: 55vh;
+    overflow-y: scroll;
+}
+
+thead {
+    position: sticky; 
+    top: 0;
+    background-color: #3498db; 
+    color: #fff; 
+  }
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+table tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tbody tr:hover {
+  background-color: #ddd;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-container {
+    width: 40vw;
+    padding-left: 3rem;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0.5rem;
+}

@@ -19,6 +19,9 @@ export class CartaComponent implements OnInit {
   parsedMenus: { id: number; nombre: string }[] = [];
   parsedMenusVeggie: { id: number; nombre: string }[] = [];
 
+  userRole: 'clientes' | 'administradores' | 'responsables' = 'clientes';
+  // TODO: Add check of user roles
+
   newCarta: Carta = new Carta();
   editableCarta: Carta = new Carta();
   isEditPopupVisible = false;

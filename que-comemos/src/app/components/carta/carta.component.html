@@ -9,7 +9,7 @@
       <th>Fecha</th>
       <th>Menú</th>
       <th>Menú Vegetariano</th>
-      <th>Acciones</th>
+      <th *ngIf="userRole === 'administradores'">Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -31,7 +31,7 @@
           <li> <strong>Precio:  </strong>${{ carta.menuVeggie?.precio }}</li>
         </ul>
       </td>
-      <td> 
+      <td *ngIf="userRole === 'administradores'"> 
         <button class="btn" (click)="openEditPopup(carta)">Editar</button>
       </td>
     </tr>
@@ -39,7 +39,7 @@
 </table>
 
 <!-- Formulario -->
-<div class="form-container">
+<div *ngIf="userRole === 'administradores'" class="form-container">
   <h3>Agregar Carta</h3>
   <form (ngSubmit)="addCarta()" #cartaForm="ngForm">
     <div class="form-group">

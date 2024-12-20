@@ -18,6 +18,9 @@ export class ComidaComponent implements OnInit {
   isEditPopupVisible = false;
   editableComida: Comida = new Comida();
 
+  userRole: 'clientes' | 'administradores' | 'responsables' = 'clientes';
+  // TODO: Add check of user roles
+
   constructor(private comidaService: ComidaService) {}
 
   ngOnInit(): void {

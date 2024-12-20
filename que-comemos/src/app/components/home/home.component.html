@@ -10,9 +10,41 @@
     </div>
   </ng-container>
 
-    <!-- Fun animation and background image -->
-    <div class="image-container">
+    <div *ngIf="!isLoggedIn" class="image-container">
       <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.info.unlp.edu.ar%2Fwp-content%2Fuploads%2F2021%2F01%2F20170905_112853-1024x576.jpg&f=1&nofb=1&ipt=b896aec821d82f87aa9834d6cd1f93953d82c91c335f78c3aae15669ff3cd952&ipo=images" alt="Buffet Image" class="home-image" />
     </div>
+
+    <div *ngIf="isLoggedIn">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Menú</th>
+            <th>Menú Vegetariano</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let carta of cartas">
+            <td>{{ carta.dia }}</td>
+            <td>
+              <ul>
+                <li *ngFor="let comida of carta.menu?.comidas">
+                  {{ comida.nombre }}
+                </li>
+                <li> <strong>Precio:  </strong>${{ carta.menu?.precio }}</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li *ngFor="let comida of carta.menuVeggie?.comidas">
+                  {{ comida.nombre }}
+                </li>
+                <li> <strong>Precio:  </strong>${{ carta.menuVeggie?.precio }}</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
 </div>
 
