@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import ttps.spring.model.Cliente;
 import ttps.spring.model.Compra;
 import ttps.spring.service.ClienteService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/clientes")
 public class ClienteController extends UsuarioController<Cliente>{
 

@@ -13,13 +13,14 @@ import { CartaService } from '../../services/carta.service';
   styleUrls: ['./carta.component.css'],
 })
 export class CartaComponent implements OnInit {
+  today = new Date().toISOString().split('T')[0];
   cartas: Carta[] = [];
   menus: Menu[] = [];
   parsedMenus: { id: number; nombre: string }[] = [];
   parsedMenusVeggie: { id: number; nombre: string }[] = [];
 
-  newCarta: Carta = this.initializeCarta();
-  editableCarta: Carta = this.initializeCarta();
+  newCarta: Carta = new Carta();
+  editableCarta: Carta = new Carta();
   isEditPopupVisible = false;
 
   constructor(
@@ -55,7 +56,7 @@ export class CartaComponent implements OnInit {
   }
 
   resetNewCarta(): void {
-    this.newCarta = this.initializeCarta();
+    this.newCarta = new Carta();
   }
 
   loadMenus(): void {
@@ -81,7 +82,7 @@ export class CartaComponent implements OnInit {
 
   closeEditPopup(): void {
     this.isEditPopupVisible = false;
-    this.editableCarta = this.initializeCarta();
+    this.editableCarta = new Carta();
   }
 
   confirmEdit(): void {
@@ -103,14 +104,6 @@ export class CartaComponent implements OnInit {
     } else {
       alert('Todos los campos son obligatorios.');
     }
-  }
-
-  private initializeCarta(): Carta {
-    return {
-      dia: new Date(),
-      menu: null,
-      menuVeggie: null,
-    };
   }
 
   private formatDate(date: Date): string {

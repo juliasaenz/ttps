@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Admin } from '../models/admin.model';
 
@@ -30,8 +30,8 @@ export class AdminService {
 
   registrarAdmin(admin: Admin): Observable<Admin> {
     return this.http.post<Admin>(this.apiUrl, admin, httpOptions).pipe(
-      catchError(() => {
-        return of(admin);
+      catchError((error) => {
+        return throwError(() => error);
       })
     );
   }
