@@ -21,7 +21,7 @@ export class HeaderComponent {
     if (storedRole === 'clientes' || storedRole === 'administradores' || storedRole === 'responsables') {
       this.userRole = storedRole;
     } else {
-      this.userRole = 'clientes'; // default
+      this.userRole = 'administradores'; // default
     }
   }
 }
