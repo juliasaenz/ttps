@@ -21,8 +21,8 @@ export class MenuComponent implements OnInit {
 
   isEditPopupVisible = false;
 
-  editableMenu: Menu = this.resetMenu();
-  newMenu: Menu = this.resetMenu();
+  editableMenu: Menu = new Menu();
+  newMenu: Menu = new Menu();
 
   constructor(
     private menuService: MenuService,
@@ -53,7 +53,7 @@ export class MenuComponent implements OnInit {
     if (this.newMenu.platoPrincipal && this.newMenu.precio > 0) {
       this.menuService.addMenu(this.newMenu).subscribe((addedMenu) => {
         this.menus.push(this.parseMenuAdded(addedMenu));
-        this.resetNewMenu();
+        this.newMenu = new Menu();
       });
     } else {
       alert('El plato principal y el precio son obligatorios.');
@@ -73,10 +73,6 @@ export class MenuComponent implements OnInit {
     };
   }
 
-  resetNewMenu() {
-    this.newMenu = this.resetMenu();
-  }
-
   openEditPopup(menu: Menu) {
     this.editableMenu = {
       id: menu.id,
@@ -94,7 +90,7 @@ export class MenuComponent implements OnInit {
 
   closeEditPopup() {
     this.isEditPopupVisible = false;
-    this.editableMenu = this.resetMenu();
+    this.editableMenu = new Menu();
   }
 
   confirmEdit() {
@@ -115,15 +111,5 @@ export class MenuComponent implements OnInit {
         alert('Error al actualizar el menu');
       }
     );
-  }
-
-  private resetMenu() {
-    return {
-      entrada: null,
-      platoPrincipal: null,
-      bebida: null,
-      postre: null,
-      precio: 0,
-    };
   }
 }
