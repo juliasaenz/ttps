@@ -322,6 +322,10 @@ table {
   margin-bottom: 20px;
 }
 
+tbody::-webkit-scrollbar {
+  display: none;
+}
+
 table .btn {
   width: 100%;
 }
