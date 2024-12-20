@@ -7,6 +7,7 @@ import { MenuService } from '../../services/menu.service';
 import { CartaService } from '../../services/carta.service';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carta',
@@ -31,6 +32,7 @@ export class CartaComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
+    private router: Router,
     private menuService: MenuService,
     private cartaService: CartaService,
     private authService: AuthService
@@ -53,6 +55,9 @@ export class CartaComponent implements OnInit, OnDestroy {
       this.authService.userRole$.subscribe((role) => {
         this.userRole = role;
         console.log('Rol del usuario actualizado:', role);
+        if(role === 'clientes'){
+          this.router.navigate(['/']);
+        }
       })
     );
   }

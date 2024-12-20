@@ -5,6 +5,7 @@ import { Comida } from '../../models/comida.model';
 import { ComidaService } from '../../services/comida.service';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comidas',
@@ -26,7 +27,8 @@ export class ComidaComponent implements OnInit, OnDestroy {
 
   constructor(
     private comidaService: ComidaService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,9 @@ export class ComidaComponent implements OnInit, OnDestroy {
       this.authService.userRole$.subscribe((role) => {
         this.userRole = role;
         console.log('Rol del usuario actualizado:', role);
+        if (role === 'clientes') {
+          this.router.navigate(['/']);
+        }
       })
     );
   }
