@@ -13,6 +13,7 @@ import { CartaService } from '../../services/carta.service';
   styleUrls: ['./carta.component.css'],
 })
 export class CartaComponent implements OnInit {
+  today = new Date().toISOString().split('T')[0];
   cartas: Carta[] = [];
   menus: Menu[] = [];
   parsedMenus: { id: number; nombre: string }[] = [];
