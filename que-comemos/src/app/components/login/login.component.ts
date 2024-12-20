@@ -8,13 +8,9 @@ import { AuthService } from '../../services/auth.service'; // Ajusta la ruta seg
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  //email = '';
-  //  password = '';
-
   constructor(private authService: AuthService, private router: Router) {}
 
   login(event: Event): void {
-
     event.preventDefault(); // Evitar el comportamiento por defecto del formulario
 
     // Capturar valores de los inputs
@@ -22,9 +18,10 @@ export class LoginComponent {
     const email = (form.querySelector('#email') as HTMLInputElement).value;
     const password = (form.querySelector('#password') as HTMLInputElement).value;
 
-    this.authService.login({ email, password}).subscribe({
+    this.authService.login({ email, password }).subscribe({
       next: (response: { token: string }) => {
-        localStorage.setItem('token', response.token);
+        localStorage.setItem('jwt', response.token); // Guarda el token en el localStorage
+        alert('Cliente registrado exitosamente.');
         this.router.navigate(['/carta']);
       },
       error: (err) => {

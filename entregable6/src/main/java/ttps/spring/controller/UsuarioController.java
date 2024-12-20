@@ -1,13 +1,13 @@
 package ttps.spring.controller;
 
-import java.util.List;
-
+import java.util.List; // Asegúrate de importar List
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import ttps.spring.model.UsuarioLogin; // Asegúrate de importar UsuarioLogin
 import ttps.spring.model.Usuario;
 import ttps.spring.service.UsuarioService;
+import java.util.Map;
 
 public abstract class UsuarioController<T extends Usuario> {
 
@@ -48,9 +48,23 @@ public abstract class UsuarioController<T extends Usuario> {
         return usuario != null ? new ResponseEntity<>(usuario, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+
     @PostMapping("/login")
-    public ResponseEntity<T> autenticar(@RequestParam String dni, @RequestParam String clave) {
-        T usuario = usuarioService.autenticarUsuario(dni, clave);
-        return usuario != null ? new ResponseEntity<>(usuario, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    public ResponseEntity<T> autenticar(@RequestBody Map<String, String> credentials) {
+        String email = credentials.get("email");
+        String password = credentials.get("password");
+        
+        T usuario = usuarioService.autenticarUsuario(email, password);
+        
+        if (usuario != null) {
+            return new ResponseEntity<>(usuario, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+}
+
+
+    private String generateToken(T usuario) {
+        return "JWT_TOKEN"; 
     }
 }

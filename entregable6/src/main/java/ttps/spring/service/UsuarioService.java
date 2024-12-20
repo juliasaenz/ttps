@@ -1,11 +1,9 @@
 package ttps.spring.service;
 
-import java.util.List;
-
+import java.util.List; // Asegúrate de importar List
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import ttps.spring.dao.UsuarioDAO;
 import ttps.spring.model.Usuario;
 
@@ -57,7 +55,12 @@ public abstract class UsuarioService<T extends Usuario> {
     }
 
     @Transactional(readOnly = true)
-    public T autenticarUsuario(String dni, String clave) {
-        return usuarioDAO.autenticar(dni, clave);
+    public T autenticarUsuario(String email, String clave) {
+        T usuario = usuarioDAO.findByEmail(email);  
+        if (usuario != null && usuario.getClave().equals(clave)) {
+            return usuario; 
+        }
+        return null;  
     }
+
 }
